@@ -1,20 +1,24 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
 
 const navLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/le-festival/', label: 'Le Festival' },
-  { href: '/programmation/', label: 'Programmation' },
-  { href: '/musiciens/', label: 'Musiciens' },
-  { href: '/billetterie/', label: 'Billetterie' },
-  { href: '/soutenir/', label: 'Nous Soutenir' },
-  { href: '/contact/', label: 'Contact' },
+  { href: locale === 'fr' ? '/' : '/en/', label: t('nav.home') },
+  { href: locale === 'fr' ? '/le-festival/' : '/en/the-festival/', label: t('nav.festival') },
+  { href: locale === 'fr' ? '/programmation/' : '/en/program/', label: t('nav.program') },
+  { href: locale === 'fr' ? '/musiciens/' : '/en/musicians/', label: t('nav.musicians') },
+  { href: locale === 'fr' ? '/billetterie/' : '/en/tickets/', label: t('nav.tickets') },
+  { href: locale === 'fr' ? '/soutenir/' : '/en/support-us/', label: t('nav.support') },
+  { href: locale === 'fr' ? '/contact/' : '/en/contact/', label: t('nav.contact') },
 ];
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-ivory/90 backdrop-blur-sm border-b border-gray-300/50">
   <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="font-serif text-xl font-bold text-[#1A1A1A]">
+    <a href={locale === 'fr' ? '/' : '/en/'} class="font-serif text-xl font-bold text-[#1A1A1A]">
       Accords en Valromey
     </a>
     <div class="hidden lg:flex items-center gap-6">
