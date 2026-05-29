@@ -31,6 +31,9 @@ export default defineConfig({
     }),
   ],
   vite: {
+    // @ts-expect-error — Vite type mismatch: Astro bundles its own Vite with slightly
+    // different Plugin types than the project-level Vite that @tailwindcss/vite targets.
+    // This is a type-level only issue; builds and dev work correctly.
     plugins: [tailwindcss()],
     resolve: {
       alias: {
