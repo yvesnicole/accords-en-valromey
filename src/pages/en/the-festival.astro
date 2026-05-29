@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import Card from '../../components/ui/Card.astro';
+
+const t = (key: string) => key;
+---
+
+<BaseLayout title="The Festival — Accords en Valromey" description="History and identity of the Accords en Valromey festival" lang="en">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/eglise.jpg"
+      alt="Saint-Symphorien Church"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">The Festival</h1>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-6 py-section">
+    <div class="space-y-6 font-sans text-lg text-gray-700 leading-relaxed">
+      <p>
+        The Accords en Valromey festival is a chamber music festival held each summer in
+        Champagne-en-Valromey, Ain. It brings together exceptional young musicians around
+        ambitious programs, in the stunning setting of Saint-Symphorien church — a venue
+        rich in history and character.
+      </p>
+      <p>
+        Born from a passion for classical music and a desire to celebrate local heritage,
+        the festival offers a demanding yet accessible program each year, open to all.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-contrast py-section">
+    <div class="max-w-7xl mx-auto px-6">
+      <SectionTitle title="Our Values" />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-3">Musical Excellence</h3>
+          <p class="font-sans text-gray-700">
+            Talented musicians, trained at the finest conservatories, for exceptional concerts.
+          </p>
+        </Card>
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-3">Heritage</h3>
+          <p class="font-sans text-gray-700">
+            Saint-Symphorien church, a historic venue with remarkable acoustics and a unique atmosphere.
+          </p>
+        </Card>
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-3">Conviviality</h3>
+          <p class="font-sans text-gray-700">
+            A human-scale festival, where exchanges between artists and audiences are at the heart of the experience.
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

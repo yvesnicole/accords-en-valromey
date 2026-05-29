@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import Card from '../components/ui/Card.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations('fr');
+---
+
+<BaseLayout title="Le Festival — Accords en Valromey" description="Histoire et identité du festival Accords en Valromey">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/eglise.jpg"
+      alt="Église Saint-Symphorien"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">Le Festival</h1>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-6 py-section">
+    <div class="space-y-6 font-sans text-lg text-gray-700 leading-relaxed">
+      <p>
+        Le festival Accords en Valromey est un festival de musique de chambre qui se déroule chaque été
+        à Champagne-en-Valromey, dans l'Ain. Il réunit de jeunes musiciens d'exception autour de
+        programmes ambitieux, dans l'écrin de l'église Saint-Symphorien — un lieu chargé d'histoire
+        et de caractère.
+      </p>
+      <p>
+        Né de la passion pour la musique classique et du désir de faire vivre le patrimoine local,
+        le festival propose chaque année une programmation exigeante et accessible, ouverte à tous
+        les publics.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-contrast py-section">
+    <div class="max-w-7xl mx-auto px-6">
+      <SectionTitle title="Nos Valeurs" />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-3">Excellence musicale</h3>
+          <p class="font-sans text-gray-700">
+            Des musiciens de talent, formés dans les plus grands conservatoires, pour des concerts d'exception.
+          </p>
+        </Card>
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-3">Patrimoine</h3>
+          <p class="font-sans text-gray-700">
+            L'église Saint-Symphorien, lieu chargé d'histoire, offre une acoustique remarquable et un cadre unique.
+          </p>
+        </Card>
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-3">Convivialité</h3>
+          <p class="font-sans text-gray-700">
+            Un festival à taille humaine, où les échanges entre artistes et public sont au cœur de l'expérience.
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
