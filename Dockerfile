@@ -13,6 +13,7 @@ ARG PUBLIC_TINA_CLIENT_ID
 ARG TINA_TOKEN
 ENV PUBLIC_TINA_CLIENT_ID=${PUBLIC_TINA_CLIENT_ID}
 ENV TINA_TOKEN=${TINA_TOKEN}
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN npm run build
 
 # Stage 3: Serve static files with Nginx
