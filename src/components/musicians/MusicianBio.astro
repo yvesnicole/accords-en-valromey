@@ -1,0 +1,62 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  instrument: string;
+  photo: string;
+  biography: string;
+}
+
+const { id, name, instrument, photo, biography } = Astro.props;
+---
+
+<dialog
+  id={id}
+  class="rounded-card border-0 p-0 bg-contrast backdrop:bg-[#1A1A1A]/60 max-w-lg w-[90vw] max-h-[90vh] overflow-y-auto"
+>
+  <div class="relative">
+    <form method="dialog" class="absolute top-4 right-4 z-10">
+      <button
+        class="w-10 h-10 rounded-full bg-[#1A1A1A]/60 text-contrast font-sans text-xl leading-none flex items-center justify-center hover:bg-[#1A1A1A]/80 transition-colors"
+        aria-label={`Close biography of ${name}`}
+      >
+        &times;
+      </button>
+    </form>
+    <img src={photo} alt={name} class="w-full max-h-80 object-cover rounded-t-card" />
+    <div class="p-6">
+      <h2 class="font-serif text-2xl font-bold text-[#1A1A1A]">{name}</h2>
+      <p class="font-sans text-sm text-gray-500 mt-1 mb-4">{instrument}</p>
+      <div class="font-sans text-gray-700 leading-relaxed space-y-4">
+        {biography.split('\n\n').map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  document.querySelectorAll('dialog').forEach((dialog) => {
+    if (dialog.dataset.bioInitialized === 'true') return;
+    dialog.dataset.bioInitialized = 'true';
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        dialog.close();
+      }
+    });
+
+    dialog.addEventListener('cancel', () => {
+      document.body.style.overflow = '';
+    });
+
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = '';
+    });
+  });
+</script>

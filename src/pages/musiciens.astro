@@ -4,11 +4,65 @@ import SectionTitle from '../components/ui/SectionTitle.astro';
 import MusicianGrid from '../components/musicians/MusicianGrid.astro';
 
 const musicians = [
-  { name: 'Elea Nick', instrument: 'Violon', photo: '/images/musicians/elea.jpg', photoCredit: 'DR' },
-  { name: 'Ekhi Martinez Imai', instrument: 'Violon', photo: '/images/musicians/ekhi.jpg', photoCredit: 'DR' },
-  { name: 'Nicolas Fromonteil', instrument: 'Alto', photo: '/images/musicians/nicolas.jpg', photoCredit: 'DR' },
-  { name: 'Mariam Chitanava', instrument: 'Piano', photo: '/images/musicians/mariam.jpg', photoCredit: 'DR' },
-  { name: 'Célia Garetti-Nicole', instrument: 'Violoncelle', photo: '/images/musicians/celia.jpg', photoCredit: 'DR' },
+  {
+    name: 'Elea Nick',
+    instrument: 'Violon',
+    photo: '/images/musicians/elea.jpg',
+    photoCredit: 'DR',
+    biography: `Née en 1999 à Zurich dans une famille de musiciens, la violoniste Elea Nick est rapidement remarquée pour son talent. Très jeune, elle remporte déjà plusieurs concours internationaux, notamment à Novosibirsk, Lublin et Sofia, ainsi que le prestigieux Migros Prix Culture en Suisse.
+
+Elle se produit également en tant que soliste avec différents orchestres, parmi lesquels le Munich Radio Orchestra et l'Orchestre Symphonique de Saint-Pétersbourg.
+
+Elea a étudié à l'Université des Arts de Zurich ainsi qu'à l'École Supérieure de Musique Reina Sofía à Madrid. Curieuse et passionnée par plusieurs domaines, elle mène en parallèle des études universitaires et obtient un Master en droit à l'Université de Zurich ainsi qu'un Master en sciences politiques à l'Université de Hagen.
+
+Aujourd'hui, elle est membre des premiers violons de la Sächsische Staatskapelle Dresden.`,
+  },
+  {
+    name: 'Ekhi Martinez Imai',
+    instrument: 'Violon',
+    photo: '/images/musicians/ekhi.jpg',
+    photoCredit: 'DR',
+    biography: `Ekhi naît en 2002 en Espagne et commence le violon à seulement trois ans. Après avoir étudié avec plusieurs professeurs, il poursuit sa formation à l'École Supérieure Reina Sofía à Madrid dans la classe de Christoph Poppen. En 2022, il est admis à la prestigieuse Hochschule für Musik Hanns Eisler de Berlin, où il continue de se perfectionner.
+
+Au fil des années, il remporte plusieurs distinctions dans des concours internationaux, notamment au concours de violon Maria Canals, avec un premier prix au concours Ciudad de Vigo, et figure parmi les lauréats du concours Arthur Grumiaux.
+
+En tant que soliste, Ekhi aborde un répertoire très varié, de Bach et Vivaldi jusqu'à Dutilleux. Il se produit également régulièrement avec des ensembles tels que le Kölner Kammerorchester, ce qui l'amène à jouer dans de grandes salles à travers le monde, de l'Espagne à la Chine, en passant par l'Allemagne.`,
+  },
+  {
+    name: 'Nicolas Fromonteil',
+    instrument: 'Alto',
+    photo: '/images/musicians/nicolas.jpg',
+    photoCredit: 'DR',
+    biography: `Nicolas commence l'alto à l'âge de quatre ans. Deux ans plus tard, il rejoint le CRR de Versailles, où il se forme pendant dix ans. Il poursuit ensuite ses études au Conservatoire de Paris dans les classes de Jean Sulem, Marc Desmons et Odile Auboin. En 2024, il part à la Cleveland Institute of Music pour étudier avec Jeffrey Irvin dans le cadre d'un échange Erasmus.
+
+Très engagé dans la pratique orchestrale, Nicolas a été alto solo de l'Orchestre Français des Jeunes et membre de l'EUYO en 2023. Ces expériences l'ont notamment conduit à se produire au Concertgebouw d'Amsterdam et à la Konzerthaus de Berlin, sous la direction d'Antonio Pappano et Manfred Honeck. Pour poursuivre cette immersion dans le monde orchestral, il rejoint également les académies de l'Orchestre de chambre de Paris et de l'Orchestre Philharmonique de Radio France.
+
+Passionné de musique de chambre et curieux des répertoires historiques, il se forme au quatuor auprès du Quatuor Danel et découvre l'alto baroque avec Christophe Robert et François Fernandez.`,
+  },
+  {
+    name: 'Mariam Chitanava',
+    instrument: 'Piano',
+    photo: '/images/musicians/mariam.jpg',
+    photoCredit: 'DR',
+    biography: `Mariam commence le piano très jeune à l'école de musique pour enfants Oborin. Rapidement remarquée, elle intègre la Central Music School de Moscou, avant de poursuivre ses études au Conservatoire Tchaïkovski de la même ville dans la classe d'Elena Richter.
+
+En 2022, elle est admise à l'École Supérieure de Musique Reina Sofía à Madrid dans la classe de Milana Chernyavska, où elle obtient son Master deux ans plus tard.
+
+Mariam se produit régulièrement en concert en France, en Italie, en Espagne et en Suisse, mais aussi dans ses pays d'origine, la Géorgie et la Russie. Lauréate de plusieurs concours internationaux, elle a notamment remporté des prix au concours Rubinstein à Paris (2008), au Concours Scriabine (2013) et plus récemment au Gonzalo Soriano Competition (2023).
+
+Très investie dans la musique de chambre, elle participe à de nombreux festivals et projets en différentes formations. Et peut-être l'avez-vous déjà entendue aux côtés de Célia lors de leur concert à Lompnieu en 2023!`,
+  },
+  {
+    name: 'Célia Garetti-Nicole',
+    instrument: 'Violoncelle',
+    photo: '/images/musicians/celia.jpg',
+    photoCredit: 'DR',
+    biography: `Née en 2003, Célia commence le violoncelle à l'âge de six ans au Conservatoire de Menton avant d'être admise à la Yehudi Menuhin School de Londres à neuf ans. Après ce séjour Londonien elle étudie à Bâle avec Ivan Monighetti avant de rejoindre sa classe à l'École Supérieure de Musique Reina Sofia de Madrid où elle fera son Bachelor. En 2025 elle est admise à l'Académie Jaroussky à Paris afin d'étudier avec la violoncelliste française Anne Gastinel.
+
+Aujourd'hui, elle mêle une activité de chambriste, soliste et d'orchestre, ce qui l'amène à jouer partout en Europe mais aussi aux Etats-Unis comme en novembre 2025 où elle joue au Carnegie Hall de New-York avec notamment Renaud Capuçon.
+
+Elle co-fonde en 2025 l'association Accords en Valromey et est aujourd'hui la directrice artistique du festival.`,
+  },
 ];
 ---
 

@@ -1,21 +1,50 @@
 ---
+import MusicianBio from './MusicianBio.astro';
+
 interface Props {
   name: string;
   instrument: string;
   photo: string;
   photoCredit?: string;
+  biography?: string;
 }
 
-const { name, instrument, photo, photoCredit } = Astro.props;
+const { name, instrument, photo, photoCredit, biography } = Astro.props;
+const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 ---
 
-<div class="bg-contrast rounded-card overflow-hidden">
-  <img src={photo} alt={name} class="w-full h-64 object-cover" />
-  <div class="p-4">
-    <h3 class="font-serif text-lg font-semibold text-[#1A1A1A]">{name}</h3>
-    <p class="font-sans text-sm text-gray-500 mt-1">{instrument}</p>
-    {photoCredit && (
-      <p class="font-sans text-xs text-gray-400 mt-2">© {photoCredit}</p>
-    )}
-  </div>
+<div class="bg-contrast rounded-card overflow-hidden group transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+  <button
+    type="button"
+    class="w-full text-left cursor-pointer block"
+    onclick={`document.getElementById('bio-${slug}')?.showModal(); document.body.style.overflow = 'hidden';`}
+  >
+    <img
+      src={photo}
+      alt={name}
+      class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+    <div class="p-4">
+      <h3 class="font-serif text-lg font-semibold text-[#1A1A1A]">{name}</h3>
+      <p class="font-sans text-sm text-gray-500 mt-1">{instrument}</p>
+      {biography && (
+        <span class="inline-block mt-3 font-sans text-xs text-sage-dark font-semibold">
+          Découvrir →
+        </span>
+      )}
+      {photoCredit && (
+        <p class="font-sans text-xs text-gray-400 mt-2">© {photoCredit}</p>
+      )}
+    </div>
+  </button>
 </div>
+
+{biography && (
+  <MusicianBio
+    id={`bio-${slug}`}
+    name={name}
+    instrument={instrument}
+    photo={photo}
+    biography={biography}
+  />
+)}

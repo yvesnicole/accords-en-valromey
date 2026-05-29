@@ -6,6 +6,7 @@ interface Musician {
   instrument: string;
   photo: string;
   photoCredit?: string;
+  biography?: string;
 }
 
 interface Props {
@@ -22,6 +23,7 @@ const { musicians } = Astro.props;
       instrument={musician.instrument}
       photo={musician.photo}
       photoCredit={musician.photoCredit}
+      biography={musician.biography}
     />
   ))}
 </div>

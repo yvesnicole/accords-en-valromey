@@ -4,11 +4,65 @@ import SectionTitle from '../../components/ui/SectionTitle.astro';
 import MusicianGrid from '../../components/musicians/MusicianGrid.astro';
 
 const musicians = [
-  { name: 'Elea Nick', instrument: 'Violin', photo: '/images/musicians/elea.jpg', photoCredit: 'DR' },
-  { name: 'Ekhi Martinez Imai', instrument: 'Violin', photo: '/images/musicians/ekhi.jpg', photoCredit: 'DR' },
-  { name: 'Nicolas Fromonteil', instrument: 'Viola', photo: '/images/musicians/nicolas.jpg', photoCredit: 'DR' },
-  { name: 'Mariam Chitanava', instrument: 'Piano', photo: '/images/musicians/mariam.jpg', photoCredit: 'DR' },
-  { name: 'Célia Garetti-Nicole', instrument: 'Cello', photo: '/images/musicians/celia.jpg', photoCredit: 'DR' },
+  {
+    name: 'Elea Nick',
+    instrument: 'Violin',
+    photo: '/images/musicians/elea.jpg',
+    photoCredit: 'DR',
+    biography: `Born in 1999 in Zurich into a family of musicians, violinist Elea Nick was quickly recognized for her talent. At a very young age, she won several international competitions, notably in Novosibirsk, Lublin, and Sofia, as well as the prestigious Migros Kulturprozent Prize in Switzerland.
+
+She has also performed as a soloist with various orchestras, including the Munich Radio Orchestra and the Saint Petersburg Symphony Orchestra.
+
+Elea studied at the Zurich University of the Arts and the Reina Sofía School of Music in Madrid. Inquisitive and passionate about multiple fields, she simultaneously pursued university studies, earning a Master's in Law from the University of Zurich and a Master's in Political Science from the University of Hagen.
+
+Today, she is a member of the first violins of the Sächsische Staatskapelle Dresden.`,
+  },
+  {
+    name: 'Ekhi Martinez Imai',
+    instrument: 'Violin',
+    photo: '/images/musicians/ekhi.jpg',
+    photoCredit: 'DR',
+    biography: `Born in 2002 in Spain, Ekhi began playing the violin at just three years old. After studying with several teachers, he continued his training at the Reina Sofía School of Music in Madrid under Christoph Poppen. In 2022, he was admitted to the prestigious Hanns Eisler School of Music in Berlin, where he continues to refine his art.
+
+Over the years, he has won several distinctions in international competitions, notably at the Maria Canals Violin Competition, with first prize at the Ciudad de Vigo Competition, and is among the laureates of the Arthur Grumiaux Competition.
+
+As a soloist, Ekhi tackles a highly varied repertoire, from Bach and Vivaldi to Dutilleux. He also regularly performs with ensembles such as the Kölner Kammerorchester, taking him to major venues around the world, from Spain to China, via Germany.`,
+  },
+  {
+    name: 'Nicolas Fromonteil',
+    instrument: 'Viola',
+    photo: '/images/musicians/nicolas.jpg',
+    photoCredit: 'DR',
+    biography: `Nicolas began playing the viola at the age of four. Two years later, he joined the CRR de Versailles, where he trained for ten years. He then continued his studies at the Paris Conservatory under Jean Sulem, Marc Desmons, and Odile Auboin. In 2024, he went to the Cleveland Institute of Music to study with Jeffrey Irvin as part of an Erasmus exchange.
+
+Deeply committed to orchestral practice, Nicolas served as principal viola of the Orchestre Français des Jeunes and was a member of the EUYO in 2023. These experiences led him to perform at the Concertgebouw in Amsterdam and the Konzerthaus in Berlin, under the baton of Antonio Pappano and Manfred Honeck. To further immerse himself in the orchestral world, he also joined the academies of the Orchestre de chambre de Paris and the Orchestre Philharmonique de Radio France.
+
+Passionate about chamber music and curious about historical repertoires, he trained in quartet with the Quatuor Danel and discovered the baroque viola with Christophe Robert and François Fernandez.`,
+  },
+  {
+    name: 'Mariam Chitanava',
+    instrument: 'Piano',
+    photo: '/images/musicians/mariam.jpg',
+    photoCredit: 'DR',
+    biography: `Mariam began playing the piano at a very young age at the Oborin Music School for Children. Quickly recognized for her talent, she joined the Central Music School in Moscow before continuing her studies at the Tchaikovsky Conservatory in the same city under Elena Richter.
+
+In 2022, she was admitted to the Reina Sofía School of Music in Madrid under Milana Chernyavska, where she earned her Master's degree two years later.
+
+Mariam regularly performs in France, Italy, Spain, and Switzerland, as well as in her home countries of Georgia and Russia. A laureate of several international competitions, she notably won prizes at the Rubinstein Competition in Paris (2008), the Scriabin Competition (2013), and more recently the Gonzalo Soriano Competition (2023).
+
+Deeply committed to chamber music, she participates in numerous festivals and projects in various formations. And perhaps you have already heard her alongside Célia during their concert in Lompnieu in 2023!`,
+  },
+  {
+    name: 'Célia Garetti-Nicole',
+    instrument: 'Cello',
+    photo: '/images/musicians/celia.jpg',
+    photoCredit: 'DR',
+    biography: `Born in 2003, Célia began playing the cello at the age of six at the Menton Conservatory before being admitted to the Yehudi Menuhin School in London at the age of nine. After her time in London, she studied in Basel with Ivan Monighetti before joining his class at the Reina Sofía School of Music in Madrid, where she completed her Bachelor's degree. In 2025, she was admitted to the Académie Jaroussky in Paris to study with French cellist Anne Gastinel.
+
+Today, she balances chamber music, solo, and orchestral work, taking her across Europe and to the United States — notably in November 2025, when she performed at Carnegie Hall in New York alongside Renaud Capuçon.
+
+She co-founded the Accords en Valromey association in 2025 and now serves as the festival's artistic director.`,
+  },
 ];
 ---
 
