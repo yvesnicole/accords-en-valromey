@@ -1,0 +1,17 @@
+---
+import { getLangFromUrl, getLocalizedPath } from '../../i18n/utils';
+
+const currentLocale = getLangFromUrl(Astro.url);
+const targetLocale = currentLocale === 'fr' ? 'en' : 'fr';
+const targetPath = getLocalizedPath(Astro.url.pathname, targetLocale);
+const label = currentLocale === 'fr' ? 'EN' : 'FR';
+---
+
+<a
+  href={targetPath}
+  class="font-sans text-xs font-semibold uppercase tracking-wider text-gray-500 hover:text-[#1A1A1A] transition-colors px-3 py-1 border border-gray-300 rounded-full"
+  hreflang={targetLocale}
+  aria-label={`Switch to ${targetLocale === 'fr' ? 'French' : 'English'}`}
+>
+  {label}
+</a>
