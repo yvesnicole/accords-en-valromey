@@ -9,6 +9,10 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ARG PUBLIC_TINA_CLIENT_ID
+ARG TINA_TOKEN
+ENV PUBLIC_TINA_CLIENT_ID=${PUBLIC_TINA_CLIENT_ID}
+ENV TINA_TOKEN=${TINA_TOKEN}
 RUN npm run build
 
 # Stage 3: Serve static files with Nginx
