@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   image?: string;
   lang?: string;
+  canonicalURL?: string;
 }
 
 const {
@@ -15,7 +16,10 @@ const {
   description = 'Festival de musique classique — Accords en Valromey',
   image = '/images/scenery/eglise.jpg',
   lang = 'fr',
+  canonicalURL = Astro.url.href,
 } = Astro.props;
+
+const fullImage = image.startsWith('http') ? image : `https://accordsenvalromey.fr${image}`;
 ---
 
 <!doctype html>
@@ -25,14 +29,47 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={fullImage} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Accords en Valromey" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImage} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Festival",
+        "name": "Accords en Valromey",
+        "description": description,
+        "location": {
+          "@type": "Place",
+          "name": "Église Saint-Symphorien",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Champagne-en-Valromey",
+            "addressRegion": "Ain",
+            "postalCode": "01260",
+            "addressCountry": "FR"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Accords en Valromey",
+          "url": "https://accordsenvalromey.fr"
+        }
+      })}
+    </script>
   </head>
   <body class="bg-ivory text-[#1A1A1A] font-sans antialiased">
     <Header />
