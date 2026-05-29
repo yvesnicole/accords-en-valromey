@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations('fr');
+---
+
+<BaseLayout title="Nous Soutenir — Accords en Valromey" description="Soutenez le festival Accords en Valromey">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/paysage.jpg"
+      alt="Valromey"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">Nous Soutenir</h1>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-section">
+    <SectionTitle
+      title="Soutenez le festival"
+      subtitle="Votre contribution permet de faire vivre la musique classique dans le Valromey et de soutenir de jeunes talents."
+    />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+      <Card>
+        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{t('support.join')}</h3>
+        <p class="font-sans text-gray-700 leading-relaxed mb-6">
+          Devenez membre de l'association et participez à la vie du festival. Accès privilégié
+          aux concerts, rencontres avec les artistes, et bien plus.
+        </p>
+        <Button href="https://www.helloasso.com/associations/accords-en-valromey/adhesions" external variant="primary">
+          {t('support.join')}
+        </Button>
+      </Card>
+      <Card>
+        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{t('support.donate')}</h3>
+        <p class="font-sans text-gray-700 leading-relaxed mb-6">
+          Faites un don pour soutenir la programmation, l'accueil des artistes et le développement
+          du festival. Chaque geste compte.
+        </p>
+        <Button href="https://www.helloasso.com/associations/accords-en-valromey/dons" external variant="primary">
+          {t('support.donate')}
+        </Button>
+      </Card>
+    </div>
+  </section>
+</BaseLayout>
