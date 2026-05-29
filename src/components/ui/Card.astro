@@ -1,0 +1,18 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+}
+
+const { href, class: extraClass = '' } = Astro.props;
+const Element = href ? 'a' : 'div';
+
+const base = `block bg-contrast rounded-card p-6 ${extraClass}`;
+---
+
+<Element
+  href={href}
+  class={`${base} ${href ? 'hover:shadow-md transition-shadow duration-200' : ''}`}
+>
+  <slot />
+</Element>
