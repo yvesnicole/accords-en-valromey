@@ -20,5 +20,6 @@ RUN npm run build
 FROM nginx:alpine AS runtime
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
+RUN chmod -R a+r /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
