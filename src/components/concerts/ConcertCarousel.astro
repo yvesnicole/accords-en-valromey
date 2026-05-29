@@ -1,0 +1,183 @@
+---
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+interface Concert {
+  title: string;
+  date: string;
+  description: string;
+  poster: string;
+  mapsLink: string;
+  ticketLink?: string;
+  mapsLabel?: string;
+  ticketLabel?: string;
+}
+
+interface Props {
+  concerts: Concert[];
+}
+
+const { concerts } = Astro.props;
+---
+
+<div class="concert-carousel w-full max-w-4xl mx-auto" data-concerts={JSON.stringify(concerts)}>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {concerts.map((concert, i) => (
+        <div class="swiper-slide">
+          <div
+            class="cursor-pointer group"
+            data-concert-index={i}
+          >
+            <div class="relative w-full bg-gray-100 rounded-card overflow-hidden flex items-center justify-center">
+              <img
+                src={concert.poster}
+                alt={concert.title}
+                class="w-full h-auto object-contain max-h-[70vh]"
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-1">
+                {concert.title}
+              </h3>
+              <p class="font-sans text-sm text-gray-500">{concert.date}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<!-- Modal overlay -->
+<dialog data-modal class="fixed inset-0 z-50 m-0 w-full h-full max-w-none max-h-none bg-transparent backdrop:bg-black/60">
+  <div class="absolute inset-0 flex items-center justify-center p-4" onclick="this.closest('dialog')?.close()">
+    <div class="relative bg-ivory rounded-card max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl" onclick="event.stopPropagation()">
+      <button
+        onclick="this.closest('dialog')?.close()"
+        class="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-[#1A1A1A] transition-colors"
+        aria-label="Fermer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <img data-modal-poster src="" alt="" class="w-full h-auto object-contain bg-gray-100" />
+      <div class="p-6">
+        <h2 data-modal-title class="font-serif text-2xl font-bold text-[#1A1A1A] mb-2"></h2>
+        <p data-modal-date class="font-sans text-sm text-gray-500 mb-4"></p>
+        <p data-modal-desc class="font-sans text-gray-700 leading-relaxed mb-6"></p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a data-modal-maps href="" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-card font-sans text-sm font-semibold text-gray-700 hover:border-sage hover:text-[#1A1A1A] transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span data-modal-maps-label>Voir sur Google Maps</span>
+          </a>
+          <a data-modal-tickets href="" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center px-4 py-2 bg-sage text-[#1A1A1A] rounded-card font-sans text-sm font-semibold hover:bg-sage/80 transition-colors">
+            <span data-modal-tickets-label>Réserver</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import Swiper from 'swiper';
+  import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+
+  const root = document.querySelector('.concert-carousel');
+  if (!root) throw new Error('Carousel root not found');
+
+  const concertsJson = root.dataset.concerts || '[]';
+  const concerts = JSON.parse(concertsJson);
+
+  // Init Swiper
+  const swiperEl = root.querySelector('.swiper');
+  if (swiperEl) {
+    new Swiper(swiperEl, {
+      modules: [Pagination, Navigation, Autoplay],
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 1,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true, dynamicBullets: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      grabCursor: true,
+      keyboard: { enabled: true },
+    });
+  }
+
+  // Modal
+  const modal = document.querySelector('[data-modal]');
+  const mp = document.querySelector('[data-modal-poster]');
+  const mt = document.querySelector('[data-modal-title]');
+  const md = document.querySelector('[data-modal-date]');
+  const mc = document.querySelector('[data-modal-desc]');
+  const mm = document.querySelector('[data-modal-maps]');
+  const mml = document.querySelector('[data-modal-maps-label]');
+  const mtk = document.querySelector('[data-modal-tickets]');
+  const mtkl = document.querySelector('[data-modal-tickets-label]');
+
+  root.querySelectorAll('[data-concert-index]').forEach(el => {
+    el.addEventListener('click', () => {
+      const idx = parseInt(el.dataset.concertIndex || '0');
+      const c = concerts[idx];
+      if (!c) return;
+      if (mp) { mp.src = c.poster; mp.alt = c.title; }
+      if (mt) mt.textContent = c.title;
+      if (md) md.textContent = c.date;
+      if (mc) mc.textContent = c.description;
+      if (mm) mm.href = c.mapsLink;
+      if (mml) mml.textContent = c.mapsLabel || 'Voir sur Google Maps';
+      if (c.ticketLink) {
+        if (mtk) { mtk.href = c.ticketLink; mtk.classList.remove('hidden'); }
+        if (mtkl) mtkl.textContent = c.ticketLabel || 'Réserver';
+      } else {
+        if (mtk) mtk.classList.add('hidden');
+      }
+      modal?.showModal();
+    });
+  });
+</script>
+
+<style is:global>
+  .concert-carousel .swiper-pagination-bullet {
+    background: #1A1A1A;
+    opacity: 0.3;
+  }
+  .concert-carousel .swiper-pagination-bullet-active {
+    background: #C4E0C4;
+    opacity: 1;
+  }
+  .concert-carousel .swiper-button-prev,
+  .concert-carousel .swiper-button-next {
+    color: #1A1A1A;
+    background: rgba(255, 255, 255, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .concert-carousel .swiper-button-prev:hover,
+  .concert-carousel .swiper-button-next:hover {
+    background: #fff;
+  }
+  .concert-carousel .swiper-button-prev::after,
+  .concert-carousel .swiper-button-next::after {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  dialog[open] {
+    display: flex;
+  }
+</style>

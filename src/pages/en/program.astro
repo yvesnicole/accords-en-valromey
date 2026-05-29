@@ -1,29 +1,38 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionTitle from '../../components/ui/SectionTitle.astro';
-import ConcertList from '../../components/concerts/ConcertList.astro';
+import ConcertCarousel from '../../components/concerts/ConcertCarousel.astro';
 
 const concerts = [
   {
     title: 'Opening Concert',
     date: 'August 20, 2026 — 7:00 PM',
-    summary: 'A journey through 20th century chamber music with works by Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke.',
-    image: '/images/scenery/eglise.jpg',
-    helloAssoLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+    description: 'A journey through 20th century chamber music, with works by Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke. This opening concert sets the tone for the festival: musical excellence and rediscovery of forgotten women composers.',
+    poster: '/images/concerts/ouverture.jpg',
+    mapsLink: 'https://www.google.com/maps/place/Paroisse+de+Champagne+En+Valromey+./@45.9045508,5.6759187,993m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478b68b29359f9d1:0xa52260d492b15338!8m2!3d45.9045508!4d5.6784936!16s%2Fg%2F1tjcnbkd?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D',
+    ticketLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+    mapsLabel: 'View on Google Maps',
+    ticketLabel: 'Book tickets',
   },
   {
     title: 'Tribute to Alice Lesur',
     date: 'August 21, 2026 — 7:00 PM',
-    summary: 'A tribute to Alice Lesur, with works by Alice Lesur and Olivier Messiaen and a special appearance by Christian Lesur.',
-    image: '/images/scenery/eglise.jpg',
-    helloAssoLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+    description: 'A tribute to French composer Alice Lesur, an overlooked figure of 20th century music. Her grandson, Christian Lesur, will be present to share his grandmother\'s story and work with the audience. A unique moment of transmission and emotion.',
+    poster: '/images/concerts/lesur.jpg',
+    mapsLink: 'https://www.google.com/maps/place/Paroisse+de+Champagne+En+Valromey+./@45.9045508,5.6759187,993m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478b68b29359f9d1:0xa52260d492b15338!8m2!3d45.9045508!4d5.6784936!16s%2Fg%2F1tjcnbkd?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D',
+    ticketLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+    mapsLabel: 'View on Google Maps',
+    ticketLabel: 'Book tickets',
   },
   {
     title: 'Closing Concert',
     date: 'August 22, 2026 — 7:00 PM',
-    summary: 'The festival concludes with Schumann, Mendelssohn, and Brahms\' piano quintet in a grand romantic finale.',
-    image: '/images/scenery/eglise.jpg',
-    helloAssoLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+    description: 'The festival concludes in grand style with major romantic works by Schumann, Mendelssohn, and Brahms\' piano quintet. A magnificent finale bringing together all the festival musicians for an exceptional moment.',
+    poster: '/images/concerts/cloture.jpg',
+    mapsLink: 'https://www.google.com/maps/place/Paroisse+de+Champagne+En+Valromey+./@45.9045508,5.6759187,993m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478b68b29359f9d1:0xa52260d492b15338!8m2!3d45.9045508!4d5.6784936!16s%2Fg%2F1tjcnbkd?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D',
+    ticketLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+    mapsLabel: 'View on Google Maps',
+    ticketLabel: 'Book tickets',
   },
 ];
 ---
@@ -32,8 +41,8 @@ const concerts = [
   <section class="relative h-64 md:h-80 overflow-hidden">
     <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
     <img
-      src="/images/scenery/eglise.jpg"
-      alt="Concert"
+      src="/images/scenery/paysage.jpg"
+      alt="Valromey landscape"
       class="absolute inset-0 w-full h-full object-cover"
     />
     <div class="relative z-20 flex items-center justify-center h-full">
@@ -47,37 +56,8 @@ const concerts = [
       subtitle="Three exceptional concerts in Saint-Pierre Church, all at 7:00 PM from August 20 to 22, 2026."
     />
     <p class="max-w-3xl mx-auto font-sans text-lg text-gray-700 leading-relaxed text-center mb-12">
-      Discover a program that combines great classics, lesser-known works, and a major research project devoted to overlooked composer Alice Lesur, whom we are honoring this year.
+      Discover a program that combines great classics, lesser-known works, and a major research project devoted to overlooked composer Alice Lesur, whom we are honoring this year. Click on a poster to learn more.
     </p>
-    <ConcertList concerts={concerts} />
-    <div class="grid grid-cols-1 gap-8 mt-12">
-      <div class="bg-contrast rounded-card p-8">
-        <h2 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-3">Opening Concert — August 20, 2026, 7:00 PM</h2>
-        <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          A journey through 20th century chamber music, with works by Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke. This opening concert sets the tone for the festival: musical excellence and rediscovery of forgotten women composers.
-        </p>
-        <object data="/posters/Concert%20Ouverture%20affiche%20.pdf" type="application/pdf" class="w-full h-64">
-          <p><a href="/posters/Concert%20Ouverture%20affiche%20.pdf" class="underline">View the opening concert poster</a></p>
-        </object>
-      </div>
-      <div class="bg-contrast rounded-card p-8">
-        <h2 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-3">Tribute to Alice Lesur — August 21, 2026, 7:00 PM</h2>
-        <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          A tribute to French composer Alice Lesur, an overlooked figure of 20th century music. Her grandson, Christian Lesur, will be present to share his grandmother's story and work with the audience. A unique moment of transmission and emotion.
-        </p>
-        <object data="/posters/Concert%20Lesur%20affiche%20.pdf" type="application/pdf" class="w-full h-64">
-          <p><a href="/posters/Concert%20Lesur%20affiche%20.pdf" class="underline">View the Alice Lesur concert poster</a></p>
-        </object>
-      </div>
-      <div class="bg-contrast rounded-card p-8">
-        <h2 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-3">Closing Concert — August 22, 2026, 7:00 PM</h2>
-        <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          The festival concludes in grand style with major romantic works by Schumann, Mendelssohn, and Brahms' piano quintet. A magnificent finale bringing together all the festival musicians for an exceptional moment.
-        </p>
-        <object data="/posters/Copie%20de%20Concert%20Clôture%20affiche%20.pdf" type="application/pdf" class="w-full h-64">
-          <p><a href="/posters/Copie%20de%20Concert%20Clôture%20affiche%20.pdf" class="underline">View the closing concert poster</a></p>
-        </object>
-      </div>
-    </div>
+    <ConcertCarousel concerts={concerts} />
   </section>
 </BaseLayout>
