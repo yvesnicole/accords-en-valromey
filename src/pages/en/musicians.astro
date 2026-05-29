@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import MusicianGrid from '../../components/musicians/MusicianGrid.astro';
+
+const musicians = [
+  { name: 'Elea Nick', instrument: 'Violin', photo: '/images/musicians/elea.jpg', photoCredit: 'DR' },
+  { name: 'Ekhi Martinez Imai', instrument: 'Violin', photo: '/images/musicians/ekhi.jpg', photoCredit: 'DR' },
+  { name: 'Nicolas Fromonteil', instrument: 'Viola', photo: '/images/musicians/nicolas.jpg', photoCredit: 'DR' },
+  { name: 'Mariam Chitanava', instrument: 'Piano', photo: '/images/musicians/mariam.jpg', photoCredit: 'DR' },
+  { name: 'Célia Garetti-Nicole', instrument: 'Cello', photo: '/images/musicians/celia.jpg', photoCredit: 'DR' },
+];
+---
+
+<BaseLayout title="Musicians — Accords en Valromey" description="Discover the musicians of the Accords en Valromey festival" lang="en">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/eglise.jpg"
+      alt="Music"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">Musicians</h1>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-section">
+    <SectionTitle
+      title="Our Musicians"
+      subtitle="Exceptional young talents gathered for the festival."
+    />
+    <MusicianGrid musicians={musicians} />
+  </section>
+</BaseLayout>

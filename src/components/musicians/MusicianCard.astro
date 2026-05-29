@@ -1,0 +1,21 @@
+---
+interface Props {
+  name: string;
+  instrument: string;
+  photo: string;
+  photoCredit?: string;
+}
+
+const { name, instrument, photo, photoCredit } = Astro.props;
+---
+
+<div class="bg-contrast rounded-card overflow-hidden">
+  <img src={photo} alt={name} class="w-full h-64 object-cover" />
+  <div class="p-4">
+    <h3 class="font-serif text-lg font-semibold text-[#1A1A1A]">{name}</h3>
+    <p class="font-sans text-sm text-gray-500 mt-1">{instrument}</p>
+    {photoCredit && (
+      <p class="font-sans text-xs text-gray-400 mt-2">© {photoCredit}</p>
+    )}
+  </div>
+</div>

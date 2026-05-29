@@ -1,0 +1,27 @@
+---
+import MusicianCard from './MusicianCard.astro';
+
+interface Musician {
+  name: string;
+  instrument: string;
+  photo: string;
+  photoCredit?: string;
+}
+
+interface Props {
+  musicians: Musician[];
+}
+
+const { musicians } = Astro.props;
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+  {musicians.map((musician) => (
+    <MusicianCard
+      name={musician.name}
+      instrument={musician.instrument}
+      photo={musician.photo}
+      photoCredit={musician.photoCredit}
+    />
+  ))}
+</div>
