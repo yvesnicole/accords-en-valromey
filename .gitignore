@@ -16,7 +16,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
-tina/__generated__
+# tina/__generated__ — MUST be committed (required by Tina Cloud for schema detection)
 
 # macOS-specific files
 .DS_Store

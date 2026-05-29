@@ -1,0 +1,31 @@
+fragment ConcertParts on Concert {
+  __typename
+  title
+  date
+  locale
+  translationKey
+  program
+  description
+  image
+  helloAssoLink
+}
+
+fragment MusicianParts on Musician {
+  __typename
+  name
+  locale
+  translationKey
+  instrument
+  photo
+  photoCredit
+  bio
+}
+
+fragment PageParts on Page {
+  __typename
+  title
+  locale
+  translationKey
+  subtitle
+  body
+}
