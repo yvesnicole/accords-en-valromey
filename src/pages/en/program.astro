@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import ConcertList from '../../components/concerts/ConcertList.astro';
+
+const concerts = [
+  {
+    title: 'Opening Concert',
+    date: '15 July 2024 — 8:00 PM',
+    summary: 'Works by Mozart, Beethoven, and Schubert performed by the festival musicians.',
+    image: '/images/scenery/eglise.jpg',
+    helloAssoLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+  },
+  {
+    title: 'Lesur Recital',
+    date: '16 July 2024 — 8:00 PM',
+    summary: 'A program of 20th-century French composers.',
+    image: '/images/scenery/eglise.jpg',
+    helloAssoLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+  },
+  {
+    title: 'Closing Concert',
+    date: '17 July 2024 — 6:00 PM',
+    summary: 'Grand finale of the festival with works by Brahms and Dvořák.',
+    image: '/images/scenery/eglise.jpg',
+    helloAssoLink: 'https://www.helloasso.com/associations/accords-en-valromey',
+  },
+];
+---
+
+<BaseLayout title="Program — Accords en Valromey" description="Discover the Accords en Valromey festival program" lang="en">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/eglise.jpg"
+      alt="Concert"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">Program</h1>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-section">
+    <SectionTitle
+      title="The Concerts"
+      subtitle="Three exceptional concerts in the stunning setting of Saint-Symphorien Church."
+    />
+    <ConcertList concerts={concerts} />
+  </section>
+</BaseLayout>

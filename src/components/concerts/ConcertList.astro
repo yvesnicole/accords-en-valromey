@@ -1,0 +1,29 @@
+---
+import ConcertCard from './ConcertCard.astro';
+
+interface Concert {
+  title: string;
+  date: string;
+  summary: string;
+  image?: string;
+  helloAssoLink?: string;
+}
+
+interface Props {
+  concerts: Concert[];
+}
+
+const { concerts } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {concerts.map((concert) => (
+    <ConcertCard
+      title={concert.title}
+      date={concert.date}
+      summary={concert.summary}
+      image={concert.image}
+      helloAssoLink={concert.helloAssoLink}
+    />
+  ))}
+</div>
