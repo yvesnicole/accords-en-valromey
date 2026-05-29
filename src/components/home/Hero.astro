@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { title, subtitle, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+  <img
+    src="/images/scenery/paysage.jpg"
+    alt="Valromey landscape"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+  <div class="relative z-20 text-center px-6 max-w-4xl">
+    <h1 class="font-serif text-5xl md:text-7xl font-bold text-contrast mb-6 leading-tight">
+      {title}
+    </h1>
+    <p class="font-sans text-xl md:text-2xl text-contrast/90 mb-10 leading-relaxed">
+      {subtitle}
+    </p>
+    <a
+      href={ctaHref}
+      class="inline-flex items-center justify-center px-8 py-4 bg-sage text-[#1A1A1A] rounded-card font-semibold text-lg hover:bg-sage/80 transition-colors"
+    >
+      {ctaLabel}
+    </a>
+  </div>
+</section>

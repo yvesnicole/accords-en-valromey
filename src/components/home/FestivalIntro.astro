@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { title, description, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="max-w-7xl mx-auto px-6 py-section">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 class="font-serif text-4xl font-bold text-[#1A1A1A] mb-6">{title}</h2>
+      <p class="font-sans text-lg text-gray-700 leading-relaxed mb-8">{description}</p>
+      <a
+        href={ctaHref}
+        class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-card font-semibold text-sm text-gray-700 hover:border-sage hover:text-[#1A1A1A] transition-colors"
+      >
+        {ctaLabel} →
+      </a>
+    </div>
+    <div class="rounded-card overflow-hidden">
+      <img
+        src="/images/scenery/eglise.jpg"
+        alt="Église Saint-Symphorien"
+        class="w-full h-80 object-cover"
+      />
+    </div>
+  </div>
+</section>

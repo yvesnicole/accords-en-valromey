@@ -1,6 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import FestivalIntro from '../components/home/FestivalIntro.astro';
+import NextConcert from '../components/home/NextConcert.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const locale = getLangFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const heroTitle = locale === 'fr'
+  ? 'Accords en Valromey'
+  : 'Accords en Valromey';
+
+const heroSubtitle = locale === 'fr'
+  ? 'Festival de musique classique — Champagne-en-Valromey, Ain'
+  : 'Classical music festival — Champagne-en-Valromey, Ain';
+
+const pageTitle = locale === 'fr'
+  ? 'Accords en Valromey — Festival de musique classique'
+  : 'Accords en Valromey — Classical Music Festival';
 ---
-<BaseLayout title="Accords en Valromey 2024">
-  <h1 class="font-serif text-5xl">Bonjour</h1>
+
+<BaseLayout title={pageTitle}>
+  <Hero
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    ctaLabel={t('hero.cta')}
+    ctaHref={locale === 'fr' ? '/programmation/' : '/en/program/'}
+  />
+  <FestivalIntro
+    title={locale === 'fr' ? 'Le Festival' : 'The Festival'}
+    description={locale === 'fr'
+      ? 'Depuis sa création, le festival Accords en Valromey réunit de jeunes musiciens d\'exception dans l\'écrin de l\'église Saint-Symphorien, au cœur du Valromey.'
+      : 'Since its creation, the Accords en Valromey festival brings together exceptional young musicians in the beautiful setting of Saint-Symphorien church, in the heart of Valromey.'
+    }
+    ctaLabel={t('home.discover')}
+    ctaHref={locale === 'fr' ? '/le-festival/' : '/en/the-festival/'}
+  />
+  <NextConcert
+    title={t('home.next')}
+    concertTitle={locale === 'fr' ? 'Concert d\'Ouverture' : 'Opening Concert'}
+    date="15 Juillet 2024"
+    description={locale === 'fr'
+      ? 'Rejoignez-nous pour le concert d\'ouverture du festival dans le cadre exceptionnel de l\'église Saint-Symphorien.'
+      : 'Join us for the festival\'s opening concert in the exceptional setting of Saint-Symphorien church.'
+    }
+    ctaLabel={t('home.discover')}
+    ctaHref={locale === 'fr' ? '/programmation/' : '/en/program/'}
+  />
 </BaseLayout>

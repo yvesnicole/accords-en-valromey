@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  concertTitle: string;
+  date: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { title, concertTitle, date, description, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="bg-contrast py-section">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-serif text-4xl font-bold text-[#1A1A1A] mb-12 text-center">{title}</h2>
+    <div class="max-w-2xl mx-auto bg-ivory rounded-card p-8">
+      <span class="inline-block px-3 py-1 bg-sage/30 rounded-full text-xs font-sans font-semibold text-[#1A1A1A] mb-4">
+        {date}
+      </span>
+      <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{concertTitle}</h3>
+      <p class="font-sans text-gray-700 leading-relaxed mb-6">{description}</p>
+      <a
+        href={ctaHref}
+        class="inline-flex items-center justify-center px-6 py-3 bg-sage text-[#1A1A1A] rounded-card font-semibold text-sm hover:bg-sage/80 transition-colors"
+      >
+        {ctaLabel}
+      </a>
+    </div>
+  </div>
+</section>
