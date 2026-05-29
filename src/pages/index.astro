@@ -13,8 +13,8 @@ const heroTitle = locale === 'fr'
   : 'Accords en Valromey';
 
 const heroSubtitle = locale === 'fr'
-  ? 'Festival de musique classique — Champagne-en-Valromey, Ain'
-  : 'Classical music festival — Champagne-en-Valromey, Ain';
+  ? 'Festival de musique classique — 20-22 août 2026, Champagne-en-Valromey, Ain'
+  : 'Classical music festival — August 20-22, 2026, Champagne-en-Valromey, Ain';
 
 const pageTitle = locale === 'fr'
   ? 'Accords en Valromey — Festival de musique classique'
@@ -31,8 +31,8 @@ const pageTitle = locale === 'fr'
   <FestivalIntro
     title={locale === 'fr' ? 'Le Festival' : 'The Festival'}
     description={locale === 'fr'
-      ? 'Depuis sa création, le festival Accords en Valromey réunit de jeunes musiciens d\'exception dans l\'écrin de l\'église Saint-Symphorien, au cœur du Valromey.'
-      : 'Since its creation, the Accords en Valromey festival brings together exceptional young musicians in the beautiful setting of Saint-Symphorien church, in the heart of Valromey.'
+      ? 'Du 20 au 22 août 2026, Accords en Valromey réunit Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava et Célia Garetti-Nicole dans l\'église Saint-Pierre pour trois soirées autour de Chostakovitch, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn et Brahms.'
+      : 'From August 20 to 22, 2026, Accords en Valromey brings together Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava, and Célia Garetti-Nicole in Saint-Pierre church for three evenings devoted to Shostakovich, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn, and Brahms.'
     }
     ctaLabel={t('home.discover')}
     ctaHref={locale === 'fr' ? '/le-festival/' : '/en/the-festival/'}
@@ -40,10 +40,10 @@ const pageTitle = locale === 'fr'
   <NextConcert
     title={t('home.next')}
     concertTitle={locale === 'fr' ? 'Concert d\'Ouverture' : 'Opening Concert'}
-    date="15 Juillet 2024"
+    date={locale === 'fr' ? '20 août 2026 — 19h00' : 'August 20, 2026 — 7:00 PM'}
     description={locale === 'fr'
-      ? 'Rejoignez-nous pour le concert d\'ouverture du festival dans le cadre exceptionnel de l\'église Saint-Symphorien.'
-      : 'Join us for the festival\'s opening concert in the exceptional setting of Saint-Symphorien church.'
+      ? 'Un voyage dans la musique de chambre du XXe siècle avec Chostakovitch, Lili Boulanger, Ravel et Rebecca Clarke, à l\'église Saint-Pierre. Billets à partir de 24 €, pass 2 jours à 45 € et pass 3 jours à 63 €.'
+      : 'A journey through 20th century chamber music with Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke in Saint-Pierre church. Tickets start at €24, with a 2-day pass at €45 and a 3-day pass at €63.'
     }
     ctaLabel={t('home.discover')}
     ctaHref={locale === 'fr' ? '/programmation/' : '/en/program/'}
