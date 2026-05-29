@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PricingCard from '../../components/tickets/PricingCard.astro';
+import HelloAssoButton from '../../components/tickets/HelloAssoButton.astro';
+import Card from '../../components/ui/Card.astro';
+---
+
+<BaseLayout title="Tickets — Accords en Valromey" description="Buy tickets for the Accords en Valromey festival" lang="en">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/eglise.jpg"
+      alt="Concert"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">Tickets</h1>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-section">
+    <SectionTitle
+      title="Pricing"
+      subtitle="Choose the package that suits you and book online."
+    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <PricingCard
+        name="Single Ticket"
+        fullPrice="21 €"
+        reducedPrice="18 €"
+        includes={['1 concert', '1 program', '1 cocktail']}
+      />
+      <PricingCard
+        name="2-Day Pass"
+        fullPrice="38 €"
+        reducedPrice="32 €"
+        includes={['2 concerts', '2 programs', '2 cocktails']}
+        highlighted
+      />
+      <PricingCard
+        name="3-Day Pass"
+        fullPrice="48 €"
+        reducedPrice="39 €"
+        includes={['3 concerts', '3 programs', '3 cocktails']}
+      />
+    </div>
+    <p class="text-center font-sans text-sm text-gray-500 mt-6">Free for under 18s</p>
+  </section>
+
+  <section class="bg-contrast py-section">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <HelloAssoButton
+        href="https://www.helloasso.com/associations/accords-en-valromey"
+        label="Buy Tickets"
+      />
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-6 py-section">
+    <Card>
+      <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Concert Experience</h3>
+      <p class="font-sans text-gray-700 leading-relaxed">
+        Each concert is followed by a complimentary cocktail reception, a special moment to meet
+        the artists. Restaurant La Barque, located nearby, welcomes you before or after the concert.
+        Children are welcome at the festival.
+      </p>
+    </Card>
+  </section>
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import PricingCard from '../components/tickets/PricingCard.astro';
+import HelloAssoButton from '../components/tickets/HelloAssoButton.astro';
+import Card from '../components/ui/Card.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations('fr');
+---
+
+<BaseLayout title="Billetterie — Accords en Valromey" description="Achetez vos billets pour le festival Accords en Valromey">
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1A1A1A]/40 z-10"></div>
+    <img
+      src="/images/scenery/eglise.jpg"
+      alt="Concert"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="relative z-20 flex items-center justify-center h-full">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold text-contrast">Billetterie</h1>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-section">
+    <SectionTitle
+      title="Tarifs"
+      subtitle="Choisissez la formule qui vous convient et réservez en ligne."
+    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <PricingCard
+        name={t('tickets.single')}
+        fullPrice="21 €"
+        reducedPrice="18 €"
+        includes={[`1 ${t('tickets.concert')}`, `1 ${t('tickets.program')}`, `1 ${t('tickets.cocktail')}`]}
+      />
+      <PricingCard
+        name={t('tickets.pass2')}
+        fullPrice="38 €"
+        reducedPrice="32 €"
+        includes={[`2 ${t('tickets.concerts')}`, `2 ${t('tickets.programs')}`, `2 ${t('tickets.cocktails')}`]}
+        highlighted
+      />
+      <PricingCard
+        name={t('tickets.pass3')}
+        fullPrice="48 €"
+        reducedPrice="39 €"
+        includes={[`3 ${t('tickets.concerts')}`, `3 ${t('tickets.programs')}`, `3 ${t('tickets.cocktails')}`]}
+      />
+    </div>
+    <p class="text-center font-sans text-sm text-gray-500 mt-6">{t('tickets.free')}</p>
+  </section>
+
+  <section class="bg-contrast py-section">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <HelloAssoButton
+        href="https://www.helloasso.com/associations/accords-en-valromey"
+        label={t('tickets.buy')}
+      />
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-6 py-section">
+    <Card>
+      <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Déroulé d'un concert</h3>
+      <p class="font-sans text-gray-700 leading-relaxed">
+        Chaque concert est suivi d'un cocktail offert, moment privilégié pour échanger avec les
+        artistes. Le restaurant La Barque, situé à proximité, vous accueille avant ou après le concert.
+        Les enfants sont les bienvenus au festival.
+      </p>
+    </Card>
+  </section>
+</BaseLayout>
