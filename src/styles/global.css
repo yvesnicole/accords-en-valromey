@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* ── Color Tokens ── */
+@theme {
+  --color-sage: #C4E0C4;
+  --color-ivory: #F9FFF7;
+  --color-contrast: #FFFFFF;
+
+  /* ── Typography ── */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", ui-sans-serif, sans-serif;
+
+  /* ── Custom spacing ── */
+  --spacing-section: 6rem;
+
+  /* ── Border radius ── */
+  --radius-card: 0.75rem;
+}
+
+/* ── Base layer: default body styling ── */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: #1A1A1A;
+    background-color: var(--color-ivory);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+}
