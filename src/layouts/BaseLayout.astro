@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 
 interface Props {
   title: string;
@@ -24,7 +26,6 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
@@ -34,6 +35,10 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="bg-ivory text-[#1A1A1A] font-sans antialiased">
-    <slot />
+    <Header />
+    <main class="pt-16">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

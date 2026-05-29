@@ -1,0 +1,34 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[#1A1A1A] text-gray-300 mt-section">
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <p class="font-serif text-lg text-contrast mb-2">Accords en Valromey</p>
+      <p class="text-sm leading-relaxed">
+        Festival de musique classique<br />
+        Champagne-en-Valromey, Ain
+      </p>
+    </div>
+    <div>
+      <p class="font-sans font-semibold text-contrast mb-3">Liens</p>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/le-festival/" class="hover:text-contrast transition-colors">Le Festival</a></li>
+        <li><a href="/programmation/" class="hover:text-contrast transition-colors">Programmation</a></li>
+        <li><a href="/billetterie/" class="hover:text-contrast transition-colors">Billetterie</a></li>
+        <li><a href="/contact/" class="hover:text-contrast transition-colors">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-sans font-semibold text-contrast mb-3">Suivez-nous</p>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#" class="hover:text-contrast transition-colors">Facebook</a></li>
+        <li><a href="#" class="hover:text-contrast transition-colors">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-gray-700 text-center py-6 text-xs text-gray-500">
+    &copy; {currentYear} Accords en Valromey. Tous droits réservés.
+  </div>
+</footer>
