@@ -32,6 +32,9 @@ jobs:
 
       - name: Build (Tina + Astro)
         run: npm run build
+        env:
+          PUBLIC_TINA_CLIENT_ID: ${{ secrets.PUBLIC_TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
 
       - name: Setup flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master

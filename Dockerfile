@@ -9,7 +9,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npx tinacms build --content=local && npm run build
+RUN npm run build
 
 # Stage 3: Serve static files with Nginx
 FROM nginx:alpine AS runtime
