@@ -1,0 +1,24 @@
+---
+// src/components/tickets/TicketButton.astro
+// Generic ticket button — replaces HelloAssoButton.astro
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
+
+const { href, variant = 'primary' } = Astro.props;
+
+const base = 'inline-flex items-center justify-center px-8 py-4 rounded-card font-semibold text-lg transition-colors';
+
+const variants: Record<string, string> = {
+  primary: 'bg-sage text-[#1A1A1A] hover:bg-sage/80',
+  secondary: 'border border-sage text-sage hover:bg-sage/10',
+};
+---
+
+<a
+  href={href}
+  class={`${base} ${variants[variant]}`}
+>
+  <slot />
+</a>

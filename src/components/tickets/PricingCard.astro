@@ -1,31 +1,38 @@
 ---
+// src/components/tickets/PricingCard.astro
+import { useTranslations } from '../../i18n/utils';
+
 interface Props {
   name: string;
   fullPrice: string;
   reducedPrice: string;
   includes: string[];
   highlighted?: boolean;
+  locale: 'fr' | 'en';
+  href?: string;
 }
 
-const { name, fullPrice, reducedPrice, includes, highlighted = false } = Astro.props;
+const { name, fullPrice, reducedPrice, includes, highlighted = false, locale, href } = Astro.props;
+const t = useTranslations(locale);
 ---
 
-<div class={`rounded-card p-8 ${highlighted ? 'bg-sage/20 border-2 border-sage' : 'bg-contrast'}`}>
+<div class={`rounded-card p-8 ${highlighted ? 'bg-sage/20 border-2 border-sage' : 'bg-contrast'} ${href ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
+  {...(href ? { 'data-ticket-href': href } : {})}>
   <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-6">{name}</h3>
 
   <div class="mb-6">
     <div class="flex items-baseline gap-2 mb-2">
       <span class="font-serif text-3xl font-bold text-[#1A1A1A]">{fullPrice}</span>
-      <span class="font-sans text-sm text-gray-500">plein tarif</span>
+      <span class="font-sans text-sm text-gray-500">{t('tickets.full')}</span>
     </div>
     <div class="flex items-baseline gap-2">
       <span class="font-serif text-xl font-semibold text-gray-700">{reducedPrice}</span>
-      <span class="font-sans text-sm text-gray-500">tarif réduit</span>
+      <span class="font-sans text-sm text-gray-500">{t('tickets.reduced')}</span>
     </div>
   </div>
 
   <div class="border-t border-gray-200 pt-4 mb-6">
-    <p class="font-sans text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Inclus</p>
+    <p class="font-sans text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{t('tickets.includes')}</p>
     <ul class="space-y-2">
       {includes.map((item) => (
         <li class="flex items-start gap-2 font-sans text-sm text-gray-700">
