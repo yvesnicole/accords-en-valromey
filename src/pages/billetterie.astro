@@ -1,12 +1,19 @@
 ---
+// src/pages/billetterie.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import PricingCard from '../components/tickets/PricingCard.astro';
-import HelloAssoButton from '../components/tickets/HelloAssoButton.astro';
+import TicketWidget from '../components/tickets/TicketWidget.astro';
 import Card from '../components/ui/Card.astro';
 import { useTranslations } from '../i18n/utils';
+import { getPricing } from '../data/pricing';
 
-const t = useTranslations('fr');
+const locale = 'fr' as const;
+const t = useTranslations(locale);
+const pricing = getPricing(locale, t as (key: string) => string);
+
+// TODO: Replace with actual Weezevent multi-event module ID
+const WEEZEVENT_EVENT_ID = 'WEEZEVENT_EVENT_ID';
 ---
 
 <BaseLayout title="Billetterie — Accords en Valromey" description="Achetez vos billets pour le festival Accords en Valromey">
@@ -28,35 +35,23 @@ const t = useTranslations('fr');
       subtitle="Choisissez la formule qui vous convient et réservez en ligne."
     />
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-      <PricingCard
-        name={t('tickets.single')}
-        fullPrice="24 €"
-        reducedPrice="21 €"
-        includes={[`1 ${t('tickets.concert')}`, `1 ${t('tickets.program')}`, `1 ${t('tickets.cocktail')}`]}
-      />
-      <PricingCard
-        name={t('tickets.pass2')}
-        fullPrice="45 €"
-        reducedPrice="39 €"
-        includes={[`2 ${t('tickets.concerts')}`, `2 ${t('tickets.programs')}`, `2 ${t('tickets.cocktails')}`]}
-        highlighted
-      />
-      <PricingCard
-        name={t('tickets.pass3')}
-        fullPrice="63 €"
-        reducedPrice="54 €"
-        includes={[`3 ${t('tickets.concerts')}`, `3 ${t('tickets.programs')}`, `3 ${t('tickets.cocktails')}`]}
-      />
+      {pricing.map((tier) => (
+        <PricingCard
+          name={tier.name}
+          fullPrice={tier.fullPrice}
+          reducedPrice={tier.reducedPrice}
+          includes={tier.includes}
+          highlighted={tier.highlighted}
+          locale={locale}
+        />
+      ))}
     </div>
     <p class="text-center font-sans text-sm text-gray-500 mt-6">Gratuit pour les moins de 18 ans. Tarif réduit pour les étudiants et les demandeurs d'emploi.</p>
   </section>
 
   <section class="bg-contrast py-section">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-      <HelloAssoButton
-        href="https://www.helloasso.com/associations/accords-en-valromey"
-        label={t('tickets.buy')}
-      />
+    <div class="max-w-2xl mx-auto px-6">
+      <TicketWidget eventId={WEEZEVENT_EVENT_ID} locale={locale} />
     </div>
   </section>
 
@@ -65,7 +60,7 @@ const t = useTranslations('fr');
     <Card>
       <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Réservation</h3>
       <p class="font-sans text-gray-700 leading-relaxed">
-        Il est vivement recommandé de réserver vos billets en ligne via HelloAsso. Une billetterie sur place
+        Il est vivement recommandé de réserver vos billets en ligne. Une billetterie sur place
         sera également disponible dans la limite des places restantes. Pour toute question, vous pouvez nous
         écrire à <a href="mailto:contact@accordsenvalromey.com" class="underline">contact@accordsenvalromey.com</a>.
       </p>

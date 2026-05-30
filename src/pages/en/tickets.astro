@@ -1,9 +1,19 @@
 ---
+// src/pages/en/tickets.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionTitle from '../../components/ui/SectionTitle.astro';
 import PricingCard from '../../components/tickets/PricingCard.astro';
-import HelloAssoButton from '../../components/tickets/HelloAssoButton.astro';
+import TicketWidget from '../../components/tickets/TicketWidget.astro';
 import Card from '../../components/ui/Card.astro';
+import { useTranslations } from '../../i18n/utils';
+import { getPricing } from '../../data/pricing';
+
+const locale = 'en' as const;
+const t = useTranslations(locale);
+const pricing = getPricing(locale, t as (key: string) => string);
+
+// TODO: Replace with actual Weezevent multi-event module ID
+const WEEZEVENT_EVENT_ID = 'WEEZEVENT_EVENT_ID';
 ---
 
 <BaseLayout title="Tickets — Accords en Valromey" description="Buy tickets for the Accords en Valromey festival" lang="en">
@@ -25,35 +35,23 @@ import Card from '../../components/ui/Card.astro';
       subtitle="Choose the package that suits you and book online."
     />
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-      <PricingCard
-        name="Single Ticket"
-        fullPrice="24 €"
-        reducedPrice="21 €"
-        includes={['1 concert', '1 printed program booklet', '1 drink at the post-concert cocktail']}
-      />
-      <PricingCard
-        name="2-Day Pass"
-        fullPrice="45 €"
-        reducedPrice="39 €"
-        includes={['2 concerts of your choice', '2 printed program booklets', '1 drink at each post-concert cocktail']}
-        highlighted
-      />
-      <PricingCard
-        name="3-Day Pass"
-        fullPrice="63 €"
-        reducedPrice="54 €"
-        includes={['All 3 concerts', '3 printed program booklets', '1 drink at each post-concert cocktail']}
-      />
+      {pricing.map((tier) => (
+        <PricingCard
+          name={tier.name}
+          fullPrice={tier.fullPrice}
+          reducedPrice={tier.reducedPrice}
+          includes={tier.includes}
+          highlighted={tier.highlighted}
+          locale={locale}
+        />
+      ))}
     </div>
     <p class="text-center font-sans text-sm text-gray-500 mt-6">Free for under-18s. Reduced pricing is available for students and unemployed audience members.</p>
   </section>
 
   <section class="bg-contrast py-section">
-    <div class="max-w-2xl mx-auto px-6 text-center">
-      <HelloAssoButton
-        href="https://www.helloasso.com/associations/accords-en-valromey"
-        label="Buy Tickets"
-      />
+    <div class="max-w-2xl mx-auto px-6">
+      <TicketWidget eventId={WEEZEVENT_EVENT_ID} locale={locale} />
     </div>
   </section>
 
@@ -62,7 +60,7 @@ import Card from '../../components/ui/Card.astro';
     <Card>
       <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Booking</h3>
       <p class="font-sans text-gray-700 leading-relaxed">
-        Online booking via HelloAsso is strongly recommended. Tickets will also be sold on site subject to
+        Online booking is strongly recommended. Tickets will also be sold on site subject to
         availability. For any question, contact <a href="mailto:contact@accordsenvalromey.com" class="underline">contact@accordsenvalromey.com</a>.
       </p>
     </Card>
