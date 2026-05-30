@@ -15,6 +15,7 @@ jobs:
     env:
       PUBLIC_TINA_CLIENT_ID: ${{ secrets.PUBLIC_TINA_CLIENT_ID }}
       TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+      PUBLIC_WEEZEVENT_EVENT_ID: ${{ secrets.PUBLIC_WEEZEVENT_EVENT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,6 +36,7 @@ jobs:
         env:
           PUBLIC_TINA_CLIENT_ID: ${{ secrets.PUBLIC_TINA_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          PUBLIC_WEEZEVENT_EVENT_ID: ${{ secrets.PUBLIC_WEEZEVENT_EVENT_ID }}
 
       - name: Setup flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master

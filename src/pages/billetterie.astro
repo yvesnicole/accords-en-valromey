@@ -12,8 +12,11 @@ const locale = 'fr' as const;
 const t = useTranslations(locale);
 const pricing = getPricing(locale, t as (key: string) => string);
 
-// TODO: Replace with actual Weezevent multi-event module ID
-const WEEZEVENT_EVENT_ID = 'WEEZEVENT_EVENT_ID';
+const WEEZEVENT_EVENT_ID = import.meta.env.PUBLIC_WEEZEVENT_EVENT_ID;
+
+if (!WEEZEVENT_EVENT_ID) {
+  throw new Error('Missing PUBLIC_WEEZEVENT_EVENT_ID environment variable');
+}
 ---
 
 <BaseLayout title="Billetterie — Accords en Valromey" description="Achetez vos billets pour le festival Accords en Valromey">
