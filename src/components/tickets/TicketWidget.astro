@@ -1,0 +1,107 @@
+---
+// src/components/tickets/TicketWidget.astro
+// Embedded Weezevent ticket widget via iFrame with lazy-loading
+// TODO: Replace WEEZEVENT_EVENT_ID with actual Weezevent multi-event module ID
+
+interface Props {
+  eventId: string;
+  locale: 'fr' | 'en';
+}
+
+const { eventId, locale } = Astro.props;
+
+// Weezevent widget URL — color C4E0C4 is the site's sage green (hex without #)
+const widgetUrl = `https://www.weezevent.com/widget_billeterie.php?id_evenement=${eventId}&locale=${locale}&color=C4E0C4`;
+const isFrench = locale === 'fr';
+
+const loadingText = isFrench ? 'Chargement de la billetterie…' : 'Loading tickets…';
+const errorText = isFrench
+  ? 'La billetterie met du temps à charger. Vous pouvez aussi réserver directement.'
+  : 'The ticket widget is taking a while. You can also book directly.';
+const fallbackLabel = isFrench ? 'Ouvrir la billetterie Weezevent' : 'Open Weezevent ticketing';
+const widgetTitle = isFrench ? 'Achetez vos billets' : 'Buy your tickets';
+---
+
+<div
+  id="tickets"
+  class="weezevent-widget w-full min-h-[600px]"
+  data-widget-url={widgetUrl}
+  data-fallback-url={`https://www.weezevent.com/widget_billeterie.php?id_evenement=${eventId}`}
+  data-widget-title={widgetTitle}
+>
+  <!-- Skeleton loader (visible until iFrame loads) -->
+  <div class="weezevent-skeleton w-full min-h-[600px] bg-gray-100 rounded-card animate-pulse flex items-center justify-center">
+    <p class="font-sans text-gray-400">{loadingText}</p>
+  </div>
+
+  <!-- Error fallback (hidden by default, shown on timeout) -->
+  <div class="weezevent-error hidden w-full text-center py-12">
+    <p class="font-sans text-gray-600 mb-4">{errorText}</p>
+    <a
+      href={`https://www.weezevent.com/widget_billeterie.php?id_evenement=${eventId}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center px-6 py-3 bg-sage text-[#1A1A1A] rounded-card font-semibold text-sm hover:bg-sage/80 transition-colors"
+    >
+      {fallbackLabel}
+    </a>
+  </div>
+</div>
+
+<script>
+  const widgetEl = document.querySelector('.weezevent-widget') as HTMLElement | null;
+  if (!widgetEl) throw new Error('TicketWidget root not found');
+
+  const widgetUrl = widgetEl.dataset.widgetUrl!;
+  const skeleton = widgetEl.querySelector('.weezevent-skeleton') as HTMLElement;
+  const errorEl = widgetEl.querySelector('.weezevent-error') as HTMLElement;
+
+  // Lazy-load iFrame when user scrolls near the widget
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          loadIframe();
+          observer.disconnect();
+        }
+      }
+    },
+    { rootMargin: '200px' },
+  );
+
+  let timeoutId: ReturnType<typeof setTimeout>;
+
+  function loadIframe() {
+    const iframe = document.createElement('iframe');
+    iframe.src = widgetUrl + '&o=site';
+    iframe.width = '100%';
+    iframe.height = '700';
+    iframe.frameBorder = '0';
+    iframe.scrolling = 'auto';
+    iframe.setAttribute('title', widgetEl.dataset.widgetTitle || 'Ticket widget');
+    iframe.setAttribute('loading', 'lazy');
+    iframe.style.border = 'none';
+
+    // Show error fallback after 10s timeout
+    timeoutId = setTimeout(() => {
+      skeleton.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+    }, 10000);
+
+    iframe.addEventListener('load', () => {
+      clearTimeout(timeoutId);
+      skeleton.classList.add('hidden');
+    });
+
+    iframe.addEventListener('error', () => {
+      clearTimeout(timeoutId);
+      skeleton.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+    });
+
+    widgetEl.appendChild(iframe);
+  }
+
+  // Start observing immediately
+  observer.observe(widgetEl);
+</script>
