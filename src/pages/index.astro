@@ -4,6 +4,7 @@ import Hero from '../components/home/Hero.astro';
 import FestivalIntro from '../components/home/FestivalIntro.astro';
 import NextConcert from '../components/home/NextConcert.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { pricingTiers } from '../data/pricing';
 
 const locale = getLangFromUrl(Astro.url);
 const t = useTranslations(locale);
@@ -42,8 +43,8 @@ const pageTitle = locale === 'fr'
     concertTitle={locale === 'fr' ? 'Concert d\'Ouverture' : 'Opening Concert'}
     date={locale === 'fr' ? '20 août 2026 — 19h00' : 'August 20, 2026 — 7:00 PM'}
     description={locale === 'fr'
-      ? 'Un voyage dans la musique de chambre du XXe siècle avec Chostakovitch, Lili Boulanger, Ravel et Rebecca Clarke, à l\'église Saint-Pierre. Billets à partir de 24 €, pass 2 jours à 45 € et pass 3 jours à 63 €.'
-      : 'A journey through 20th century chamber music with Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke in Saint-Pierre church. Tickets start at €24, with a 2-day pass at €45 and a 3-day pass at €63.'
+      ? `Un voyage dans la musique de chambre du XXe siècle avec Chostakovitch, Lili Boulanger, Ravel et Rebecca Clarke, à l'église Saint-Pierre. Billets à partir de ${pricingTiers[0].fullPrice} €, pass 2 jours à ${pricingTiers[1].fullPrice} € et pass 3 jours à ${pricingTiers[2].fullPrice} €.`
+      : `A journey through 20th century chamber music with Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke in Saint-Pierre church. Tickets start at €${pricingTiers[0].fullPrice}, with a 2-day pass at €${pricingTiers[1].fullPrice} and a 3-day pass at €${pricingTiers[2].fullPrice}.`
     }
     ctaLabel={t('home.discover')}
     ctaHref={locale === 'fr' ? '/programmation/' : '/en/program/'}
