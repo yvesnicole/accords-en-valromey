@@ -51,10 +51,11 @@ const widgetTitle = isFrench ? 'Achetez vos billets' : 'Buy your tickets';
 <script>
   const widgetEl = document.querySelector('.weezevent-widget') as HTMLElement | null;
   if (!widgetEl) throw new Error('TicketWidget root not found');
+  const root = widgetEl; // non-null after guard, but TS can't narrow into closures
 
-  const widgetUrl = widgetEl.dataset.widgetUrl!;
-  const skeleton = widgetEl.querySelector('.weezevent-skeleton') as HTMLElement;
-  const errorEl = widgetEl.querySelector('.weezevent-error') as HTMLElement;
+  const widgetUrl = root.dataset.widgetUrl!;
+  const skeleton = root.querySelector('.weezevent-skeleton') as HTMLElement;
+  const errorEl = root.querySelector('.weezevent-error') as HTMLElement;
 
   // Lazy-load iFrame when user scrolls near the widget
   const observer = new IntersectionObserver(
@@ -78,7 +79,7 @@ const widgetTitle = isFrench ? 'Achetez vos billets' : 'Buy your tickets';
     iframe.height = '700';
     iframe.frameBorder = '0';
     iframe.scrolling = 'auto';
-    iframe.setAttribute('title', widgetEl.dataset.widgetTitle || 'Ticket widget');
+    iframe.setAttribute('title', root.dataset.widgetTitle || 'Ticket widget');
     iframe.setAttribute('loading', 'lazy');
     iframe.style.border = 'none';
 
@@ -99,9 +100,9 @@ const widgetTitle = isFrench ? 'Achetez vos billets' : 'Buy your tickets';
       errorEl.classList.remove('hidden');
     });
 
-    widgetEl.appendChild(iframe);
+    root.appendChild(iframe);
   }
 
   // Start observing immediately
-  observer.observe(widgetEl);
+  observer.observe(root);
 </script>
