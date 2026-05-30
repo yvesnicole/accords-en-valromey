@@ -7,7 +7,7 @@ fragment ConcertParts on Concert {
   program
   description
   image
-  helloAssoLink
+  ticketUrl
 }
 
 fragment MusicianParts on Musician {

@@ -75,9 +75,9 @@ export default defineConfig({
           },
           {
             type: 'string',
-            name: 'helloAssoLink',
-            label: 'Lien HelloAsso',
-            description: 'URL de la billetterie pour ce concert',
+            name: 'ticketUrl',
+            label: 'Lien billetterie',
+            description: 'URL de la billetterie pour ce concert (optionnel — laisse vide pour rediriger vers la page billetterie)',
           },
         ],
       },
