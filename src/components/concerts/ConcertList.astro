@@ -1,4 +1,5 @@
 ---
+// src/components/concerts/ConcertList.astro
 import ConcertCard from './ConcertCard.astro';
 
 interface Concert {
@@ -6,7 +7,7 @@ interface Concert {
   date: string;
   summary: string;
   image?: string;
-  helloAssoLink?: string;
+  ticketUrl?: string;
 }
 
 interface Props {
@@ -23,7 +24,7 @@ const { concerts } = Astro.props;
       date={concert.date}
       summary={concert.summary}
       image={concert.image}
-      helloAssoLink={concert.helloAssoLink}
+      ticketUrl={concert.ticketUrl}
     />
   ))}
 </div>
