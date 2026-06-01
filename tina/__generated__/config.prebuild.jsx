@@ -22,7 +22,7 @@ var config_default = defineConfig({
         label: "Concerts",
         path: "src/content/concerts",
         match: {
-          include: "{fr,en}/*"
+          include: ["fr/*", "en/*"]
         },
         format: "mdx",
         fields: [
@@ -82,7 +82,7 @@ var config_default = defineConfig({
         label: "Musiciens",
         path: "src/content/musicians",
         match: {
-          include: "{fr,en}/*"
+          include: ["fr/*", "en/*"]
         },
         format: "mdx",
         fields: [
@@ -137,7 +137,7 @@ var config_default = defineConfig({
         label: "Pages",
         path: "src/content/pages",
         match: {
-          include: "{fr,en}/*"
+          include: ["fr/*", "en/*"]
         },
         format: "mdx",
         fields: [
