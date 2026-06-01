@@ -16,6 +16,9 @@ export const ConcertPartsFragmentDoc = gql`
   description
   image
   helloAssoLink
+  mapsLink
+  mapsLabel
+  ticketLabel
 }
     `;
 export const MusicianPartsFragmentDoc = gql`
@@ -37,6 +40,16 @@ export const PagePartsFragmentDoc = gql`
   locale
   translationKey
   subtitle
+  image
+  imageCaption
+  email
+  address
+  phone
+  mapEmbedUrl
+  facebookUrl
+  instagramUrl
+  membershipUrl
+  donationUrl
   body
 }
     `;

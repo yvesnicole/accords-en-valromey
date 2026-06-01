@@ -99,9 +99,12 @@ type Concert implements Node & Document {
   locale: String!
   translationKey: String!
   program: JSON!
-  description: JSON
+  description: String
   image: String
   helloAssoLink: String
+  mapsLink: String
+  mapsLabel: String
+  ticketLabel: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -141,9 +144,12 @@ input ConcertFilter {
   locale: StringFilter
   translationKey: StringFilter
   program: RichTextFilter
-  description: RichTextFilter
+  description: StringFilter
   image: ImageFilter
   helloAssoLink: StringFilter
+  mapsLink: StringFilter
+  mapsLabel: StringFilter
+  ticketLabel: StringFilter
 }
 
 type ConcertConnectionEdges {
@@ -196,6 +202,16 @@ type Page implements Node & Document {
   locale: String!
   translationKey: String!
   subtitle: String
+  image: String
+  imageCaption: String
+  email: String
+  address: String
+  phone: String
+  mapEmbedUrl: String
+  facebookUrl: String
+  instagramUrl: String
+  membershipUrl: String
+  donationUrl: String
   body: JSON!
   id: ID!
   _sys: SystemInfo!
@@ -207,6 +223,16 @@ input PageFilter {
   locale: StringFilter
   translationKey: StringFilter
   subtitle: StringFilter
+  image: ImageFilter
+  imageCaption: StringFilter
+  email: StringFilter
+  address: StringFilter
+  phone: StringFilter
+  mapEmbedUrl: StringFilter
+  facebookUrl: StringFilter
+  instagramUrl: StringFilter
+  membershipUrl: StringFilter
+  donationUrl: StringFilter
   body: RichTextFilter
 }
 
@@ -254,9 +280,12 @@ input ConcertMutation {
   locale: String
   translationKey: String
   program: JSON
-  description: JSON
+  description: String
   image: String
   helloAssoLink: String
+  mapsLink: String
+  mapsLabel: String
+  ticketLabel: String
 }
 
 input MusicianMutation {
@@ -274,6 +303,16 @@ input PageMutation {
   locale: String
   translationKey: String
   subtitle: String
+  image: String
+  imageCaption: String
+  email: String
+  address: String
+  phone: String
+  mapEmbedUrl: String
+  facebookUrl: String
+  instagramUrl: String
+  membershipUrl: String
+  donationUrl: String
   body: JSON
 }
 

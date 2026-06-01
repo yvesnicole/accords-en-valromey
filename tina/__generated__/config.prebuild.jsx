@@ -58,9 +58,10 @@ var config_default = defineConfig({
             isBody: true
           },
           {
-            type: "rich-text",
+            type: "string",
             name: "description",
-            label: "Description"
+            label: "Description",
+            description: "Courte description affich\xE9e dans le carousel des concerts"
           },
           {
             type: "image",
@@ -72,6 +73,24 @@ var config_default = defineConfig({
             name: "helloAssoLink",
             label: "Lien billetterie",
             description: "URL HelloAsso de la billetterie pour ce concert (optionnel \u2014 laisse vide pour rediriger vers la page billetterie)"
+          },
+          {
+            type: "string",
+            name: "mapsLink",
+            label: "Lien Google Maps",
+            description: "URL Google Maps du lieu du concert"
+          },
+          {
+            type: "string",
+            name: "mapsLabel",
+            label: "Texte du lien Maps",
+            description: 'Texte affich\xE9 pour le lien Google Maps (ex: "Voir sur Google Maps")'
+          },
+          {
+            type: "string",
+            name: "ticketLabel",
+            label: "Texte du lien billetterie",
+            description: 'Texte affich\xE9 pour le lien de billetterie (ex: "R\xE9server")'
           }
         ]
       },
@@ -157,6 +176,62 @@ var config_default = defineConfig({
             type: "string",
             name: "subtitle",
             label: "Sous-titre"
+          },
+          {
+            type: "image",
+            name: "image",
+            label: "Image",
+            description: "Image principale de la page (ex: photo d'illustration pour le festival)"
+          },
+          {
+            type: "string",
+            name: "imageCaption",
+            label: "L\xE9gende de l'image"
+          },
+          {
+            type: "string",
+            name: "email",
+            label: "Email",
+            description: "Adresse email de contact"
+          },
+          {
+            type: "string",
+            name: "address",
+            label: "Adresse",
+            description: "Adresse postale compl\xE8te"
+          },
+          {
+            type: "string",
+            name: "phone",
+            label: "T\xE9l\xE9phone"
+          },
+          {
+            type: "string",
+            name: "mapEmbedUrl",
+            label: "URL carte Google Maps",
+            description: "URL d'int\xE9gration Google Maps (iframe embed)"
+          },
+          {
+            type: "string",
+            name: "facebookUrl",
+            label: "URL Facebook"
+          },
+          {
+            type: "string",
+            name: "instagramUrl",
+            label: "URL Instagram"
+          },
+          {
+            type: "string",
+            name: "membershipUrl",
+            label: "URL adh\xE9sion HelloAsso",
+            description: "Lien vers la page d'adh\xE9sion sur HelloAsso"
+          },
+          {
+            type: "string",
+            name: "donationUrl",
+            label: "URL don HelloAsso",
+            description: "Lien vers la page de don sur HelloAsso"
           },
           {
             type: "rich-text",

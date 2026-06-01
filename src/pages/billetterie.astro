@@ -7,10 +7,12 @@ import HelloAssoWidget from '../components/tickets/HelloAssoWidget.astro';
 import Card from '../components/ui/Card.astro';
 import { useTranslations } from '../i18n/utils';
 import { getPricing } from '../data/pricing';
+import { getPage } from '../lib/data';
 
 const locale = 'fr' as const;
 const t = useTranslations(locale);
 const pricing = getPricing(locale, t as (key: string) => string);
+const page = await getPage('billetterie', locale);
 ---
 
 <BaseLayout title="Billetterie — Accords en Valromey" description="Achetez vos billets pour le festival Accords en Valromey">
@@ -59,7 +61,7 @@ const pricing = getPricing(locale, t as (key: string) => string);
       <p class="font-sans text-gray-700 leading-relaxed">
         Il est vivement recommandé de réserver vos billets en ligne. Une billetterie sur place
         sera également disponible dans la limite des places restantes. Pour toute question, vous pouvez nous
-        écrire à <a href="mailto:contact@accordsenvalromey.com" class="underline">contact@accordsenvalromey.com</a>.
+        écrire à <a href={`mailto:${page?.email || 'contact@accordsenvalromey.fr'}`} class="underline">{page?.email || 'contact@accordsenvalromey.fr'}</a>.
       </p>
     </Card>
     <Card>

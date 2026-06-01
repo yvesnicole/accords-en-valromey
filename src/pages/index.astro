@@ -5,13 +5,17 @@ import FestivalIntro from '../components/home/FestivalIntro.astro';
 import NextConcert from '../components/home/NextConcert.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { pricingTiers } from '../data/pricing';
+import { getConcerts } from '../lib/data';
+import { formatConcertDate } from '../lib/utils';
 
-const locale = getLangFromUrl(Astro.url);
+const locale = getLangFromUrl(Astro.url) as 'fr' | 'en';
 const t = useTranslations(locale);
 
-const heroTitle = locale === 'fr'
-  ? 'Accords en Valromey'
-  : 'Accords en Valromey';
+// Fetch concerts from CMS for the NextConcert section
+const concerts = await getConcerts(locale);
+const nextConcert = concerts.length > 0 ? concerts[0] : null;
+
+const heroTitle = 'Accords en Valromey';
 
 const heroSubtitle = locale === 'fr'
   ? 'Festival de musique classique — 20-22 août 2026, Champagne-en-Valromey, Ain'
@@ -20,6 +24,24 @@ const heroSubtitle = locale === 'fr'
 const pageTitle = locale === 'fr'
   ? 'Accords en Valromey — Festival de musique classique'
   : 'Accords en Valromey — Classical Music Festival';
+
+// Festival intro description
+const festivalIntroDescription = locale === 'fr'
+  ? 'Du 20 au 22 août 2026, Accords en Valromey réunit Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava et Célia Garetti-Nicole dans l\'église de Champagne pour trois soirées autour de Chostakovitch, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn et Brahms.'
+  : 'From August 20 to 22, 2026, Accords en Valromey brings together Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava, and Célia Garetti-Nicole in Champagne church for three evenings devoted to Shostakovich, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn, and Brahms.';
+
+// Next concert data from CMS with fallback
+const nextConcertTitle = nextConcert?.title || (locale === 'fr' ? 'Concert d\'Ouverture' : 'Opening Concert');
+const nextConcertDate = nextConcert ? formatConcertDate(nextConcert.date, locale) : (locale === 'fr' ? '20 août 2026 — 19h00' : 'August 20, 2026 — 7:00 PM');
+const nextConcertDescription = nextConcert?.description
+  ? (locale === 'fr'
+      ? `${nextConcert.description} Billets à partir de ${pricingTiers[0].fullPrice} €, pass 2 jours à ${pricingTiers[1].fullPrice} € et pass 3 jours à ${pricingTiers[2].fullPrice} €.`
+      : `${nextConcert.description} Tickets start at €${pricingTiers[0].fullPrice}, with a 2-day pass at €${pricingTiers[1].fullPrice} and a 3-day pass at €${pricingTiers[2].fullPrice}.`
+    )
+  : (locale === 'fr'
+      ? `Un voyage dans la musique de chambre du XXe siècle avec Chostakovitch, Lili Boulanger, Ravel et Rebecca Clarke, à l'église de Champagne. Billets à partir de ${pricingTiers[0].fullPrice} €, pass 2 jours à ${pricingTiers[1].fullPrice} € et pass 3 jours à ${pricingTiers[2].fullPrice} €.`
+      : `A journey through 20th century chamber music with Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke in Champagne church. Tickets start at €${pricingTiers[0].fullPrice}, with a 2-day pass at €${pricingTiers[1].fullPrice} and a 3-day pass at €${pricingTiers[2].fullPrice}.`
+    );
 ---
 
 <BaseLayout title={pageTitle}>
@@ -31,21 +53,15 @@ const pageTitle = locale === 'fr'
   />
   <FestivalIntro
     title={locale === 'fr' ? 'Le Festival' : 'The Festival'}
-    description={locale === 'fr'
-      ? 'Du 20 au 22 août 2026, Accords en Valromey réunit Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava et Célia Garetti-Nicole dans l\'église de Champagne pour trois soirées autour de Chostakovitch, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn et Brahms.'
-      : 'From August 20 to 22, 2026, Accords en Valromey brings together Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava, and Célia Garetti-Nicole in Champagne church for three evenings devoted to Shostakovich, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn, and Brahms.'
-    }
+    description={festivalIntroDescription}
     ctaLabel={t('home.discover')}
     ctaHref={locale === 'fr' ? '/le-festival/' : '/en/the-festival/'}
   />
   <NextConcert
     title={t('home.next')}
-    concertTitle={locale === 'fr' ? 'Concert d\'Ouverture' : 'Opening Concert'}
-    date={locale === 'fr' ? '20 août 2026 — 19h00' : 'August 20, 2026 — 7:00 PM'}
-    description={locale === 'fr'
-      ? `Un voyage dans la musique de chambre du XXe siècle avec Chostakovitch, Lili Boulanger, Ravel et Rebecca Clarke, à l'église de Champagne. Billets à partir de ${pricingTiers[0].fullPrice} €, pass 2 jours à ${pricingTiers[1].fullPrice} € et pass 3 jours à ${pricingTiers[2].fullPrice} €.`
-      : `A journey through 20th century chamber music with Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke in Champagne church. Tickets start at €${pricingTiers[0].fullPrice}, with a 2-day pass at €${pricingTiers[1].fullPrice} and a 3-day pass at €${pricingTiers[2].fullPrice}.`
-    }
+    concertTitle={nextConcertTitle}
+    date={nextConcertDate}
+    description={nextConcertDescription}
     ctaLabel={t('home.discover')}
     ctaHref={locale === 'fr' ? '/programmation/' : '/en/program/'}
   />

@@ -27,11 +27,7 @@ const { id, name, instrument, photo, biography } = Astro.props;
     <div class="p-6">
       <h2 class="font-serif text-2xl font-bold text-[#1A1A1A]">{name}</h2>
       <p class="font-sans text-sm text-gray-500 mt-1 mb-4">{instrument}</p>
-      <div class="font-sans text-gray-700 leading-relaxed space-y-4">
-        {biography.split('\n\n').map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
-      </div>
+      <div class="font-sans text-gray-700 leading-relaxed space-y-4" set:html={biography} />
     </div>
   </div>
 </dialog>

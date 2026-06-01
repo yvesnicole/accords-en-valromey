@@ -8,6 +8,9 @@ fragment ConcertParts on Concert {
   description
   image
   helloAssoLink
+  mapsLink
+  mapsLabel
+  ticketLabel
 }
 
 fragment MusicianParts on Musician {
@@ -27,5 +30,15 @@ fragment PageParts on Page {
   locale
   translationKey
   subtitle
+  image
+  imageCaption
+  email
+  address
+  phone
+  mapEmbedUrl
+  facebookUrl
+  instagramUrl
+  membershipUrl
+  donationUrl
   body
 }

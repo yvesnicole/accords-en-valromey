@@ -7,10 +7,12 @@ import HelloAssoWidget from '../../components/tickets/HelloAssoWidget.astro';
 import Card from '../../components/ui/Card.astro';
 import { useTranslations } from '../../i18n/utils';
 import { getPricing } from '../../data/pricing';
+import { getPage } from '../../lib/data';
 
 const locale = 'en' as const;
 const t = useTranslations(locale);
 const pricing = getPricing(locale, t as (key: string) => string);
+const page = await getPage('billetterie', locale);
 ---
 
 <BaseLayout title="Tickets — Accords en Valromey" description="Buy tickets for the Accords en Valromey festival" lang="en">
@@ -58,7 +60,7 @@ const pricing = getPricing(locale, t as (key: string) => string);
       <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Booking</h3>
       <p class="font-sans text-gray-700 leading-relaxed">
         Online booking is strongly recommended. Tickets will also be sold on site subject to
-        availability. For any question, contact <a href="mailto:contact@accordsenvalromey.com" class="underline">contact@accordsenvalromey.com</a>.
+        availability. For any question, contact <a href={`mailto:${page?.email || 'contact@accordsenvalromey.fr'}`} class="underline">{page?.email || 'contact@accordsenvalromey.fr'}</a>.
       </p>
     </Card>
     <Card>

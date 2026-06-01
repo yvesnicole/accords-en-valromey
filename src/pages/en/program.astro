@@ -2,39 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionTitle from '../../components/ui/SectionTitle.astro';
 import ConcertCarousel from '../../components/concerts/ConcertCarousel.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getConcerts } from '../../lib/data';
+import { mapConcertToProps } from '../../lib/utils';
 
-const concerts = [
-  {
-    title: 'Opening Concert',
-    date: 'August 20, 2026 — 7:00 PM',
-    description: 'A journey through 20th century chamber music, with works by Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke. This opening concert sets the tone for the festival: musical excellence and rediscovery of forgotten women composers.',
-    poster: '/images/concerts/ouverture.jpg',
-    mapsLink: 'https://www.google.com/maps/place/Paroisse+de+Champagne+En+Valromey+./@45.9045508,5.6759187,993m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478b68b29359f9d1:0xa52260d492b15338!8m2!3d45.9045508!4d5.6784936!16s%2Fg%2F1tjcnbkd?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D',
-    ticketLink: '/en/tickets/',
-    mapsLabel: 'View on Google Maps',
-    ticketLabel: 'Book tickets',
-  },
-  {
-    title: 'Tribute to Alice Lesur',
-    date: 'August 21, 2026 — 7:00 PM',
-    description: 'A tribute to French composer Alice Lesur, an overlooked figure of 20th century music. Her grandson, Christian Lesur, will be present to share his grandmother\'s story and work with the audience. A unique moment of transmission and emotion.',
-    poster: '/images/concerts/lesur.jpg',
-    mapsLink: 'https://www.google.com/maps/place/Paroisse+de+Champagne+En+Valromey+./@45.9045508,5.6759187,993m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478b68b29359f9d1:0xa52260d492b15338!8m2!3d45.9045508!4d5.6784936!16s%2Fg%2F1tjcnbkd?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D',
-    ticketLink: '/en/tickets/',
-    mapsLabel: 'View on Google Maps',
-    ticketLabel: 'Book tickets',
-  },
-  {
-    title: 'Closing Concert',
-    date: 'August 22, 2026 — 7:00 PM',
-    description: 'The festival concludes in grand style with major romantic works by Schumann, Mendelssohn, and Brahms\' piano quintet. A magnificent finale bringing together all the festival musicians for an exceptional moment.',
-    poster: '/images/concerts/cloture.jpg',
-    mapsLink: 'https://www.google.com/maps/place/Paroisse+de+Champagne+En+Valromey+./@45.9045508,5.6759187,993m/data=!3m2!1e3!4b1!4m6!3m5!1s0x478b68b29359f9d1:0xa52260d492b15338!8m2!3d45.9045508!4d5.6784936!16s%2Fg%2F1tjcnbkd?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D',
-    ticketLink: '/en/tickets/',
-    mapsLabel: 'View on Google Maps',
-    ticketLabel: 'Book tickets',
-  },
-];
+const locale = getLangFromUrl(Astro.url) as 'fr' | 'en';
+const rawConcerts = await getConcerts(locale);
+const concerts = rawConcerts.map(c => mapConcertToProps(c, locale));
 ---
 
 <BaseLayout title="Program — Accords en Valromey" description="Discover the Accords en Valromey festival program" lang="en">
@@ -58,6 +32,12 @@ const concerts = [
     <p class="max-w-3xl mx-auto font-sans text-lg text-gray-700 leading-relaxed text-center mb-12">
       Discover a program that combines great classics, lesser-known works, and a major research project devoted to overlooked composer Alice Lesur, whom we are honoring this year. Click on a poster to learn more.
     </p>
-    <ConcertCarousel concerts={concerts} />
+    {concerts.length > 0 ? (
+      <ConcertCarousel concerts={concerts} />
+    ) : (
+      <p class="text-center text-gray-500 py-section">
+        No concerts announced yet.
+      </p>
+    )}
   </section>
 </BaseLayout>

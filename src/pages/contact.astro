@@ -2,8 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import { useTranslations } from '../i18n/utils';
+import { getPage } from '../lib/data';
 
-const t = useTranslations('fr');
+const locale = 'fr' as const;
+const t = useTranslations(locale);
+const page = await getPage('contact', locale);
 ---
 
 <BaseLayout title="Contact — Accords en Valromey" description="Contactez le festival Accords en Valromey">
@@ -33,15 +36,15 @@ const t = useTranslations('fr');
       <Card>
         <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">{t('contact.email')}</h3>
         <p class="font-sans text-gray-700">
-          <a href="mailto:contact@accordsenvalromey.fr" class="text-[#1A1A1A] underline hover:text-sage transition-colors">
-            contact@accordsenvalromey.fr
+          <a href={`mailto:${page?.email || 'contact@accordsenvalromey.fr'}`} class="text-[#1A1A1A] underline hover:text-sage transition-colors">
+            {page?.email || 'contact@accordsenvalromey.fr'}
           </a>
         </p>
       </Card>
       <Card>
         <div class="rounded-card overflow-hidden h-full min-h-64">
           <iframe
-            src="https://maps.google.com/maps?q=45.9045414,5.6786311&z=18&output=embed"
+            src={page?.mapEmbedUrl || 'https://maps.google.com/maps?q=45.9045414,5.6786311&z=18&output=embed'}
             width="100%"
             height="100%"
             style="border:0; min-height: 256px;"
