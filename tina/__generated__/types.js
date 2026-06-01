@@ -15,7 +15,7 @@ export const ConcertPartsFragmentDoc = gql`
   program
   description
   image
-  ticketUrl
+  helloAssoLink
 }
     `;
 export const MusicianPartsFragmentDoc = gql`

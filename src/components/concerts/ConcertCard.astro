@@ -5,14 +5,14 @@ interface Props {
   date: string;
   summary: string;
   image?: string;
-  ticketUrl?: string;
+  helloAssoLink?: string;
   ticketLabel?: string;
 }
 
-const { title, date, summary, image, ticketUrl, ticketLabel } = Astro.props;
+const { title, date, summary, image, helloAssoLink, ticketLabel } = Astro.props;
 
 const defaultLabel = ticketLabel || 'Réserver';
-const href = ticketUrl || '/billetterie/#tickets';
+const href = helloAssoLink || '/billetterie/#tickets';
 ---
 
 <div class="bg-contrast rounded-card overflow-hidden">

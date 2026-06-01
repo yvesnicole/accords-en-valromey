@@ -210,7 +210,7 @@ export type Concert = Node & Document & {
   program: Scalars['JSON']['output'];
   description?: Maybe<Scalars['JSON']['output']>;
   image?: Maybe<Scalars['String']['output']>;
-  ticketUrl?: Maybe<Scalars['String']['output']>;
+  helloAssoLink?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -252,7 +252,7 @@ export type ConcertFilter = {
   program?: InputMaybe<RichTextFilter>;
   description?: InputMaybe<RichTextFilter>;
   image?: InputMaybe<ImageFilter>;
-  ticketUrl?: InputMaybe<StringFilter>;
+  helloAssoLink?: InputMaybe<StringFilter>;
 };
 
 export type ConcertConnectionEdges = {
@@ -443,7 +443,7 @@ export type ConcertMutation = {
   program?: InputMaybe<Scalars['JSON']['input']>;
   description?: InputMaybe<Scalars['JSON']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
-  ticketUrl?: InputMaybe<Scalars['String']['input']>;
+  helloAssoLink?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MusicianMutation = {
@@ -464,7 +464,7 @@ export type PageMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type ConcertPartsFragment = { __typename: 'Concert', title: string, date: string, locale: string, translationKey: string, program: any, description?: any | null, image?: string | null, ticketUrl?: string | null };
+export type ConcertPartsFragment = { __typename: 'Concert', title: string, date: string, locale: string, translationKey: string, program: any, description?: any | null, image?: string | null, helloAssoLink?: string | null };
 
 export type MusicianPartsFragment = { __typename: 'Musician', name: string, locale: string, translationKey: string, instrument: string, photo: string, photoCredit?: string | null, bio: any };
 
@@ -475,7 +475,7 @@ export type ConcertQueryVariables = Exact<{
 }>;
 
 
-export type ConcertQuery = { __typename?: 'Query', concert: { __typename: 'Concert', id: string, title: string, date: string, locale: string, translationKey: string, program: any, description?: any | null, image?: string | null, ticketUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ConcertQuery = { __typename?: 'Query', concert: { __typename: 'Concert', id: string, title: string, date: string, locale: string, translationKey: string, program: any, description?: any | null, image?: string | null, helloAssoLink?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ConcertConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -487,7 +487,7 @@ export type ConcertConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ConcertConnectionQuery = { __typename?: 'Query', concertConnection: { __typename?: 'ConcertConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ConcertConnectionEdges', cursor: string, node?: { __typename: 'Concert', id: string, title: string, date: string, locale: string, translationKey: string, program: any, description?: any | null, image?: string | null, ticketUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ConcertConnectionQuery = { __typename?: 'Query', concertConnection: { __typename?: 'ConcertConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ConcertConnectionEdges', cursor: string, node?: { __typename: 'Concert', id: string, title: string, date: string, locale: string, translationKey: string, program: any, description?: any | null, image?: string | null, helloAssoLink?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type MusicianQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -537,7 +537,7 @@ export const ConcertPartsFragmentDoc = gql`
   program
   description
   image
-  ticketUrl
+  helloAssoLink
 }
     `;
 export const MusicianPartsFragmentDoc = gql`

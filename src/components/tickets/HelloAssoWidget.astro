@@ -1,0 +1,43 @@
+---
+// src/components/tickets/HelloAssoWidget.astro
+// Embedded HelloAsso checkout widget via iFrame — 3 variants
+interface Props {
+  variant?: 'full' | 'button' | 'vignette';
+}
+
+const { variant = 'full' } = Astro.props;
+
+const BASE = 'https://www.helloasso.com/associations/accords-en-valromey/evenements/billetterie-2026';
+
+const configs: Record<string, { src: string; height: number; id: string }> = {
+  full: {
+    src: `${BASE}/widget`,
+    height: 750,
+    id: 'haWidget',
+  },
+  button: {
+    src: `${BASE}/widget-bouton`,
+    height: 70,
+    id: 'haWidgetButton',
+  },
+  vignette: {
+    src: `${BASE}/widget-vignette`,
+    height: 513,
+    id: 'haWidgetVignette',
+  },
+};
+
+const { src, height, id } = configs[variant];
+---
+
+<iframe
+  id={id}
+  allowtransparency="true"
+  scrolling="auto"
+  src={src}
+  style={`width: 100%; height: ${height}px; border: none;`}
+  onload={variant === 'full'
+    ? "window.addEventListener('message', function(e) { const dataHeight = e.data.height; const el = document.getElementById('haWidget'); if (dataHeight > parseFloat(el.height || 0)) { el.height = dataHeight + 'px'; } })"
+    : undefined}
+>
+</iframe>

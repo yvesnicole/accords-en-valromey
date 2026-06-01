@@ -7,7 +7,7 @@ interface Concert {
   date: string;
   summary: string;
   image?: string;
-  ticketUrl?: string;
+  helloAssoLink?: string;
 }
 
 interface Props {
@@ -24,7 +24,7 @@ const { concerts } = Astro.props;
       date={concert.date}
       summary={concert.summary}
       image={concert.image}
-      ticketUrl={concert.ticketUrl}
+      helloAssoLink={concert.helloAssoLink}
     />
   ))}
 </div>
