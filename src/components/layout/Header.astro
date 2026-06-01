@@ -18,8 +18,12 @@ const navLinks = [
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-ivory/90 backdrop-blur-sm border-b border-gray-300/50">
   <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href={locale === 'fr' ? '/' : '/en/'} class="font-serif text-xl font-bold text-[#1A1A1A]">
-      Accords en Valromey
+    <a href={locale === 'fr' ? '/' : '/en/'} class="flex-shrink-0">
+      <img
+        src="/images/logo/logo1_Black.png"
+        alt="Accords en Valromey"
+        class="h-10 w-auto"
+      />
     </a>
     <!-- Desktop nav -->
     <div class="hidden lg:flex items-center gap-6">

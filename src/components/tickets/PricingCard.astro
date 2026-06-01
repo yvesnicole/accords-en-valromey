@@ -16,7 +16,7 @@ const { name, fullPrice, reducedPrice, includes, highlighted = false, locale, hr
 const t = useTranslations(locale);
 ---
 
-<div class={`rounded-card p-8 ${highlighted ? 'bg-sage/20 border-2 border-sage' : 'bg-contrast'} ${href ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
+<div class="rounded-card p-8 bg-contrast {href ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}"
   {...(href ? { 'data-ticket-href': href } : {})}>
   <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-6">{name}</h3>
 

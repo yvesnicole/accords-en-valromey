@@ -1,11 +1,12 @@
 ---
 // src/components/tickets/HelloAssoWidget.astro
-// Embedded HelloAsso checkout widget via iFrame — 3 variants
+// Embedded HelloAsso checkout widget via iFrame — lazy loaded behind button
 interface Props {
   variant?: 'full' | 'button' | 'vignette';
+  buttonLabel?: string;
 }
 
-const { variant = 'full' } = Astro.props;
+const { variant = 'full', buttonLabel = 'Acheter mes billets' } = Astro.props;
 
 const BASE = 'https://www.helloasso.com/associations/accords-en-valromey/evenements/billetterie-2026';
 
@@ -28,16 +29,45 @@ const configs: Record<string, { src: string; height: number; id: string }> = {
 };
 
 const { src, height, id } = configs[variant];
+const widgetId = `helloasso-${id}`;
 ---
 
-<iframe
-  id={id}
-  allowtransparency="true"
-  scrolling="auto"
-  src={src}
-  style={`width: 100%; height: ${height}px; border: none;`}
-  onload={variant === 'full'
-    ? "window.addEventListener('message', function(e) { const dataHeight = e.data.height; const el = document.getElementById('haWidget'); if (dataHeight > parseFloat(el.height || 0)) { el.height = dataHeight + 'px'; } })"
-    : undefined}
->
-</iframe>
+<div id="helloasso-wrapper" class="helloasso-wrapper text-center">
+  <button
+    id="helloasso-trigger"
+    class="inline-flex items-center justify-center px-8 py-4 bg-sage text-[#1A1A1A] rounded-card font-semibold text-lg hover:opacity-90 transition-opacity"
+  >
+    {buttonLabel}
+  </button>
+  <div id="helloasso-container" class="hidden mt-6">
+    <iframe
+      id={id}
+      allowtransparency="true"
+      scrolling="auto"
+      data-src={src}
+      style={`width: 100%; height: ${height}px; border: none;`}
+      onload={variant === 'full'
+        ? "window.addEventListener('message', function(e) { const dataHeight = e.data.height; const el = document.getElementById('haWidget'); if (dataHeight > parseFloat(el.height || 0)) { el.height = dataHeight + 'px'; } })"
+        : undefined}
+    >
+    </iframe>
+  </div>
+</div>
+
+<script>
+  const trigger = document.getElementById('helloasso-trigger');
+  const container = document.getElementById('helloasso-container');
+  const iframe = container?.querySelector('iframe');
+
+  if (trigger && container && iframe) {
+    let loaded = false;
+    trigger.addEventListener('click', () => {
+      if (!loaded) {
+        iframe.src = iframe.dataset.src || '';
+        loaded = true;
+      }
+      container.classList.toggle('hidden');
+      trigger.classList.add('hidden');
+    });
+  }
+</script>
