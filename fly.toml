@@ -3,6 +3,9 @@ primary_region = "cdg"
 
 [build]
   dockerfile = "Dockerfile"
+  [build.secrets]
+    PUBLIC_TINA_CLIENT_ID = "PUBLIC_TINA_CLIENT_ID"
+    TINA_TOKEN = "TINA_TOKEN"
 
 [http_service]
   internal_port = 80
