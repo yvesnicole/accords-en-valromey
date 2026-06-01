@@ -24,7 +24,7 @@ fragment MusicianParts on Musician {
   bio
 }
 
-fragment PageParts on Page {
+fragment FestivalParts on Festival {
   __typename
   title
   locale
@@ -32,13 +32,60 @@ fragment PageParts on Page {
   subtitle
   image
   imageCaption
+  body
+}
+
+fragment HomepageParts on Homepage {
+  __typename
+  title
+  locale
+  translationKey
+  heroTitle
+  heroSubtitle
+  introTitle
+  introDescription
+  nextConcertCtaLabel
+}
+
+fragment TicketInfoParts on TicketInfo {
+  __typename
+  title
+  locale
+  translationKey
+  sectionTitle
+  sectionSubtitle
+  discountText
+  email
+  cards {
+    __typename
+    title
+    text
+  }
+}
+
+fragment ContactInfoParts on ContactInfo {
+  __typename
+  title
+  locale
+  translationKey
   email
   address
   phone
   mapEmbedUrl
   facebookUrl
   instagramUrl
+}
+
+fragment SupportInfoParts on SupportInfo {
+  __typename
+  title
+  locale
+  translationKey
+  subtitle
   membershipUrl
   donationUrl
-  body
+  membershipTitle
+  membershipText
+  donationTitle
+  donationText
 }

@@ -3,10 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionTitle from '../../components/ui/SectionTitle.astro';
 import Card from '../../components/ui/Card.astro';
 import Button from '../../components/ui/Button.astro';
-import { getPage } from '../../lib/data';
+import { getSupportInfo } from '../../lib/data';
 
 const locale = 'en' as const;
-const page = await getPage('soutenir', locale);
+const support = await getSupportInfo(locale);
 ---
 
 <BaseLayout title="Support Us — Accords en Valromey" description="Support the Accords en Valromey festival" lang="en">
@@ -25,26 +25,24 @@ const page = await getPage('soutenir', locale);
   <section class="max-w-7xl mx-auto px-6 py-section">
     <SectionTitle
       title="Support the Festival"
-      subtitle={page?.subtitle || "Your contribution helps keep classical music alive in the Valromey and supports young talent."}
+      subtitle={support?.subtitle || "Your contribution helps keep classical music alive in the Valromey and supports young talent."}
     />
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
       <Card>
-        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">Join the Association</h3>
+        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{support?.membershipTitle || 'Join the Association'}</h3>
         <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          Become a member of the association and participate in the life of the festival.
-          Priority access to concerts, meetings with artists, and much more.
+          {support?.membershipText || "Become a member of the association and participate in the life of the festival. Priority access to concerts, meetings with artists, and much more."}
         </p>
-        <Button href={page?.membershipUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
+        <Button href={support?.membershipUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
           Join
         </Button>
       </Card>
       <Card>
-        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">Donate</h3>
+        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{support?.donationTitle || 'Donate'}</h3>
         <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          Make a donation to support the program, host artists, and grow the festival.
-          Every contribution counts.
+          {support?.donationText || "Make a donation to support the program, host artists, and grow the festival. Every contribution counts."}
         </p>
-        <Button href={page?.donationUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
+        <Button href={support?.donationUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
           Donate
         </Button>
       </Card>

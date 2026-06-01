@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import { i18n, filterSitemapByDefaultLocale } from 'astro-i18n-aut/integration';
+import { filterSitemapByDefaultLocale } from 'astro-i18n-aut/integration';
 
 const defaultLocale = 'fr';
 const locales = {
@@ -24,10 +24,6 @@ export default defineConfig({
     sitemap({
       i18n: { locales, defaultLocale },
       filter: filterSitemapByDefaultLocale({ defaultLocale }),
-    }),
-    i18n({
-      locales,
-      defaultLocale,
     }),
   ],
   vite: {

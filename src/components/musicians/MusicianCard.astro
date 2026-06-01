@@ -7,10 +7,12 @@ interface Props {
   photo: string;
   photoCredit?: string;
   biography?: string;
+  locale?: 'fr' | 'en';
 }
 
-const { name, instrument, photo, photoCredit, biography } = Astro.props;
+const { name, instrument, photo, photoCredit, biography, locale = 'fr' } = Astro.props;
 const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+const discoverLabel = locale === 'fr' ? 'Découvrir →' : 'Discover →';
 ---
 
 <div class="bg-contrast rounded-card overflow-hidden group transition duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -29,7 +31,7 @@ const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
       <p class="font-sans text-base text-gray-500 mt-1">{instrument}</p>
       {biography && (
         <span class="inline-block mt-3 font-sans text-xs text-sage-dark font-semibold">
-          Découvrir →
+          {discoverLabel}
         </span>
       )}
       {photoCredit && (

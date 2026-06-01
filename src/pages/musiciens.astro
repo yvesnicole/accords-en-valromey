@@ -39,7 +39,7 @@ const musicians = await Promise.all(
       subtitle="De jeunes talents d'exception réunis pour le festival."
     />
     {musicians.length > 0 ? (
-      <MusicianGrid musicians={musicians} />
+      <MusicianGrid musicians={musicians} locale="fr" />
     ) : (
       <p class="text-center text-gray-500 py-section">
         Aucun musicien à afficher pour le moment.

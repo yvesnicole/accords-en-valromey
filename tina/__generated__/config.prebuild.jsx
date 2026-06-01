@@ -147,9 +147,9 @@ var config_default = defineConfig({
         ]
       },
       {
-        name: "page",
-        label: "Pages",
-        path: "src/content/pages",
+        name: "festival",
+        label: "Le Festival",
+        path: "src/content/festival",
         format: "mdx",
         fields: [
           {
@@ -181,7 +181,7 @@ var config_default = defineConfig({
             type: "image",
             name: "image",
             label: "Image",
-            description: "Image principale de la page (ex: photo d'illustration pour le festival)"
+            description: "Photo d'illustration du festival"
           },
           {
             type: "string",
@@ -189,16 +189,176 @@ var config_default = defineConfig({
             label: "L\xE9gende de l'image"
           },
           {
+            type: "rich-text",
+            name: "body",
+            label: "Contenu",
+            required: true,
+            isBody: true
+          }
+        ]
+      },
+      {
+        name: "homepage",
+        label: "Accueil",
+        path: "src/content/homepage",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Titre",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "locale",
+            label: "Langue",
+            required: true,
+            options: ["fr", "en"]
+          },
+          {
+            type: "string",
+            name: "translationKey",
+            label: "Cl\xE9 de traduction",
+            required: true
+          },
+          {
+            type: "string",
+            name: "heroTitle",
+            label: "Titre h\xE9ro",
+            required: true
+          },
+          {
+            type: "string",
+            name: "heroSubtitle",
+            label: "Sous-titre h\xE9ro",
+            required: true
+          },
+          {
+            type: "string",
+            name: "introTitle",
+            label: "Titre introduction"
+          },
+          {
+            type: "string",
+            name: "introDescription",
+            label: "Description introduction",
+            description: "Texte d'introduction du festival sur la page d'accueil",
+            ui: { component: "textarea" }
+          },
+          {
+            type: "string",
+            name: "nextConcertCtaLabel",
+            label: "Libell\xE9 bouton prochain concert",
+            description: `Texte du bouton d'appel \xE0 l'action (ex: "D\xE9couvrir")`
+          }
+        ]
+      },
+      {
+        name: "ticketInfo",
+        label: "Billetterie",
+        path: "src/content/ticket-info",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Titre",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "locale",
+            label: "Langue",
+            required: true,
+            options: ["fr", "en"]
+          },
+          {
+            type: "string",
+            name: "translationKey",
+            label: "Cl\xE9 de traduction",
+            required: true
+          },
+          {
+            type: "string",
+            name: "sectionTitle",
+            label: "Titre de section"
+          },
+          {
+            type: "string",
+            name: "sectionSubtitle",
+            label: "Sous-titre de section"
+          },
+          {
+            type: "string",
+            name: "discountText",
+            label: "Texte tarif r\xE9duit",
+            description: 'Texte sur les r\xE9ductions (ex: "Gratuit pour les moins de 18 ans")'
+          },
+          {
             type: "string",
             name: "email",
-            label: "Email",
-            description: "Adresse email de contact"
+            label: "Email de contact"
+          },
+          {
+            type: "object",
+            name: "cards",
+            label: "Cartes d'information",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Titre"
+              },
+              {
+                type: "string",
+                name: "text",
+                label: "Texte",
+                ui: { component: "textarea" }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "contactInfo",
+        label: "Contact",
+        path: "src/content/contact-info",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Titre",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "locale",
+            label: "Langue",
+            required: true,
+            options: ["fr", "en"]
+          },
+          {
+            type: "string",
+            name: "translationKey",
+            label: "Cl\xE9 de traduction",
+            required: true
+          },
+          {
+            type: "string",
+            name: "email",
+            label: "Email"
           },
           {
             type: "string",
             name: "address",
             label: "Adresse",
-            description: "Adresse postale compl\xE8te"
+            ui: { component: "textarea" }
           },
           {
             type: "string",
@@ -220,25 +380,71 @@ var config_default = defineConfig({
             type: "string",
             name: "instagramUrl",
             label: "URL Instagram"
+          }
+        ]
+      },
+      {
+        name: "supportInfo",
+        label: "Nous Soutenir",
+        path: "src/content/support-info",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Titre",
+            isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "locale",
+            label: "Langue",
+            required: true,
+            options: ["fr", "en"]
+          },
+          {
+            type: "string",
+            name: "translationKey",
+            label: "Cl\xE9 de traduction",
+            required: true
+          },
+          {
+            type: "string",
+            name: "subtitle",
+            label: "Sous-titre"
           },
           {
             type: "string",
             name: "membershipUrl",
-            label: "URL adh\xE9sion HelloAsso",
-            description: "Lien vers la page d'adh\xE9sion sur HelloAsso"
+            label: "URL adh\xE9sion HelloAsso"
           },
           {
             type: "string",
             name: "donationUrl",
-            label: "URL don HelloAsso",
-            description: "Lien vers la page de don sur HelloAsso"
+            label: "URL don HelloAsso"
           },
           {
-            type: "rich-text",
-            name: "body",
-            label: "Contenu",
-            required: true,
-            isBody: true
+            type: "string",
+            name: "membershipTitle",
+            label: "Titre carte adh\xE9sion"
+          },
+          {
+            type: "string",
+            name: "membershipText",
+            label: "Texte carte adh\xE9sion",
+            ui: { component: "textarea" }
+          },
+          {
+            type: "string",
+            name: "donationTitle",
+            label: "Titre carte don"
+          },
+          {
+            type: "string",
+            name: "donationText",
+            label: "Texte carte don",
+            ui: { component: "textarea" }
           }
         ]
       }

@@ -36,10 +36,11 @@ export function formatConcertDate(dateStr: string, locale: 'fr' | 'en'): string 
  * Map TinaCMS concert data to the shape expected by ConcertCarousel.
  * Handles field name differences between CMS schema and component props.
  */
-export function mapConcertToProps(concert: {
+export async function mapConcertToProps(concert: {
   title: string;
   date: string;
   description?: string | null;
+  program?: string | null;
   image?: string | null;
   helloAssoLink?: string | null;
   mapsLink?: string | null;
@@ -48,10 +49,12 @@ export function mapConcertToProps(concert: {
   locale: string;
 }, locale: 'fr' | 'en') {
   const ticketLink = concert.helloAssoLink || (locale === 'fr' ? '/billetterie/' : '/en/tickets/');
+  const programHtml = concert.program ? await renderMarkdown(concert.program) : '';
   return {
     title: concert.title,
     date: formatConcertDate(concert.date, locale),
     description: concert.description || '',
+    programHtml,
     poster: concert.image || '/images/concerts/ouverture.jpg',
     mapsLink: concert.mapsLink || '',
     ticketLink,

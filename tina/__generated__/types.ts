@@ -86,8 +86,16 @@ export type Query = {
   concertConnection: ConcertConnection;
   musician: Musician;
   musicianConnection: MusicianConnection;
-  page: Page;
-  pageConnection: PageConnection;
+  festival: Festival;
+  festivalConnection: FestivalConnection;
+  homepage: Homepage;
+  homepageConnection: HomepageConnection;
+  ticketInfo: TicketInfo;
+  ticketInfoConnection: TicketInfoConnection;
+  contactInfo: ContactInfo;
+  contactInfoConnection: ContactInfoConnection;
+  supportInfo: SupportInfo;
+  supportInfoConnection: SupportInfoConnection;
 };
 
 
@@ -142,24 +150,88 @@ export type QueryMusicianConnectionArgs = {
 };
 
 
-export type QueryPageArgs = {
+export type QueryFestivalArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryPageConnectionArgs = {
+export type QueryFestivalConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
+  filter?: InputMaybe<FestivalFilter>;
+};
+
+
+export type QueryHomepageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryHomepageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HomepageFilter>;
+};
+
+
+export type QueryTicketInfoArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTicketInfoConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TicketInfoFilter>;
+};
+
+
+export type QueryContactInfoArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryContactInfoConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ContactInfoFilter>;
+};
+
+
+export type QuerySupportInfoArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySupportInfoConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SupportInfoFilter>;
 };
 
 export type DocumentFilter = {
   concert?: InputMaybe<ConcertFilter>;
   musician?: InputMaybe<MusicianFilter>;
-  page?: InputMaybe<PageFilter>;
+  festival?: InputMaybe<FestivalFilter>;
+  homepage?: InputMaybe<HomepageFilter>;
+  ticketInfo?: InputMaybe<TicketInfoFilter>;
+  contactInfo?: InputMaybe<ContactInfoFilter>;
+  supportInfo?: InputMaybe<SupportInfoFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -199,7 +271,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Concert | Musician | Page | Folder;
+export type DocumentNode = Concert | Musician | Festival | Homepage | TicketInfo | ContactInfo | SupportInfo | Folder;
 
 export type Concert = Node & Document & {
   __typename?: 'Concert';
@@ -311,57 +383,214 @@ export type MusicianConnection = Connection & {
   edges?: Maybe<Array<Maybe<MusicianConnectionEdges>>>;
 };
 
-export type Page = Node & Document & {
-  __typename?: 'Page';
+export type Festival = Node & Document & {
+  __typename?: 'Festival';
   title: Scalars['String']['output'];
   locale: Scalars['String']['output'];
   translationKey: Scalars['String']['output'];
   subtitle?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   imageCaption?: Maybe<Scalars['String']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
-  address?: Maybe<Scalars['String']['output']>;
-  phone?: Maybe<Scalars['String']['output']>;
-  mapEmbedUrl?: Maybe<Scalars['String']['output']>;
-  facebookUrl?: Maybe<Scalars['String']['output']>;
-  instagramUrl?: Maybe<Scalars['String']['output']>;
-  membershipUrl?: Maybe<Scalars['String']['output']>;
-  donationUrl?: Maybe<Scalars['String']['output']>;
   body: Scalars['JSON']['output'];
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
-export type PageFilter = {
+export type FestivalFilter = {
   title?: InputMaybe<StringFilter>;
   locale?: InputMaybe<StringFilter>;
   translationKey?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
   imageCaption?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type FestivalConnectionEdges = {
+  __typename?: 'FestivalConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Festival>;
+};
+
+export type FestivalConnection = Connection & {
+  __typename?: 'FestivalConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FestivalConnectionEdges>>>;
+};
+
+export type Homepage = Node & Document & {
+  __typename?: 'Homepage';
+  title: Scalars['String']['output'];
+  locale: Scalars['String']['output'];
+  translationKey: Scalars['String']['output'];
+  heroTitle: Scalars['String']['output'];
+  heroSubtitle: Scalars['String']['output'];
+  introTitle?: Maybe<Scalars['String']['output']>;
+  introDescription?: Maybe<Scalars['String']['output']>;
+  nextConcertCtaLabel?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type HomepageFilter = {
+  title?: InputMaybe<StringFilter>;
+  locale?: InputMaybe<StringFilter>;
+  translationKey?: InputMaybe<StringFilter>;
+  heroTitle?: InputMaybe<StringFilter>;
+  heroSubtitle?: InputMaybe<StringFilter>;
+  introTitle?: InputMaybe<StringFilter>;
+  introDescription?: InputMaybe<StringFilter>;
+  nextConcertCtaLabel?: InputMaybe<StringFilter>;
+};
+
+export type HomepageConnectionEdges = {
+  __typename?: 'HomepageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Homepage>;
+};
+
+export type HomepageConnection = Connection & {
+  __typename?: 'HomepageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<HomepageConnectionEdges>>>;
+};
+
+export type TicketInfoCards = {
+  __typename?: 'TicketInfoCards';
+  title?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type TicketInfo = Node & Document & {
+  __typename?: 'TicketInfo';
+  title: Scalars['String']['output'];
+  locale: Scalars['String']['output'];
+  translationKey: Scalars['String']['output'];
+  sectionTitle?: Maybe<Scalars['String']['output']>;
+  sectionSubtitle?: Maybe<Scalars['String']['output']>;
+  discountText?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  cards?: Maybe<Array<Maybe<TicketInfoCards>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type TicketInfoCardsFilter = {
+  title?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+export type TicketInfoFilter = {
+  title?: InputMaybe<StringFilter>;
+  locale?: InputMaybe<StringFilter>;
+  translationKey?: InputMaybe<StringFilter>;
+  sectionTitle?: InputMaybe<StringFilter>;
+  sectionSubtitle?: InputMaybe<StringFilter>;
+  discountText?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  cards?: InputMaybe<TicketInfoCardsFilter>;
+};
+
+export type TicketInfoConnectionEdges = {
+  __typename?: 'TicketInfoConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<TicketInfo>;
+};
+
+export type TicketInfoConnection = Connection & {
+  __typename?: 'TicketInfoConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<TicketInfoConnectionEdges>>>;
+};
+
+export type ContactInfo = Node & Document & {
+  __typename?: 'ContactInfo';
+  title: Scalars['String']['output'];
+  locale: Scalars['String']['output'];
+  translationKey: Scalars['String']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  address?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  mapEmbedUrl?: Maybe<Scalars['String']['output']>;
+  facebookUrl?: Maybe<Scalars['String']['output']>;
+  instagramUrl?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ContactInfoFilter = {
+  title?: InputMaybe<StringFilter>;
+  locale?: InputMaybe<StringFilter>;
+  translationKey?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
   address?: InputMaybe<StringFilter>;
   phone?: InputMaybe<StringFilter>;
   mapEmbedUrl?: InputMaybe<StringFilter>;
   facebookUrl?: InputMaybe<StringFilter>;
   instagramUrl?: InputMaybe<StringFilter>;
-  membershipUrl?: InputMaybe<StringFilter>;
-  donationUrl?: InputMaybe<StringFilter>;
-  body?: InputMaybe<RichTextFilter>;
 };
 
-export type PageConnectionEdges = {
-  __typename?: 'PageConnectionEdges';
+export type ContactInfoConnectionEdges = {
+  __typename?: 'ContactInfoConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<Page>;
+  node?: Maybe<ContactInfo>;
 };
 
-export type PageConnection = Connection & {
-  __typename?: 'PageConnection';
+export type ContactInfoConnection = Connection & {
+  __typename?: 'ContactInfoConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<ContactInfoConnectionEdges>>>;
+};
+
+export type SupportInfo = Node & Document & {
+  __typename?: 'SupportInfo';
+  title: Scalars['String']['output'];
+  locale: Scalars['String']['output'];
+  translationKey: Scalars['String']['output'];
+  subtitle?: Maybe<Scalars['String']['output']>;
+  membershipUrl?: Maybe<Scalars['String']['output']>;
+  donationUrl?: Maybe<Scalars['String']['output']>;
+  membershipTitle?: Maybe<Scalars['String']['output']>;
+  membershipText?: Maybe<Scalars['String']['output']>;
+  donationTitle?: Maybe<Scalars['String']['output']>;
+  donationText?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type SupportInfoFilter = {
+  title?: InputMaybe<StringFilter>;
+  locale?: InputMaybe<StringFilter>;
+  translationKey?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  membershipUrl?: InputMaybe<StringFilter>;
+  donationUrl?: InputMaybe<StringFilter>;
+  membershipTitle?: InputMaybe<StringFilter>;
+  membershipText?: InputMaybe<StringFilter>;
+  donationTitle?: InputMaybe<StringFilter>;
+  donationText?: InputMaybe<StringFilter>;
+};
+
+export type SupportInfoConnectionEdges = {
+  __typename?: 'SupportInfoConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<SupportInfo>;
+};
+
+export type SupportInfoConnection = Connection & {
+  __typename?: 'SupportInfoConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SupportInfoConnectionEdges>>>;
 };
 
 export type Mutation = {
@@ -375,8 +604,16 @@ export type Mutation = {
   createConcert: Concert;
   updateMusician: Musician;
   createMusician: Musician;
-  updatePage: Page;
-  createPage: Page;
+  updateFestival: Festival;
+  createFestival: Festival;
+  updateHomepage: Homepage;
+  createHomepage: Homepage;
+  updateTicketInfo: TicketInfo;
+  createTicketInfo: TicketInfo;
+  updateContactInfo: ContactInfo;
+  createContactInfo: ContactInfo;
+  updateSupportInfo: SupportInfo;
+  createSupportInfo: SupportInfo;
 };
 
 
@@ -437,28 +674,84 @@ export type MutationCreateMusicianArgs = {
 };
 
 
-export type MutationUpdatePageArgs = {
+export type MutationUpdateFestivalArgs = {
   relativePath: Scalars['String']['input'];
-  params: PageMutation;
+  params: FestivalMutation;
 };
 
 
-export type MutationCreatePageArgs = {
+export type MutationCreateFestivalArgs = {
   relativePath: Scalars['String']['input'];
-  params: PageMutation;
+  params: FestivalMutation;
+};
+
+
+export type MutationUpdateHomepageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: HomepageMutation;
+};
+
+
+export type MutationCreateHomepageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: HomepageMutation;
+};
+
+
+export type MutationUpdateTicketInfoArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TicketInfoMutation;
+};
+
+
+export type MutationCreateTicketInfoArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TicketInfoMutation;
+};
+
+
+export type MutationUpdateContactInfoArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ContactInfoMutation;
+};
+
+
+export type MutationCreateContactInfoArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ContactInfoMutation;
+};
+
+
+export type MutationUpdateSupportInfoArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SupportInfoMutation;
+};
+
+
+export type MutationCreateSupportInfoArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SupportInfoMutation;
 };
 
 export type DocumentUpdateMutation = {
   concert?: InputMaybe<ConcertMutation>;
   musician?: InputMaybe<MusicianMutation>;
-  page?: InputMaybe<PageMutation>;
+  festival?: InputMaybe<FestivalMutation>;
+  homepage?: InputMaybe<HomepageMutation>;
+  ticketInfo?: InputMaybe<TicketInfoMutation>;
+  contactInfo?: InputMaybe<ContactInfoMutation>;
+  supportInfo?: InputMaybe<SupportInfoMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   concert?: InputMaybe<ConcertMutation>;
   musician?: InputMaybe<MusicianMutation>;
-  page?: InputMaybe<PageMutation>;
+  festival?: InputMaybe<FestivalMutation>;
+  homepage?: InputMaybe<HomepageMutation>;
+  ticketInfo?: InputMaybe<TicketInfoMutation>;
+  contactInfo?: InputMaybe<ContactInfoMutation>;
+  supportInfo?: InputMaybe<SupportInfoMutation>;
 };
 
 export type ConcertMutation = {
@@ -485,29 +778,81 @@ export type MusicianMutation = {
   bio?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PageMutation = {
+export type FestivalMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   translationKey?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   imageCaption?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type HomepageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  translationKey?: InputMaybe<Scalars['String']['input']>;
+  heroTitle?: InputMaybe<Scalars['String']['input']>;
+  heroSubtitle?: InputMaybe<Scalars['String']['input']>;
+  introTitle?: InputMaybe<Scalars['String']['input']>;
+  introDescription?: InputMaybe<Scalars['String']['input']>;
+  nextConcertCtaLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TicketInfoCardsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TicketInfoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  translationKey?: InputMaybe<Scalars['String']['input']>;
+  sectionTitle?: InputMaybe<Scalars['String']['input']>;
+  sectionSubtitle?: InputMaybe<Scalars['String']['input']>;
+  discountText?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  cards?: InputMaybe<Array<InputMaybe<TicketInfoCardsMutation>>>;
+};
+
+export type ContactInfoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  translationKey?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   address?: InputMaybe<Scalars['String']['input']>;
   phone?: InputMaybe<Scalars['String']['input']>;
   mapEmbedUrl?: InputMaybe<Scalars['String']['input']>;
   facebookUrl?: InputMaybe<Scalars['String']['input']>;
   instagramUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SupportInfoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  translationKey?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   membershipUrl?: InputMaybe<Scalars['String']['input']>;
   donationUrl?: InputMaybe<Scalars['String']['input']>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
+  membershipTitle?: InputMaybe<Scalars['String']['input']>;
+  membershipText?: InputMaybe<Scalars['String']['input']>;
+  donationTitle?: InputMaybe<Scalars['String']['input']>;
+  donationText?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ConcertPartsFragment = { __typename: 'Concert', title: string, date: string, locale: string, translationKey: string, program: any, description?: string | null, image?: string | null, helloAssoLink?: string | null, mapsLink?: string | null, mapsLabel?: string | null, ticketLabel?: string | null };
 
 export type MusicianPartsFragment = { __typename: 'Musician', name: string, locale: string, translationKey: string, instrument: string, photo: string, photoCredit?: string | null, bio: any };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, locale: string, translationKey: string, subtitle?: string | null, image?: string | null, imageCaption?: string | null, email?: string | null, address?: string | null, phone?: string | null, mapEmbedUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, membershipUrl?: string | null, donationUrl?: string | null, body: any };
+export type FestivalPartsFragment = { __typename: 'Festival', title: string, locale: string, translationKey: string, subtitle?: string | null, image?: string | null, imageCaption?: string | null, body: any };
+
+export type HomepagePartsFragment = { __typename: 'Homepage', title: string, locale: string, translationKey: string, heroTitle: string, heroSubtitle: string, introTitle?: string | null, introDescription?: string | null, nextConcertCtaLabel?: string | null };
+
+export type TicketInfoPartsFragment = { __typename: 'TicketInfo', title: string, locale: string, translationKey: string, sectionTitle?: string | null, sectionSubtitle?: string | null, discountText?: string | null, email?: string | null, cards?: Array<{ __typename: 'TicketInfoCards', title?: string | null, text?: string | null } | null> | null };
+
+export type ContactInfoPartsFragment = { __typename: 'ContactInfo', title: string, locale: string, translationKey: string, email?: string | null, address?: string | null, phone?: string | null, mapEmbedUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null };
+
+export type SupportInfoPartsFragment = { __typename: 'SupportInfo', title: string, locale: string, translationKey: string, subtitle?: string | null, membershipUrl?: string | null, donationUrl?: string | null, membershipTitle?: string | null, membershipText?: string | null, donationTitle?: string | null, donationText?: string | null };
 
 export type ConcertQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -547,24 +892,100 @@ export type MusicianConnectionQueryVariables = Exact<{
 
 export type MusicianConnectionQuery = { __typename?: 'Query', musicianConnection: { __typename?: 'MusicianConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MusicianConnectionEdges', cursor: string, node?: { __typename: 'Musician', id: string, name: string, locale: string, translationKey: string, instrument: string, photo: string, photoCredit?: string | null, bio: any, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
-export type PageQueryVariables = Exact<{
+export type FestivalQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, locale: string, translationKey: string, subtitle?: string | null, image?: string | null, imageCaption?: string | null, email?: string | null, address?: string | null, phone?: string | null, mapEmbedUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, membershipUrl?: string | null, donationUrl?: string | null, body: any, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type FestivalQuery = { __typename?: 'Query', festival: { __typename: 'Festival', id: string, title: string, locale: string, translationKey: string, subtitle?: string | null, image?: string | null, imageCaption?: string | null, body: any, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type PageConnectionQueryVariables = Exact<{
+export type FestivalConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
+  filter?: InputMaybe<FestivalFilter>;
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, locale: string, translationKey: string, subtitle?: string | null, image?: string | null, imageCaption?: string | null, email?: string | null, address?: string | null, phone?: string | null, mapEmbedUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, membershipUrl?: string | null, donationUrl?: string | null, body: any, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type FestivalConnectionQuery = { __typename?: 'Query', festivalConnection: { __typename?: 'FestivalConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FestivalConnectionEdges', cursor: string, node?: { __typename: 'Festival', id: string, title: string, locale: string, translationKey: string, subtitle?: string | null, image?: string | null, imageCaption?: string | null, body: any, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type HomepageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, title: string, locale: string, translationKey: string, heroTitle: string, heroSubtitle: string, introTitle?: string | null, introDescription?: string | null, nextConcertCtaLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type HomepageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HomepageFilter>;
+}>;
+
+
+export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, title: string, locale: string, translationKey: string, heroTitle: string, heroSubtitle: string, introTitle?: string | null, introDescription?: string | null, nextConcertCtaLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type TicketInfoQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type TicketInfoQuery = { __typename?: 'Query', ticketInfo: { __typename: 'TicketInfo', id: string, title: string, locale: string, translationKey: string, sectionTitle?: string | null, sectionSubtitle?: string | null, discountText?: string | null, email?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cards?: Array<{ __typename: 'TicketInfoCards', title?: string | null, text?: string | null } | null> | null } };
+
+export type TicketInfoConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TicketInfoFilter>;
+}>;
+
+
+export type TicketInfoConnectionQuery = { __typename?: 'Query', ticketInfoConnection: { __typename?: 'TicketInfoConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TicketInfoConnectionEdges', cursor: string, node?: { __typename: 'TicketInfo', id: string, title: string, locale: string, translationKey: string, sectionTitle?: string | null, sectionSubtitle?: string | null, discountText?: string | null, email?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cards?: Array<{ __typename: 'TicketInfoCards', title?: string | null, text?: string | null } | null> | null } | null } | null> | null } };
+
+export type ContactInfoQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ContactInfoQuery = { __typename?: 'Query', contactInfo: { __typename: 'ContactInfo', id: string, title: string, locale: string, translationKey: string, email?: string | null, address?: string | null, phone?: string | null, mapEmbedUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type ContactInfoConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ContactInfoFilter>;
+}>;
+
+
+export type ContactInfoConnectionQuery = { __typename?: 'Query', contactInfoConnection: { __typename?: 'ContactInfoConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactInfoConnectionEdges', cursor: string, node?: { __typename: 'ContactInfo', id: string, title: string, locale: string, translationKey: string, email?: string | null, address?: string | null, phone?: string | null, mapEmbedUrl?: string | null, facebookUrl?: string | null, instagramUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type SupportInfoQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type SupportInfoQuery = { __typename?: 'Query', supportInfo: { __typename: 'SupportInfo', id: string, title: string, locale: string, translationKey: string, subtitle?: string | null, membershipUrl?: string | null, donationUrl?: string | null, membershipTitle?: string | null, membershipText?: string | null, donationTitle?: string | null, donationText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type SupportInfoConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SupportInfoFilter>;
+}>;
+
+
+export type SupportInfoConnectionQuery = { __typename?: 'Query', supportInfoConnection: { __typename?: 'SupportInfoConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SupportInfoConnectionEdges', cursor: string, node?: { __typename: 'SupportInfo', id: string, title: string, locale: string, translationKey: string, subtitle?: string | null, membershipUrl?: string | null, donationUrl?: string | null, membershipTitle?: string | null, membershipText?: string | null, donationTitle?: string | null, donationText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const ConcertPartsFragmentDoc = gql`
     fragment ConcertParts on Concert {
@@ -594,8 +1015,8 @@ export const MusicianPartsFragmentDoc = gql`
   bio
 }
     `;
-export const PagePartsFragmentDoc = gql`
-    fragment PageParts on Page {
+export const FestivalPartsFragmentDoc = gql`
+    fragment FestivalParts on Festival {
   __typename
   title
   locale
@@ -603,15 +1024,66 @@ export const PagePartsFragmentDoc = gql`
   subtitle
   image
   imageCaption
+  body
+}
+    `;
+export const HomepagePartsFragmentDoc = gql`
+    fragment HomepageParts on Homepage {
+  __typename
+  title
+  locale
+  translationKey
+  heroTitle
+  heroSubtitle
+  introTitle
+  introDescription
+  nextConcertCtaLabel
+}
+    `;
+export const TicketInfoPartsFragmentDoc = gql`
+    fragment TicketInfoParts on TicketInfo {
+  __typename
+  title
+  locale
+  translationKey
+  sectionTitle
+  sectionSubtitle
+  discountText
+  email
+  cards {
+    __typename
+    title
+    text
+  }
+}
+    `;
+export const ContactInfoPartsFragmentDoc = gql`
+    fragment ContactInfoParts on ContactInfo {
+  __typename
+  title
+  locale
+  translationKey
   email
   address
   phone
   mapEmbedUrl
   facebookUrl
   instagramUrl
+}
+    `;
+export const SupportInfoPartsFragmentDoc = gql`
+    fragment SupportInfoParts on SupportInfo {
+  __typename
+  title
+  locale
+  translationKey
+  subtitle
   membershipUrl
   donationUrl
-  body
+  membershipTitle
+  membershipText
+  donationTitle
+  donationText
 }
     `;
 export const ConcertDocument = gql`
@@ -728,9 +1200,9 @@ export const MusicianConnectionDocument = gql`
   }
 }
     ${MusicianPartsFragmentDoc}`;
-export const PageDocument = gql`
-    query page($relativePath: String!) {
-  page(relativePath: $relativePath) {
+export const FestivalDocument = gql`
+    query festival($relativePath: String!) {
+  festival(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -743,13 +1215,13 @@ export const PageDocument = gql`
       }
       id
     }
-    ...PageParts
+    ...FestivalParts
   }
 }
-    ${PagePartsFragmentDoc}`;
-export const PageConnectionDocument = gql`
-    query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
-  pageConnection(
+    ${FestivalPartsFragmentDoc}`;
+export const FestivalConnectionDocument = gql`
+    query festivalConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FestivalFilter) {
+  festivalConnection(
     before: $before
     after: $after
     first: $first
@@ -779,12 +1251,240 @@ export const PageConnectionDocument = gql`
           }
           id
         }
-        ...PageParts
+        ...FestivalParts
       }
     }
   }
 }
-    ${PagePartsFragmentDoc}`;
+    ${FestivalPartsFragmentDoc}`;
+export const HomepageDocument = gql`
+    query homepage($relativePath: String!) {
+  homepage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...HomepageParts
+  }
+}
+    ${HomepagePartsFragmentDoc}`;
+export const HomepageConnectionDocument = gql`
+    query homepageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomepageFilter) {
+  homepageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...HomepageParts
+      }
+    }
+  }
+}
+    ${HomepagePartsFragmentDoc}`;
+export const TicketInfoDocument = gql`
+    query ticketInfo($relativePath: String!) {
+  ticketInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TicketInfoParts
+  }
+}
+    ${TicketInfoPartsFragmentDoc}`;
+export const TicketInfoConnectionDocument = gql`
+    query ticketInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TicketInfoFilter) {
+  ticketInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TicketInfoParts
+      }
+    }
+  }
+}
+    ${TicketInfoPartsFragmentDoc}`;
+export const ContactInfoDocument = gql`
+    query contactInfo($relativePath: String!) {
+  contactInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactInfoParts
+  }
+}
+    ${ContactInfoPartsFragmentDoc}`;
+export const ContactInfoConnectionDocument = gql`
+    query contactInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactInfoFilter) {
+  contactInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactInfoParts
+      }
+    }
+  }
+}
+    ${ContactInfoPartsFragmentDoc}`;
+export const SupportInfoDocument = gql`
+    query supportInfo($relativePath: String!) {
+  supportInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SupportInfoParts
+  }
+}
+    ${SupportInfoPartsFragmentDoc}`;
+export const SupportInfoConnectionDocument = gql`
+    query supportInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SupportInfoFilter) {
+  supportInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SupportInfoParts
+      }
+    }
+  }
+}
+    ${SupportInfoPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -800,11 +1500,35 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     musicianConnection(variables?: MusicianConnectionQueryVariables, options?: C): Promise<{data: MusicianConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MusicianConnectionQueryVariables, query: string}> {
         return requester<{data: MusicianConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MusicianConnectionQueryVariables, query: string}, MusicianConnectionQueryVariables>(MusicianConnectionDocument, variables, options);
       },
-    page(variables: PageQueryVariables, options?: C): Promise<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}> {
-        return requester<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}, PageQueryVariables>(PageDocument, variables, options);
+    festival(variables: FestivalQueryVariables, options?: C): Promise<{data: FestivalQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FestivalQueryVariables, query: string}> {
+        return requester<{data: FestivalQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FestivalQueryVariables, query: string}, FestivalQueryVariables>(FestivalDocument, variables, options);
       },
-    pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
-        return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
+    festivalConnection(variables?: FestivalConnectionQueryVariables, options?: C): Promise<{data: FestivalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FestivalConnectionQueryVariables, query: string}> {
+        return requester<{data: FestivalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FestivalConnectionQueryVariables, query: string}, FestivalConnectionQueryVariables>(FestivalConnectionDocument, variables, options);
+      },
+    homepage(variables: HomepageQueryVariables, options?: C): Promise<{data: HomepageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageQueryVariables, query: string}> {
+        return requester<{data: HomepageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageQueryVariables, query: string}, HomepageQueryVariables>(HomepageDocument, variables, options);
+      },
+    homepageConnection(variables?: HomepageConnectionQueryVariables, options?: C): Promise<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}> {
+        return requester<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}, HomepageConnectionQueryVariables>(HomepageConnectionDocument, variables, options);
+      },
+    ticketInfo(variables: TicketInfoQueryVariables, options?: C): Promise<{data: TicketInfoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TicketInfoQueryVariables, query: string}> {
+        return requester<{data: TicketInfoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TicketInfoQueryVariables, query: string}, TicketInfoQueryVariables>(TicketInfoDocument, variables, options);
+      },
+    ticketInfoConnection(variables?: TicketInfoConnectionQueryVariables, options?: C): Promise<{data: TicketInfoConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TicketInfoConnectionQueryVariables, query: string}> {
+        return requester<{data: TicketInfoConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TicketInfoConnectionQueryVariables, query: string}, TicketInfoConnectionQueryVariables>(TicketInfoConnectionDocument, variables, options);
+      },
+    contactInfo(variables: ContactInfoQueryVariables, options?: C): Promise<{data: ContactInfoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactInfoQueryVariables, query: string}> {
+        return requester<{data: ContactInfoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactInfoQueryVariables, query: string}, ContactInfoQueryVariables>(ContactInfoDocument, variables, options);
+      },
+    contactInfoConnection(variables?: ContactInfoConnectionQueryVariables, options?: C): Promise<{data: ContactInfoConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactInfoConnectionQueryVariables, query: string}> {
+        return requester<{data: ContactInfoConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactInfoConnectionQueryVariables, query: string}, ContactInfoConnectionQueryVariables>(ContactInfoConnectionDocument, variables, options);
+      },
+    supportInfo(variables: SupportInfoQueryVariables, options?: C): Promise<{data: SupportInfoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportInfoQueryVariables, query: string}> {
+        return requester<{data: SupportInfoQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportInfoQueryVariables, query: string}, SupportInfoQueryVariables>(SupportInfoDocument, variables, options);
+      },
+    supportInfoConnection(variables?: SupportInfoConnectionQueryVariables, options?: C): Promise<{data: SupportInfoConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportInfoConnectionQueryVariables, query: string}> {
+        return requester<{data: SupportInfoConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SupportInfoConnectionQueryVariables, query: string}, SupportInfoConnectionQueryVariables>(SupportInfoConnectionDocument, variables, options);
       }
     };
   }

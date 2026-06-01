@@ -5,32 +5,30 @@ import FestivalIntro from '../components/home/FestivalIntro.astro';
 import NextConcert from '../components/home/NextConcert.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { pricingTiers } from '../data/pricing';
-import { getConcerts } from '../lib/data';
+import { getConcerts, getHomepage } from '../lib/data';
 import { formatConcertDate } from '../lib/utils';
 
 const locale = getLangFromUrl(Astro.url) as 'fr' | 'en';
 const t = useTranslations(locale);
 
-// Fetch concerts from CMS for the NextConcert section
 const concerts = await getConcerts(locale);
 const nextConcert = concerts.length > 0 ? concerts[0] : null;
+const homepage = await getHomepage(locale);
 
-const heroTitle = 'Accords en Valromey';
-
-const heroSubtitle = locale === 'fr'
+const heroTitle = homepage?.heroTitle || 'Accords en Valromey';
+const heroSubtitle = homepage?.heroSubtitle || (locale === 'fr'
   ? 'Festival de musique classique — 20-22 août 2026, Champagne-en-Valromey, Ain'
-  : 'Classical music festival — August 20-22, 2026, Champagne-en-Valromey, Ain';
+  : 'Classical music festival — August 20-22, 2026, Champagne-en-Valromey, Ain');
 
 const pageTitle = locale === 'fr'
   ? 'Accords en Valromey — Festival de musique classique'
   : 'Accords en Valromey — Classical Music Festival';
 
-// Festival intro description
-const festivalIntroDescription = locale === 'fr'
+const introTitle = homepage?.introTitle || (locale === 'fr' ? 'Le Festival' : 'The Festival');
+const introDescription = homepage?.introDescription || (locale === 'fr'
   ? 'Du 20 au 22 août 2026, Accords en Valromey réunit Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava et Célia Garetti-Nicole dans l\'église de Champagne pour trois soirées autour de Chostakovitch, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn et Brahms.'
-  : 'From August 20 to 22, 2026, Accords en Valromey brings together Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava, and Célia Garetti-Nicole in Champagne church for three evenings devoted to Shostakovich, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn, and Brahms.';
+  : 'From August 20 to 22, 2026, Accords en Valromey brings together Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava, and Célia Garetti-Nicole in Champagne church for three evenings devoted to Shostakovich, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn, and Brahms.');
 
-// Next concert data from CMS with fallback
 const nextConcertTitle = nextConcert?.title || (locale === 'fr' ? 'Concert d\'Ouverture' : 'Opening Concert');
 const nextConcertDate = nextConcert ? formatConcertDate(nextConcert.date, locale) : (locale === 'fr' ? '20 août 2026 — 19h00' : 'August 20, 2026 — 7:00 PM');
 const nextConcertDescription = nextConcert?.description
@@ -52,9 +50,9 @@ const nextConcertDescription = nextConcert?.description
     ctaHref={locale === 'fr' ? '/programmation/' : '/en/program/'}
   />
   <FestivalIntro
-    title={locale === 'fr' ? 'Le Festival' : 'The Festival'}
-    description={festivalIntroDescription}
-    ctaLabel={t('home.discover')}
+    title={introTitle}
+    description={introDescription}
+    ctaLabel={homepage?.nextConcertCtaLabel || t('home.discover')}
     ctaHref={locale === 'fr' ? '/le-festival/' : '/en/the-festival/'}
   />
   <NextConcert

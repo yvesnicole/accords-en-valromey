@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import FestivalIntro from '../../components/home/FestivalIntro.astro';
+import NextConcert from '../../components/home/NextConcert.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { pricingTiers } from '../../data/pricing';
+import { getConcerts, getHomepage } from '../../lib/data';
+import { formatConcertDate } from '../../lib/utils';
+
+const locale = 'en' as const;
+const t = useTranslations(locale);
+
+const concerts = await getConcerts(locale);
+const nextConcert = concerts.length > 0 ? concerts[0] : null;
+const homepage = await getHomepage(locale);
+
+const heroTitle = homepage?.heroTitle || 'Accords en Valromey';
+const heroSubtitle = homepage?.heroSubtitle || 'Classical music festival — August 20-22, 2026, Champagne-en-Valromey, Ain';
+
+const introTitle = homepage?.introTitle || 'The Festival';
+const introDescription = homepage?.introDescription || 'From August 20 to 22, 2026, Accords en Valromey brings together Ekhi Martinez Imai, Elea Nick, Nicolas Fromonteil, Mariam Chitanava, and Célia Garetti-Nicole in Champagne church for three evenings devoted to Shostakovich, Lili Boulanger, Ravel, Rebecca Clarke, Alice Lesur, Messiaen, Schumann, Mendelssohn, and Brahms.';
+
+const nextConcertTitle = nextConcert?.title || 'Opening Concert';
+const nextConcertDate = nextConcert ? formatConcertDate(nextConcert.date, locale) : 'August 20, 2026 — 7:00 PM';
+const nextConcertDescription = nextConcert?.description
+  ? `${nextConcert.description} Tickets start at €${pricingTiers[0].fullPrice}, with a 2-day pass at €${pricingTiers[1].fullPrice} and a 3-day pass at €${pricingTiers[2].fullPrice}.`
+  : `A journey through 20th century chamber music with Shostakovich, Lili Boulanger, Ravel, and Rebecca Clarke in Champagne church. Tickets start at €${pricingTiers[0].fullPrice}, with a 2-day pass at €${pricingTiers[1].fullPrice} and a 3-day pass at €${pricingTiers[2].fullPrice}.`;
+---
+
+<BaseLayout title="Accords en Valromey — Classical Music Festival" lang="en">
+  <Hero
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    ctaLabel={t('hero.cta')}
+    ctaHref="/en/program/"
+  />
+  <FestivalIntro
+    title={introTitle}
+    description={introDescription}
+    ctaLabel={homepage?.nextConcertCtaLabel || t('home.discover')}
+    ctaHref="/en/the-festival/"
+  />
+  <NextConcert
+    title={t('home.next')}
+    concertTitle={nextConcertTitle}
+    date={nextConcertDate}
+    description={nextConcertDescription}
+    ctaLabel={t('home.discover')}
+    ctaHref="/en/program/"
+  />
+</BaseLayout>

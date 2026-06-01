@@ -4,11 +4,11 @@ import SectionTitle from '../components/ui/SectionTitle.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
 import { useTranslations } from '../i18n/utils';
-import { getPage } from '../lib/data';
+import { getSupportInfo } from '../lib/data';
 
 const locale = 'fr' as const;
 const t = useTranslations(locale);
-const page = await getPage('soutenir', locale);
+const support = await getSupportInfo(locale);
 ---
 
 <BaseLayout title="Nous Soutenir — Accords en Valromey" description="Soutenez le festival Accords en Valromey">
@@ -27,26 +27,24 @@ const page = await getPage('soutenir', locale);
   <section class="max-w-7xl mx-auto px-6 py-section">
     <SectionTitle
       title="Soutenez le festival"
-      subtitle={page?.subtitle || "Votre contribution permet de faire vivre la musique classique dans le Valromey et de soutenir de jeunes talents."}
+      subtitle={support?.subtitle || "Votre contribution permet de faire vivre la musique classique dans le Valromey et de soutenir de jeunes talents."}
     />
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
       <Card>
-        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{t('support.join')}</h3>
+        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{support?.membershipTitle || t('support.join')}</h3>
         <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          Devenez membre de l'association et participez à la vie du festival. Accès privilégié
-          aux concerts, rencontres avec les artistes, et bien plus.
+          {support?.membershipText || "Devenez membre de l'association et participez à la vie du festival. Accès privilégié aux concerts, rencontres avec les artistes, et bien plus."}
         </p>
-        <Button href={page?.membershipUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
+        <Button href={support?.membershipUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
           {t('support.join')}
         </Button>
       </Card>
       <Card>
-        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{t('support.donate')}</h3>
+        <h3 class="font-serif text-2xl font-semibold text-[#1A1A1A] mb-4">{support?.donationTitle || t('support.donate')}</h3>
         <p class="font-sans text-gray-700 leading-relaxed mb-6">
-          Faites un don pour soutenir la programmation, l'accueil des artistes et le développement
-          du festival. Chaque geste compte.
+          {support?.donationText || "Faites un don pour soutenir la programmation, l'accueil des artistes et le développement du festival. Chaque geste compte."}
         </p>
-        <Button href={page?.donationUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
+        <Button href={support?.donationUrl || 'https://www.helloasso.com/associations/accords-en-valromey'} external variant="primary">
           {t('support.donate')}
         </Button>
       </Card>

@@ -33,8 +33,8 @@ export const MusicianPartsFragmentDoc = gql`
   bio
 }
     `;
-export const PagePartsFragmentDoc = gql`
-    fragment PageParts on Page {
+export const FestivalPartsFragmentDoc = gql`
+    fragment FestivalParts on Festival {
   __typename
   title
   locale
@@ -42,15 +42,66 @@ export const PagePartsFragmentDoc = gql`
   subtitle
   image
   imageCaption
+  body
+}
+    `;
+export const HomepagePartsFragmentDoc = gql`
+    fragment HomepageParts on Homepage {
+  __typename
+  title
+  locale
+  translationKey
+  heroTitle
+  heroSubtitle
+  introTitle
+  introDescription
+  nextConcertCtaLabel
+}
+    `;
+export const TicketInfoPartsFragmentDoc = gql`
+    fragment TicketInfoParts on TicketInfo {
+  __typename
+  title
+  locale
+  translationKey
+  sectionTitle
+  sectionSubtitle
+  discountText
+  email
+  cards {
+    __typename
+    title
+    text
+  }
+}
+    `;
+export const ContactInfoPartsFragmentDoc = gql`
+    fragment ContactInfoParts on ContactInfo {
+  __typename
+  title
+  locale
+  translationKey
   email
   address
   phone
   mapEmbedUrl
   facebookUrl
   instagramUrl
+}
+    `;
+export const SupportInfoPartsFragmentDoc = gql`
+    fragment SupportInfoParts on SupportInfo {
+  __typename
+  title
+  locale
+  translationKey
+  subtitle
   membershipUrl
   donationUrl
-  body
+  membershipTitle
+  membershipText
+  donationTitle
+  donationText
 }
     `;
 export const ConcertDocument = gql`
@@ -167,9 +218,9 @@ export const MusicianConnectionDocument = gql`
   }
 }
     ${MusicianPartsFragmentDoc}`;
-export const PageDocument = gql`
-    query page($relativePath: String!) {
-  page(relativePath: $relativePath) {
+export const FestivalDocument = gql`
+    query festival($relativePath: String!) {
+  festival(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -182,13 +233,13 @@ export const PageDocument = gql`
       }
       id
     }
-    ...PageParts
+    ...FestivalParts
   }
 }
-    ${PagePartsFragmentDoc}`;
-export const PageConnectionDocument = gql`
-    query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
-  pageConnection(
+    ${FestivalPartsFragmentDoc}`;
+export const FestivalConnectionDocument = gql`
+    query festivalConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FestivalFilter) {
+  festivalConnection(
     before: $before
     after: $after
     first: $first
@@ -218,12 +269,240 @@ export const PageConnectionDocument = gql`
           }
           id
         }
-        ...PageParts
+        ...FestivalParts
       }
     }
   }
 }
-    ${PagePartsFragmentDoc}`;
+    ${FestivalPartsFragmentDoc}`;
+export const HomepageDocument = gql`
+    query homepage($relativePath: String!) {
+  homepage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...HomepageParts
+  }
+}
+    ${HomepagePartsFragmentDoc}`;
+export const HomepageConnectionDocument = gql`
+    query homepageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomepageFilter) {
+  homepageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...HomepageParts
+      }
+    }
+  }
+}
+    ${HomepagePartsFragmentDoc}`;
+export const TicketInfoDocument = gql`
+    query ticketInfo($relativePath: String!) {
+  ticketInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TicketInfoParts
+  }
+}
+    ${TicketInfoPartsFragmentDoc}`;
+export const TicketInfoConnectionDocument = gql`
+    query ticketInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TicketInfoFilter) {
+  ticketInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TicketInfoParts
+      }
+    }
+  }
+}
+    ${TicketInfoPartsFragmentDoc}`;
+export const ContactInfoDocument = gql`
+    query contactInfo($relativePath: String!) {
+  contactInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactInfoParts
+  }
+}
+    ${ContactInfoPartsFragmentDoc}`;
+export const ContactInfoConnectionDocument = gql`
+    query contactInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactInfoFilter) {
+  contactInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactInfoParts
+      }
+    }
+  }
+}
+    ${ContactInfoPartsFragmentDoc}`;
+export const SupportInfoDocument = gql`
+    query supportInfo($relativePath: String!) {
+  supportInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SupportInfoParts
+  }
+}
+    ${SupportInfoPartsFragmentDoc}`;
+export const SupportInfoConnectionDocument = gql`
+    query supportInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SupportInfoFilter) {
+  supportInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SupportInfoParts
+      }
+    }
+  }
+}
+    ${SupportInfoPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
     concert(variables, options) {
@@ -238,11 +517,35 @@ export function getSdk(requester) {
     musicianConnection(variables, options) {
       return requester(MusicianConnectionDocument, variables, options);
     },
-    page(variables, options) {
-      return requester(PageDocument, variables, options);
+    festival(variables, options) {
+      return requester(FestivalDocument, variables, options);
     },
-    pageConnection(variables, options) {
-      return requester(PageConnectionDocument, variables, options);
+    festivalConnection(variables, options) {
+      return requester(FestivalConnectionDocument, variables, options);
+    },
+    homepage(variables, options) {
+      return requester(HomepageDocument, variables, options);
+    },
+    homepageConnection(variables, options) {
+      return requester(HomepageConnectionDocument, variables, options);
+    },
+    ticketInfo(variables, options) {
+      return requester(TicketInfoDocument, variables, options);
+    },
+    ticketInfoConnection(variables, options) {
+      return requester(TicketInfoConnectionDocument, variables, options);
+    },
+    contactInfo(variables, options) {
+      return requester(ContactInfoDocument, variables, options);
+    },
+    contactInfoConnection(variables, options) {
+      return requester(ContactInfoConnectionDocument, variables, options);
+    },
+    supportInfo(variables, options) {
+      return requester(SupportInfoDocument, variables, options);
+    },
+    supportInfoConnection(variables, options) {
+      return requester(SupportInfoConnectionDocument, variables, options);
     }
   };
 }

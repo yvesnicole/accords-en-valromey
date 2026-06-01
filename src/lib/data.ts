@@ -32,22 +32,66 @@ export interface CmsMusician {
   bio: string; // MDX body (isBody)
 }
 
-export interface CmsPage {
+export interface CmsFestival {
   title: string;
   locale: string;
   translationKey: string;
   subtitle?: string;
   image?: string;
   imageCaption?: string;
+  body: string; // MDX body (isBody)
+}
+
+export interface CmsHomepage {
+  title: string;
+  locale: string;
+  translationKey: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  introTitle?: string;
+  introDescription?: string;
+  nextConcertCtaLabel?: string;
+}
+
+export interface CmsTicketCard {
+  title: string;
+  text: string;
+}
+
+export interface CmsTicketInfo {
+  title: string;
+  locale: string;
+  translationKey: string;
+  sectionTitle?: string;
+  sectionSubtitle?: string;
+  discountText?: string;
+  email?: string;
+  cards: CmsTicketCard[];
+}
+
+export interface CmsContactInfo {
+  title: string;
+  locale: string;
+  translationKey: string;
   email?: string;
   address?: string;
   phone?: string;
   mapEmbedUrl?: string;
   facebookUrl?: string;
   instagramUrl?: string;
+}
+
+export interface CmsSupportInfo {
+  title: string;
+  locale: string;
+  translationKey: string;
+  subtitle?: string;
   membershipUrl?: string;
   donationUrl?: string;
-  body: string; // MDX body (isBody)
+  membershipTitle?: string;
+  membershipText?: string;
+  donationTitle?: string;
+  donationText?: string;
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -122,28 +166,99 @@ export async function getMusicians(locale?: string): Promise<CmsMusician[]> {
   return musicians.filter(m => !locale || m.locale === locale);
 }
 
-// ── Page ────────────────────────────────────────────────────────────────────
+// ── Festival ────────────────────────────────────────────────────────────────
 
-export async function getPage(translationKey: string, locale: string): Promise<CmsPage | null> {
-  const files = readMdxFiles('src/content/pages');
+export async function getFestival(locale: string): Promise<CmsFestival | null> {
+  const files = readMdxFiles('src/content/festival');
 
-  const pages: CmsPage[] = files.map(({ data, content }) => ({
+  const festivals: CmsFestival[] = files.map(({ data, content }) => ({
     title: (data.title as string) || '',
     locale: (data.locale as string) || 'fr',
     translationKey: (data.translationKey as string) || '',
     subtitle: (data.subtitle as string) || undefined,
     image: (data.image as string) || undefined,
     imageCaption: (data.imageCaption as string) || undefined,
+    body: content.trim(),
+  }));
+
+  return festivals.find(f => f.translationKey === 'le-festival' && f.locale === locale) ?? null;
+}
+
+// ── Homepage ────────────────────────────────────────────────────────────────
+
+export async function getHomepage(locale: string): Promise<CmsHomepage | null> {
+  const files = readMdxFiles('src/content/homepage');
+
+  const homepages: CmsHomepage[] = files.map(({ data }) => ({
+    title: (data.title as string) || '',
+    locale: (data.locale as string) || 'fr',
+    translationKey: (data.translationKey as string) || '',
+    heroTitle: (data.heroTitle as string) || '',
+    heroSubtitle: (data.heroSubtitle as string) || '',
+    introTitle: (data.introTitle as string) || undefined,
+    introDescription: (data.introDescription as string) || undefined,
+    nextConcertCtaLabel: (data.nextConcertCtaLabel as string) || undefined,
+  }));
+
+  return homepages.find(h => h.locale === locale) ?? null;
+}
+
+// ── TicketInfo ──────────────────────────────────────────────────────────────
+
+export async function getTicketInfo(locale: string): Promise<CmsTicketInfo | null> {
+  const files = readMdxFiles('src/content/ticket-info');
+
+  const ticketInfos: CmsTicketInfo[] = files.map(({ data }) => ({
+    title: (data.title as string) || '',
+    locale: (data.locale as string) || 'fr',
+    translationKey: (data.translationKey as string) || '',
+    sectionTitle: (data.sectionTitle as string) || undefined,
+    sectionSubtitle: (data.sectionSubtitle as string) || undefined,
+    discountText: (data.discountText as string) || undefined,
+    email: (data.email as string) || undefined,
+    cards: Array.isArray(data.cards) ? (data.cards as CmsTicketCard[]) : [],
+  }));
+
+  return ticketInfos.find(t => t.translationKey === 'billetterie' && t.locale === locale) ?? null;
+}
+
+// ── ContactInfo ──────────────────────────────────────────────────────────────
+
+export async function getContactInfo(locale: string): Promise<CmsContactInfo | null> {
+  const files = readMdxFiles('src/content/contact-info');
+
+  const contactInfos: CmsContactInfo[] = files.map(({ data }) => ({
+    title: (data.title as string) || '',
+    locale: (data.locale as string) || 'fr',
+    translationKey: (data.translationKey as string) || '',
     email: (data.email as string) || undefined,
     address: (data.address as string) || undefined,
     phone: (data.phone as string) || undefined,
     mapEmbedUrl: (data.mapEmbedUrl as string) || undefined,
     facebookUrl: (data.facebookUrl as string) || undefined,
     instagramUrl: (data.instagramUrl as string) || undefined,
-    membershipUrl: (data.membershipUrl as string) || undefined,
-    donationUrl: (data.donationUrl as string) || undefined,
-    body: content.trim(),
   }));
 
-  return pages.find(p => p.translationKey === translationKey && p.locale === locale) ?? null;
+  return contactInfos.find(c => c.translationKey === 'contact' && c.locale === locale) ?? null;
+}
+
+// ── SupportInfo ──────────────────────────────────────────────────────────────
+
+export async function getSupportInfo(locale: string): Promise<CmsSupportInfo | null> {
+  const files = readMdxFiles('src/content/support-info');
+
+  const supportInfos: CmsSupportInfo[] = files.map(({ data }) => ({
+    title: (data.title as string) || '',
+    locale: (data.locale as string) || 'fr',
+    translationKey: (data.translationKey as string) || '',
+    subtitle: (data.subtitle as string) || undefined,
+    membershipUrl: (data.membershipUrl as string) || undefined,
+    donationUrl: (data.donationUrl as string) || undefined,
+    membershipTitle: (data.membershipTitle as string) || undefined,
+    membershipText: (data.membershipText as string) || undefined,
+    donationTitle: (data.donationTitle as string) || undefined,
+    donationText: (data.donationText as string) || undefined,
+  }));
+
+  return supportInfos.find(s => s.translationKey === 'soutenir' && s.locale === locale) ?? null;
 }

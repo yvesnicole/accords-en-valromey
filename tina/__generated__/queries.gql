@@ -108,8 +108,8 @@ query musicianConnection($before: String, $after: String, $first: Float, $last: 
   }
 }
 
-query page($relativePath: String!) {
-  page(relativePath: $relativePath) {
+query festival($relativePath: String!) {
+  festival(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -122,12 +122,12 @@ query page($relativePath: String!) {
       }
       id
     }
-    ...PageParts
+    ...FestivalParts
   }
 }
 
-query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
-  pageConnection(
+query festivalConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FestivalFilter) {
+  festivalConnection(
     before: $before
     after: $after
     first: $first
@@ -157,7 +157,227 @@ query pageConnection($before: String, $after: String, $first: Float, $last: Floa
           }
           id
         }
-        ...PageParts
+        ...FestivalParts
+      }
+    }
+  }
+}
+
+query homepage($relativePath: String!) {
+  homepage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...HomepageParts
+  }
+}
+
+query homepageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomepageFilter) {
+  homepageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...HomepageParts
+      }
+    }
+  }
+}
+
+query ticketInfo($relativePath: String!) {
+  ticketInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TicketInfoParts
+  }
+}
+
+query ticketInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TicketInfoFilter) {
+  ticketInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TicketInfoParts
+      }
+    }
+  }
+}
+
+query contactInfo($relativePath: String!) {
+  contactInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactInfoParts
+  }
+}
+
+query contactInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactInfoFilter) {
+  contactInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactInfoParts
+      }
+    }
+  }
+}
+
+query supportInfo($relativePath: String!) {
+  supportInfo(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SupportInfoParts
+  }
+}
+
+query supportInfoConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SupportInfoFilter) {
+  supportInfoConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SupportInfoParts
       }
     }
   }

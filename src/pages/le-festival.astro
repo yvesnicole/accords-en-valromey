@@ -3,12 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import Card from '../components/ui/Card.astro';
 import { getLangFromUrl } from '../i18n/utils';
-import { getPage } from '../lib/data';
+import { getFestival } from '../lib/data';
 import { renderMarkdown } from '../lib/utils';
 
 const locale = getLangFromUrl(Astro.url) as 'fr' | 'en';
-const page = await getPage('le-festival', locale);
-const bodyHtml = page ? await renderMarkdown(page.body) : '';
+const festival = await getFestival(locale);
+const bodyHtml = festival ? await renderMarkdown(festival.body) : '';
 ---
 
 <BaseLayout title="Le Festival — Accords en Valromey" description="Histoire et identité du festival Accords en Valromey">
@@ -33,16 +33,16 @@ const bodyHtml = page ? await renderMarkdown(page.body) : '';
           <p>Contenu du festival à venir.</p>
         )}
       </div>
-      {page?.image && (
+      {festival?.image && (
         <div class="rounded-card overflow-hidden bg-contrast">
           <img
-            src={page.image}
-            alt={page.title || 'Festival'}
+            src={festival.image}
+            alt={festival.title || 'Festival'}
             class="w-full h-auto object-contain"
           />
-          {page.imageCaption && (
+          {festival.imageCaption && (
             <p class="p-4 text-center font-sans text-sm text-gray-500">
-              {page.imageCaption}
+              {festival.imageCaption}
             </p>
           )}
         </div>

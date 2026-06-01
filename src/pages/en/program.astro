@@ -8,7 +8,7 @@ import { mapConcertToProps } from '../../lib/utils';
 
 const locale = getLangFromUrl(Astro.url) as 'fr' | 'en';
 const rawConcerts = await getConcerts(locale);
-const concerts = rawConcerts.map(c => mapConcertToProps(c, locale));
+const concerts = await Promise.all(rawConcerts.map(c => mapConcertToProps(c, locale)));
 ---
 
 <BaseLayout title="Program — Accords en Valromey" description="Discover the Accords en Valromey festival program" lang="en">

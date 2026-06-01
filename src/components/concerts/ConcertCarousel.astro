@@ -7,6 +7,7 @@ interface Concert {
   title: string;
   date: string;
   description: string;
+  programHtml: string;
   poster: string;
   mapsLink: string;
   ticketLink?: string;
@@ -71,7 +72,8 @@ const { concerts } = Astro.props;
       <div class="p-6">
         <h2 data-modal-title class="font-serif text-2xl font-bold text-[#1A1A1A] mb-2"></h2>
         <p data-modal-date class="font-sans text-sm text-gray-500 mb-4"></p>
-        <p data-modal-desc class="font-sans text-gray-700 leading-relaxed mb-6"></p>
+        <p data-modal-desc class="font-sans text-gray-700 leading-relaxed mb-4"></p>
+        <div data-modal-program class="font-sans text-gray-700 leading-relaxed mb-6"></div>
         <div class="flex flex-col sm:flex-row gap-3">
           <a data-modal-maps href="" target="_blank" rel="noopener noreferrer"
              class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-card font-sans text-sm font-semibold text-gray-700 hover:border-sage hover:text-[#1A1A1A] transition-colors">
@@ -123,6 +125,7 @@ const { concerts } = Astro.props;
   const mt = document.querySelector('[data-modal-title]');
   const md = document.querySelector('[data-modal-date]');
   const mc = document.querySelector('[data-modal-desc]');
+  const mpr = document.querySelector('[data-modal-program]');
   const mm = document.querySelector('[data-modal-maps]');
   const mml = document.querySelector('[data-modal-maps-label]');
   const mtk = document.querySelector('[data-modal-tickets]');
@@ -137,6 +140,15 @@ const { concerts } = Astro.props;
       if (mt) mt.textContent = c.title;
       if (md) md.textContent = c.date;
       if (mc) mc.textContent = c.description;
+      if (mpr) {
+        if (c.programHtml) {
+          mpr.innerHTML = c.programHtml;
+          mpr.classList.remove('hidden');
+        } else {
+          mpr.innerHTML = '';
+          mpr.classList.add('hidden');
+        }
+      }
       if (mm) mm.href = c.mapsLink;
       if (mml) mml.textContent = c.mapsLabel || 'Voir sur Google Maps';
       if (c.ticketLink) {

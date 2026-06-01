@@ -58,14 +58,26 @@ type Query {
   concertConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ConcertFilter): ConcertConnection!
   musician(relativePath: String): Musician!
   musicianConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: MusicianFilter): MusicianConnection!
-  page(relativePath: String): Page!
-  pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
+  festival(relativePath: String): Festival!
+  festivalConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FestivalFilter): FestivalConnection!
+  homepage(relativePath: String): Homepage!
+  homepageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomepageFilter): HomepageConnection!
+  ticketInfo(relativePath: String): TicketInfo!
+  ticketInfoConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TicketInfoFilter): TicketInfoConnection!
+  contactInfo(relativePath: String): ContactInfo!
+  contactInfoConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactInfoFilter): ContactInfoConnection!
+  supportInfo(relativePath: String): SupportInfo!
+  supportInfoConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SupportInfoFilter): SupportInfoConnection!
 }
 
 input DocumentFilter {
   concert: ConcertFilter
   musician: MusicianFilter
-  page: PageFilter
+  festival: FestivalFilter
+  homepage: HomepageFilter
+  ticketInfo: TicketInfoFilter
+  contactInfo: ContactInfoFilter
+  supportInfo: SupportInfoFilter
 }
 
 type DocumentConnectionEdges {
@@ -91,7 +103,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Concert | Musician | Page | Folder
+union DocumentNode = Concert | Musician | Festival | Homepage | TicketInfo | ContactInfo | SupportInfo | Folder
 
 type Concert implements Node & Document {
   title: String!
@@ -197,54 +209,198 @@ type MusicianConnection implements Connection {
   edges: [MusicianConnectionEdges]
 }
 
-type Page implements Node & Document {
+type Festival implements Node & Document {
   title: String!
   locale: String!
   translationKey: String!
   subtitle: String
   image: String
   imageCaption: String
-  email: String
-  address: String
-  phone: String
-  mapEmbedUrl: String
-  facebookUrl: String
-  instagramUrl: String
-  membershipUrl: String
-  donationUrl: String
   body: JSON!
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input PageFilter {
+input FestivalFilter {
   title: StringFilter
   locale: StringFilter
   translationKey: StringFilter
   subtitle: StringFilter
   image: ImageFilter
   imageCaption: StringFilter
+  body: RichTextFilter
+}
+
+type FestivalConnectionEdges {
+  cursor: String!
+  node: Festival
+}
+
+type FestivalConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FestivalConnectionEdges]
+}
+
+type Homepage implements Node & Document {
+  title: String!
+  locale: String!
+  translationKey: String!
+  heroTitle: String!
+  heroSubtitle: String!
+  introTitle: String
+  introDescription: String
+  nextConcertCtaLabel: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input HomepageFilter {
+  title: StringFilter
+  locale: StringFilter
+  translationKey: StringFilter
+  heroTitle: StringFilter
+  heroSubtitle: StringFilter
+  introTitle: StringFilter
+  introDescription: StringFilter
+  nextConcertCtaLabel: StringFilter
+}
+
+type HomepageConnectionEdges {
+  cursor: String!
+  node: Homepage
+}
+
+type HomepageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [HomepageConnectionEdges]
+}
+
+type TicketInfoCards {
+  title: String
+  text: String
+}
+
+type TicketInfo implements Node & Document {
+  title: String!
+  locale: String!
+  translationKey: String!
+  sectionTitle: String
+  sectionSubtitle: String
+  discountText: String
+  email: String
+  cards: [TicketInfoCards]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input TicketInfoCardsFilter {
+  title: StringFilter
+  text: StringFilter
+}
+
+input TicketInfoFilter {
+  title: StringFilter
+  locale: StringFilter
+  translationKey: StringFilter
+  sectionTitle: StringFilter
+  sectionSubtitle: StringFilter
+  discountText: StringFilter
+  email: StringFilter
+  cards: TicketInfoCardsFilter
+}
+
+type TicketInfoConnectionEdges {
+  cursor: String!
+  node: TicketInfo
+}
+
+type TicketInfoConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TicketInfoConnectionEdges]
+}
+
+type ContactInfo implements Node & Document {
+  title: String!
+  locale: String!
+  translationKey: String!
+  email: String
+  address: String
+  phone: String
+  mapEmbedUrl: String
+  facebookUrl: String
+  instagramUrl: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactInfoFilter {
+  title: StringFilter
+  locale: StringFilter
+  translationKey: StringFilter
   email: StringFilter
   address: StringFilter
   phone: StringFilter
   mapEmbedUrl: StringFilter
   facebookUrl: StringFilter
   instagramUrl: StringFilter
-  membershipUrl: StringFilter
-  donationUrl: StringFilter
-  body: RichTextFilter
 }
 
-type PageConnectionEdges {
+type ContactInfoConnectionEdges {
   cursor: String!
-  node: Page
+  node: ContactInfo
 }
 
-type PageConnection implements Connection {
+type ContactInfoConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PageConnectionEdges]
+  edges: [ContactInfoConnectionEdges]
+}
+
+type SupportInfo implements Node & Document {
+  title: String!
+  locale: String!
+  translationKey: String!
+  subtitle: String
+  membershipUrl: String
+  donationUrl: String
+  membershipTitle: String
+  membershipText: String
+  donationTitle: String
+  donationText: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SupportInfoFilter {
+  title: StringFilter
+  locale: StringFilter
+  translationKey: StringFilter
+  subtitle: StringFilter
+  membershipUrl: StringFilter
+  donationUrl: StringFilter
+  membershipTitle: StringFilter
+  membershipText: StringFilter
+  donationTitle: StringFilter
+  donationText: StringFilter
+}
+
+type SupportInfoConnectionEdges {
+  cursor: String!
+  node: SupportInfo
+}
+
+type SupportInfoConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SupportInfoConnectionEdges]
 }
 
 type Mutation {
@@ -257,21 +413,37 @@ type Mutation {
   createConcert(relativePath: String!, params: ConcertMutation!): Concert!
   updateMusician(relativePath: String!, params: MusicianMutation!): Musician!
   createMusician(relativePath: String!, params: MusicianMutation!): Musician!
-  updatePage(relativePath: String!, params: PageMutation!): Page!
-  createPage(relativePath: String!, params: PageMutation!): Page!
+  updateFestival(relativePath: String!, params: FestivalMutation!): Festival!
+  createFestival(relativePath: String!, params: FestivalMutation!): Festival!
+  updateHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
+  createHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
+  updateTicketInfo(relativePath: String!, params: TicketInfoMutation!): TicketInfo!
+  createTicketInfo(relativePath: String!, params: TicketInfoMutation!): TicketInfo!
+  updateContactInfo(relativePath: String!, params: ContactInfoMutation!): ContactInfo!
+  createContactInfo(relativePath: String!, params: ContactInfoMutation!): ContactInfo!
+  updateSupportInfo(relativePath: String!, params: SupportInfoMutation!): SupportInfo!
+  createSupportInfo(relativePath: String!, params: SupportInfoMutation!): SupportInfo!
 }
 
 input DocumentUpdateMutation {
   concert: ConcertMutation
   musician: MusicianMutation
-  page: PageMutation
+  festival: FestivalMutation
+  homepage: HomepageMutation
+  ticketInfo: TicketInfoMutation
+  contactInfo: ContactInfoMutation
+  supportInfo: SupportInfoMutation
   relativePath: String
 }
 
 input DocumentMutation {
   concert: ConcertMutation
   musician: MusicianMutation
-  page: PageMutation
+  festival: FestivalMutation
+  homepage: HomepageMutation
+  ticketInfo: TicketInfoMutation
+  contactInfo: ContactInfoMutation
+  supportInfo: SupportInfoMutation
 }
 
 input ConcertMutation {
@@ -298,22 +470,66 @@ input MusicianMutation {
   bio: JSON
 }
 
-input PageMutation {
+input FestivalMutation {
   title: String
   locale: String
   translationKey: String
   subtitle: String
   image: String
   imageCaption: String
+  body: JSON
+}
+
+input HomepageMutation {
+  title: String
+  locale: String
+  translationKey: String
+  heroTitle: String
+  heroSubtitle: String
+  introTitle: String
+  introDescription: String
+  nextConcertCtaLabel: String
+}
+
+input TicketInfoCardsMutation {
+  title: String
+  text: String
+}
+
+input TicketInfoMutation {
+  title: String
+  locale: String
+  translationKey: String
+  sectionTitle: String
+  sectionSubtitle: String
+  discountText: String
+  email: String
+  cards: [TicketInfoCardsMutation]
+}
+
+input ContactInfoMutation {
+  title: String
+  locale: String
+  translationKey: String
   email: String
   address: String
   phone: String
   mapEmbedUrl: String
   facebookUrl: String
   instagramUrl: String
+}
+
+input SupportInfoMutation {
+  title: String
+  locale: String
+  translationKey: String
+  subtitle: String
   membershipUrl: String
   donationUrl: String
-  body: JSON
+  membershipTitle: String
+  membershipText: String
+  donationTitle: String
+  donationText: String
 }
 
 schema {

@@ -7,12 +7,12 @@ import HelloAssoWidget from '../../components/tickets/HelloAssoWidget.astro';
 import Card from '../../components/ui/Card.astro';
 import { useTranslations } from '../../i18n/utils';
 import { getPricing } from '../../data/pricing';
-import { getPage } from '../../lib/data';
+import { getTicketInfo } from '../../lib/data';
 
 const locale = 'en' as const;
 const t = useTranslations(locale);
 const pricing = getPricing(locale, t as (key: string) => string);
-const page = await getPage('billetterie', locale);
+const ticketInfo = await getTicketInfo(locale);
 ---
 
 <BaseLayout title="Tickets — Accords en Valromey" description="Buy tickets for the Accords en Valromey festival" lang="en">
@@ -30,8 +30,8 @@ const page = await getPage('billetterie', locale);
 
   <section class="max-w-7xl mx-auto px-6 py-section">
     <SectionTitle
-      title="Pricing"
-      subtitle="Choose the package that suits you and book online."
+      title={ticketInfo?.sectionTitle || 'Pricing'}
+      subtitle={ticketInfo?.sectionSubtitle || 'Choose the package that suits you and book online.'}
     />
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
       {pricing.map((tier) => (
@@ -45,40 +45,23 @@ const page = await getPage('billetterie', locale);
         />
       ))}
     </div>
-    <p class="text-center font-sans text-sm text-gray-500 mt-6">Free for under-18s. Reduced pricing is available for students and unemployed audience members.</p>
+    <p class="text-center font-sans text-sm text-gray-500 mt-6">{ticketInfo?.discountText || 'Free for under-18s. Reduced pricing is available for students and unemployed audience members.'}</p>
   </section>
 
   <section class="bg-contrast py-section">
     <div class="max-w-2xl mx-auto px-6">
-      <HelloAssoWidget variant="full" />
+      <HelloAssoWidget variant="full" buttonLabel="Buy tickets" />
     </div>
   </section>
 
   <section class="max-w-3xl mx-auto px-6 py-section">
     <div class="grid grid-cols-1 gap-8">
-    <Card>
-      <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Booking</h3>
-      <p class="font-sans text-gray-700 leading-relaxed">
-        Online booking is strongly recommended. Tickets will also be sold on site subject to
-        availability. For any question, contact <a href={`mailto:${page?.email || 'contact@accordsenvalromey.fr'}`} class="underline">{page?.email || 'contact@accordsenvalromey.fr'}</a>.
-      </p>
-    </Card>
-    <Card>
-      <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">What your ticket includes</h3>
-      <p class="font-sans text-gray-700 leading-relaxed">
-        Every ticket includes a printed program booklet and one drink at the post-concert cocktail. These
-        cocktail receptions are prepared by our partner La Barque in the Maison de Pays hall, just across from
-        Saint-Pierre church.
-      </p>
-    </Card>
-    <Card>
-      <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">Concert Experience</h3>
-      <p class="font-sans text-gray-700 leading-relaxed">
-        Each concert lasts about 90 minutes. Children are welcome, with coloring sheets and music games
-        available for younger audience members. If you would like a more substantial meal before or after the
-        concert, La Barque is only a few steps from the church.
-      </p>
-    </Card>
+      {(ticketInfo?.cards || []).map((card) => (
+        <Card>
+          <h3 class="font-serif text-xl font-semibold text-[#1A1A1A] mb-4">{card.title}</h3>
+          <p class="font-sans text-gray-700 leading-relaxed">{card.text}</p>
+        </Card>
+      ))}
     </div>
   </section>
 </BaseLayout>

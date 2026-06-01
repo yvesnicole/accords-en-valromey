@@ -1,4 +1,9 @@
 ---
+import { getContactInfo } from '../../lib/data';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const locale = getLangFromUrl(Astro.url) as 'fr' | 'en';
+const contact = await getContactInfo(locale);
 const currentYear = new Date().getFullYear();
 ---
 
@@ -7,28 +12,32 @@ const currentYear = new Date().getFullYear();
     <div>
       <p class="font-serif text-lg text-contrast mb-2">Accords en Valromey</p>
       <p class="text-sm leading-relaxed">
-        Festival de musique classique<br />
+        {locale === 'fr' ? 'Festival de musique classique' : 'Classical music festival'}<br />
         Champagne-en-Valromey, Ain
       </p>
     </div>
     <div>
-      <p class="font-sans font-semibold text-contrast mb-3">Liens</p>
+      <p class="font-sans font-semibold text-contrast mb-3">{locale === 'fr' ? 'Liens' : 'Links'}</p>
       <ul class="space-y-2 text-sm">
-        <li><a href="/le-festival/" class="hover:text-contrast transition-colors">Le Festival</a></li>
-        <li><a href="/programmation/" class="hover:text-contrast transition-colors">Programmation</a></li>
-        <li><a href="/billetterie/" class="hover:text-contrast transition-colors">Billetterie</a></li>
-        <li><a href="/contact/" class="hover:text-contrast transition-colors">Contact</a></li>
+        <li><a href={locale === 'fr' ? '/le-festival/' : '/en/the-festival/'} class="hover:text-contrast transition-colors">{locale === 'fr' ? 'Le Festival' : 'The Festival'}</a></li>
+        <li><a href={locale === 'fr' ? '/programmation/' : '/en/program/'} class="hover:text-contrast transition-colors">{locale === 'fr' ? 'Programmation' : 'Program'}</a></li>
+        <li><a href={locale === 'fr' ? '/billetterie/' : '/en/tickets/'} class="hover:text-contrast transition-colors">{locale === 'fr' ? 'Billetterie' : 'Tickets'}</a></li>
+        <li><a href={locale === 'fr' ? '/contact/' : '/en/contact/'} class="hover:text-contrast transition-colors">{locale === 'fr' ? 'Contact' : 'Contact'}</a></li>
       </ul>
     </div>
     <div>
-      <p class="font-sans font-semibold text-contrast mb-3">Suivez-nous</p>
+      <p class="font-sans font-semibold text-contrast mb-3">{locale === 'fr' ? 'Suivez-nous' : 'Follow us'}</p>
       <ul class="space-y-2 text-sm">
-        <li><a href="#" class="hover:text-contrast transition-colors">Facebook</a></li>
-        <li><a href="#" class="hover:text-contrast transition-colors">Instagram</a></li>
+        {contact?.facebookUrl && (
+          <li><a href={contact.facebookUrl} target="_blank" rel="noopener noreferrer" class="hover:text-contrast transition-colors">Facebook</a></li>
+        )}
+        {contact?.instagramUrl && (
+          <li><a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:text-contrast transition-colors">Instagram</a></li>
+        )}
       </ul>
     </div>
   </div>
   <div class="border-t border-gray-700 text-center py-6 text-xs text-gray-500">
-    &copy; {currentYear} Accords en Valromey. Tous droits réservés.
+    &copy; {currentYear} Accords en Valromey. {locale === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'}
   </div>
 </footer>
