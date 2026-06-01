@@ -35,7 +35,7 @@ TinaCMS requires two secrets at **build time**. They are stored as Fly runtime s
 
 ```toml
 [build.secrets]
-  PUBLIC_TINA_CLIENT_ID = "PUBLIC_TINA_CLIENT_ID"
+  NEXT_PUBLIC_TINA_CLIENT_ID = "NEXT_PUBLIC_TINA_CLIENT_ID"
   TINA_TOKEN = "TINA_TOKEN"
 ```
 
@@ -47,7 +47,7 @@ errorCode: 'ERR_MISSING_CLOUD_CREDS'
 
 **To set/reset secrets:**
 ```bash
-fly secrets set PUBLIC_TINA_CLIENT_ID=<value> TINA_TOKEN=<value>
+fly secrets set NEXT_PUBLIC_TINA_CLIENT_ID=<value> TINA_TOKEN=<value>
 ```
 
 ## Post-Deploy

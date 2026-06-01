@@ -32,7 +32,7 @@ npx astro check  # type checking
 ## Environment Variables
 
 ```
-PUBLIC_TINA_CLIENT_ID=   # Tina Cloud client ID (public, embedded in build)
+NEXT_PUBLIC_TINA_CLIENT_ID=   # Tina Cloud client ID (public, embedded in build)
 TINA_TOKEN=              # Tina Cloud token (secret, build-time only)
 ```
 
@@ -158,11 +158,11 @@ GitHub Actions (`deploy.yml`) is configured but **not active**. Do NOT assume pu
 
 ```bash
 fly deploy --app accords-en-valromey \
-  --build-arg PUBLIC_TINA_CLIENT_ID=<from .env> \
+  --build-arg NEXT_PUBLIC_TINA_CLIENT_ID=<from .env> \
   --build-arg TINA_TOKEN=<from .env>
 ```
 
-The Tina credentials are in `.env` at the project root (`PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN`). Without them, `tinacms build` fails with `ERR_MISSING_CLOUD_CREDS`.
+The Tina credentials are in `.env` at the project root (`NEXT_PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN`). Without them, `tinacms build` fails with `ERR_MISSING_CLOUD_CREDS`.
 
 ## Common Gotchas
 
@@ -173,8 +173,8 @@ The Tina credentials are in `.env` at the project root (`PUBLIC_TINA_CLIENT_ID` 
 5. **Tina `tina-lock.json`** — Commit it. If missing, run `tinacms dev` first to generate it.
 6. **`@/` alias** — Maps to `src/`. Use `import X from '@/components/...'`.
 7. **HelloAsso links** — External ticketing platform. Links are stored as `helloAssoLink` field on concerts. Don't build a custom checkout.
-8. **GitHub Actions NOT active** — `git push` does NOT trigger deploy. Always deploy manually with `fly deploy --app accords-en-valromey --build-arg PUBLIC_TINA_CLIENT_ID=... --build-arg TINA_TOKEN=...`. Credentials in `.env`.
-9. **`fly deploy` needs --build-arg** — Without `PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN` build args, `tinacms build` fails with `ERR_MISSING_CLOUD_CREDS`.
+8. **GitHub Actions NOT active** — `git push` does NOT trigger deploy. Always deploy manually with `fly deploy --app accords-en-valromey --build-arg NEXT_PUBLIC_TINA_CLIENT_ID=... --build-arg TINA_TOKEN=...`. Credentials in `.env`.
+9. **`fly deploy` needs --build-arg** — Without `NEXT_PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN` build args, `tinacms build` fails with `ERR_MISSING_CLOUD_CREDS`.
 
 ## When Adding Features
 

@@ -7,7 +7,7 @@ const branch =
 
 export default defineConfig({
   branch,
-  clientId: process.env.PUBLIC_TINA_CLIENT_ID || '',
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || '',
   token: process.env.TINA_TOKEN || '',
   build: {
     outputFolder: 'admin',
@@ -25,9 +25,6 @@ export default defineConfig({
         name: 'concert',
         label: 'Concerts',
         path: 'src/content/concerts',
-        match: {
-          include: ['fr/*', 'en/*'],
-        },
         format: 'mdx',
         fields: [
           {
@@ -86,9 +83,6 @@ export default defineConfig({
         name: 'musician',
         label: 'Musiciens',
         path: 'src/content/musicians',
-        match: {
-          include: ['fr/*', 'en/*'],
-        },
         format: 'mdx',
         fields: [
           {
@@ -141,9 +135,6 @@ export default defineConfig({
         name: 'page',
         label: 'Pages',
         path: 'src/content/pages',
-        match: {
-          include: ['fr/*', 'en/*'],
-        },
         format: 'mdx',
         fields: [
           {
