@@ -62,6 +62,7 @@ export default defineConfig({
             name: 'program',
             label: 'Programme musical',
             required: true,
+            isBody: true,
           },
           {
             type: 'rich-text',

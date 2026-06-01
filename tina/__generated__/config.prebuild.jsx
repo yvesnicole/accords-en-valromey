@@ -57,7 +57,8 @@ var config_default = defineConfig({
             type: "rich-text",
             name: "program",
             label: "Programme musical",
-            required: true
+            required: true,
+            isBody: true
           },
           {
             type: "rich-text",
