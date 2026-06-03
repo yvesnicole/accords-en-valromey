@@ -54,17 +54,18 @@ module.exports = {
     );
 
     const repoUrl = execSync("git remote get-url origin", { encoding: "utf-8" }).trim();
-    let repoPath;
-    if (repoUrl.startsWith("https://")) {
-      repoPath = repoUrl.replace("https://github.com/", "").replace(/\.git$/, "");
-    } else if (repoUrl.startsWith("git@github.com:")) {
-      repoPath = repoUrl.replace("git@github.com:", "").replace(/\.git$/, "");
-    } else {
-      console.log("tina-reindex: Unrecognized remote URL format, skipping push.");
+    // Extract "owner/repo" from any GitHub URL format:
+    //   https://github.com/owner/repo.git
+    //   https://x-access-token:ghs_xxx@github.com/owner/repo.git  (Netlify CI)
+    //   git@github.com:owner/repo.git
+    const match = repoUrl.match(/[:/]([^/:]+\/[^/]+?)(?:\.git)?$/);
+    if (!match) {
+      console.log("tina-reindex: Could not parse repo path from remote URL, skipping push.");
       return;
     }
+    const repoPath = match[1];
 
-    execSync(`git push https://${token}@github.com/${repoPath}.git HEAD:main`);
+    execSync(`git push https://x-access-token:${token}@github.com/${repoPath}.git HEAD:main`);
 
     console.log(`tina-reindex: Pushed reindex commit at ${timestamp}`);
     console.log("tina-reindex: Tina Cloud should reindex within a few minutes.");
