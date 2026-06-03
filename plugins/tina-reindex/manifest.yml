@@ -1,0 +1,5 @@
+name: tina-reindex
+inputs:
+  - name: REINDEX_GITHUB_TOKEN
+    description: "GitHub Personal Access Token with public_repo scope for pushing reindex commits"
+    required: false
