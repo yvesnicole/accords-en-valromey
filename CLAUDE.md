@@ -21,6 +21,7 @@ npm run dev      # tinacms dev -c "astro dev"  → localhost:4321
 npm run build    # tinacms build --content=local --skip-cloud-checks && astro build
 npm run preview  # astro preview (serve dist/)
 npx astro check  # type checking
+npm run reindex  # force Tina Cloud content reindex (pushes to main)
 ```
 
 **Build gotchas**:
@@ -35,7 +36,7 @@ NEXT_PUBLIC_TINA_CLIENT_ID=   # Tina Cloud client ID (public, embedded in build)
 TINA_TOKEN=              # Tina Cloud token (secret, build-time only)
 ```
 
-Both are set as Netlify environment variables (Site settings → Environment variables). `NEXT_PUBLIC_TINA_CLIENT_ID` is public (embedded in build), `TINA_TOKEN` is sensitive (build-time only).
+Both are set as Netlify environment variables (Site settings → Environment variables). `NEXT_PUBLIC_TINA_CLIENT_ID` is public (embedded in build), `TINA_TOKEN` is build-time only. Both are also hardcoded in `tina/__generated__/` by `tinacms dev` — this is expected and not a security risk since they are non-secret values required for the admin UI.
 
 ## Content Architecture
 
@@ -156,14 +157,18 @@ Set in Netlify Dashboard → Site settings → Environment variables:
 
 - `NEXT_PUBLIC_TINA_CLIENT_ID` — Tina Cloud client ID (public, embedded in build)
 - `TINA_TOKEN` — Tina Cloud token (secret, build-time only)
+- `REINDEX_GITHUB_TOKEN` — GitHub PAT with repo scope (secret, used by the auto-reindex plugin to push commits)
 
 ### Auto-Deploy Flow
 
 ```
 TinaCMS Admin edit → commit to GitHub → Netlify auto-build → site updated
+                                                    ↓
+                                    Auto-reindex plugin pushes timestamp
+                                    to tina-lock.json → Tina Cloud reindexes
 ```
 
-Every push to `main` triggers an automatic build and deploy. No manual steps needed.
+Every push to `main` triggers an automatic build and deploy. The `tina-reindex` Netlify plugin also pushes a timestamp to `tina-lock.json` after each build, forcing Tina Cloud to reindex content and preventing ghost folders in the admin UI.
 
 ## Common Gotchas
 
@@ -175,6 +180,7 @@ Every push to `main` triggers an automatic build and deploy. No manual steps nee
 6. **`@/` alias** — Maps to `src/`. Use `import X from '@/components/...'`.
 7. **HelloAsso links** — External ticketing platform. Links are stored as `helloAssoLink` field on concerts. Don't build a custom checkout.
 8. **Netlify auto-deploys** — Every push to `main` triggers a build. Set `NEXT_PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN` in Netlify Dashboard → Site settings → Environment variables.
+9. **Ghost folders in admin UI** — The `tina-reindex` Netlify plugin automatically pushes a reindex commit after each deploy. If ghost folders persist, run `npm run reindex` manually. The plugin uses `REINDEX_GITHUB_TOKEN` (set in Netlify env vars) and skips itself if the last commit already contains `[tina-reindex]` to prevent infinite loops.
 
 ## When Adding Features
 
