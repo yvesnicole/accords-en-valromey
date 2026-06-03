@@ -2,6 +2,10 @@
   command = "NODE_OPTIONS='--max-old-space-size=4096' npm run build"
   publish = "dist/"
 
+# Auto-reindex Tina Cloud after each deploy to prevent ghost folders in admin UI
+[[plugins]]
+  package = "./plugins/tina-reindex"
+
 [build.environment]
   NODE_VERSION = "22"
   NODE_OPTIONS = "--max-old-space-size=4096"

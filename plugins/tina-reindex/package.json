@@ -1,0 +1,6 @@
+{
+  "name": "tina-reindex",
+  "version": "1.0.0",
+  "description": "Netlify Build Plugin — pushes a reindex commit to tina-lock.json after each deploy to force Tina Cloud content reindex",
+  "main": "index.js"
+}
