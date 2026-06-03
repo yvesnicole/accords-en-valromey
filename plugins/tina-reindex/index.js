@@ -65,7 +65,10 @@ module.exports = {
     }
     const repoPath = match[1];
 
-    execSync(`git push https://x-access-token:${token}@github.com/${repoPath}.git HEAD:main`);
+    const authedRemote = `https://x-access-token:${token}@github.com/${repoPath}.git`;
+    execSync(`git remote set-url origin ${authedRemote}`);
+    execSync("git pull --rebase origin main", { encoding: "utf-8" });
+    execSync("git push origin HEAD:main");
 
     console.log(`tina-reindex: Pushed reindex commit at ${timestamp}`);
     console.log("tina-reindex: Tina Cloud should reindex within a few minutes.");
