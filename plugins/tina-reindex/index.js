@@ -12,8 +12,6 @@
  */
 
 module.exports = {
-  name: "tina-reindex",
-
   onPostBuild: async () => {
     const { execSync } = require("node:child_process");
     const { readFileSync, writeFileSync } = require("node:fs");
