@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
-    "schema:sync": "tinacms dev -c \"echo 'Schema synced to Tina Cloud. Press Ctrl+C to exit.'\""
+    "schema:sync": "tinacms dev -c \"echo 'Schema synced to Tina Cloud. Press Ctrl+C to exit.'\"",
+    "reindex": "node scripts/reindex.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.0",
