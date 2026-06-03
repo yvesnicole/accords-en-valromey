@@ -1,4 +1,5 @@
 ---
+import AdminButton from './AdminButton.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
@@ -36,6 +37,7 @@ const navLinks = [
         </a>
       ))}
       <LanguageSwitcher />
+      <AdminButton />
     </div>
     <!-- Burger button -->
     <button id="burger-btn" class="lg:hidden p-2" aria-label="Menu">
@@ -58,8 +60,9 @@ const navLinks = [
           {link.label}
         </a>
       ))}
-      <div class="pt-2 border-t border-gray-200/50">
+      <div class="pt-2 border-t border-gray-200/50 flex items-center gap-3">
         <LanguageSwitcher />
+        <AdminButton />
       </div>
     </div>
   </div>
