@@ -4,9 +4,11 @@
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build --content=local --skip-cloud-checks && astro build",
+    "build:cloud": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "schema:sync": "tinacms dev -c \"echo 'Schema synced to Tina Cloud. Press Ctrl+C to exit.'\""
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.0",
